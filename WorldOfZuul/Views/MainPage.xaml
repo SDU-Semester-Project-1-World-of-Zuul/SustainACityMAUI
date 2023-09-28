@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WorldOfZuul.Views.MainPage"
+             BackgroundColor="Black">
+
+    <StackLayout VerticalOptions="FillAndExpand">
+
+        <ScrollView VerticalOptions="FillAndExpand">
+            <Label Text="{Binding GameOutput}" TextColor="White" FontFamily="CourierNew" />
+        </ScrollView>
+
+        <StackLayout VerticalOptions="End">
+            <Entry Placeholder="Enter command" Text="{Binding UserInput}" TextColor="White" BackgroundColor="Black" 
+                   FontFamily="CourierNew" 
+                   ReturnCommand="{Binding ProcessInputCommand}" 
+                   ReturnCommandParameter="{Binding Path=Text, Source={x:Reference InputBox}}" 
+                   x:Name="InputBox"/>
+        </StackLayout>
+
+    </StackLayout>
+
+</ContentPage>
