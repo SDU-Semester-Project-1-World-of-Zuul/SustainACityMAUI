@@ -1,16 +1,19 @@
 ﻿namespace SustainACityMAUI.Models;
 
+/// <summary> Handles user commands and game interactions. </summary>
 public class CommandHandler
 {
     private readonly GameState _gameState;
     private readonly Dictionary<(int, int), Room> _roomMap;
     private readonly Dictionary<string, Func<string>> _commandActions;
 
+    /// <summary> Initializes the command handler with game state and room map. </summary>
     public CommandHandler(GameState gameState, Dictionary<(int, int), Room> roomMap)
     {
         _gameState = gameState;
         _roomMap = roomMap;
 
+        // Maps user input to corresponding actions.
         _commandActions = new()
         {
             {"look", () => $"\n{_gameState.CurrentRoom.LongDescription}"},
@@ -27,10 +30,13 @@ public class CommandHandler
         };
     }
 
+    /// <summary> Processes user input and returns game response. </summary>
     public string Handle(string userInput)
     {
         return _commandActions.ContainsKey(userInput) ? _commandActions[userInput].Invoke() : "\nI don't know that command.";
     }
+
+    /// <summary> Provides game directions to the user. </summary>
     public static string Help()
     {
         return "\nIn a world tied to Sustainable Development Goals (SDGs):" +
@@ -41,6 +47,7 @@ public class CommandHandler
                "\nFor this guide, type 'help'.";
     }
 
+    /// <summary> Moves the player to a new room. </summary>
     private string Move(int x, int y, string direction)
     {
         var newCoordinates = (_gameState.CurrentRoom.Coordinates.X + x, _gameState.CurrentRoom.Coordinates.Y + y);
@@ -55,6 +62,7 @@ public class CommandHandler
         return $"You can't go '{direction}'!";
     }
 
+    /// <summary> Returns player to the previous room. </summary>
     private string Return()
     {
         if (_gameState.PreviousRoom != null)
@@ -67,6 +75,8 @@ public class CommandHandler
             return "\nYou cannot go back from here!";
         }
     }
+
+    /// <summary> Engages a quest dialogue based on player's choice. </summary>
     public string Talk(string choiceType)
     {
         var npc = _gameState.CurrentRoom.Resident;
@@ -85,6 +95,7 @@ public class CommandHandler
         return $"{choice.Outcome} Your score is now {_gameState.Score}.";
     }
 
+    /// <summary> Presents available quest choices to the player. </summary>
     public string PresentChoices()
     {
         var npc = _gameState.CurrentRoom.Resident;
@@ -93,7 +104,7 @@ public class CommandHandler
             return "There's no one here offering a quest!";
         }
 
-        // Present the choices to the user.
+        // Present the choices to the user based of the NPCs options.
         return $"Quest: {npc.Quest.Description}\n" +
                $"1. {npc.Quest.Good.Action}\n" +
                $"2. {npc.Quest.Neutral.Action}\n" +

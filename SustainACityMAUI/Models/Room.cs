@@ -1,11 +1,12 @@
 namespace SustainACityMAUI.Models;
 
+/// <summary> Represents a location in the game. </summary>
 public class Room
 {
-    public string ShortDescription { get; set; }
-    public string LongDescription { get; set; }
-    public int X { get; set; }
-    public int Y { get; set; }
-    public (int X, int Y) Coordinates => (X, Y);
-    public NPC Resident { get; set; }
+    public string ShortDescription { get; set; } // Brief room info
+    public string LongDescription { get; set; }  // Detailed room info
+    public int X { get; set; }                   // Horizontal coordinate
+    public int Y { get; set; }                   // Vertical coordinate
+    public (int X, int Y) Coordinates => (X, Y); // Room's (X, Y) position
+    public NPC Resident { get; set; }            // Room's resident NPC
 }

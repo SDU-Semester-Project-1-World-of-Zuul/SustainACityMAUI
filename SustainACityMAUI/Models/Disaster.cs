@@ -1,9 +1,12 @@
 ﻿namespace SustainACityMAUI.Models;
 
+/// <summary> Represents random disaster events within the game. </summary>
 public class Disaster
 {
+    // RNG for disaster selection
     private static readonly Random _random = new();
 
+    // List of potential disaster events
     private readonly List<string> _disasters = new()
     {
         "A sudden earthquake shakes the ground beneath you!",
@@ -18,6 +21,7 @@ public class Disaster
         "A meteor shower turns deadly as a large meteorite crashes nearby."
     };
 
+    /// <summary> Selects and returns a random disaster event. </summary>
     public string TriggerRandomDisaster()
     {
         int index = _random.Next(_disasters.Count);

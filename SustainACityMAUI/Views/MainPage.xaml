@@ -4,20 +4,21 @@
              x:Class="SustainACityMAUI.Views.MainPage"
              BackgroundColor="Black">
 
+    <!-- Main layout container -->
     <StackLayout VerticalOptions="FillAndExpand">
 
+        <!-- Display game messages -->
         <ScrollView VerticalOptions="FillAndExpand">
-            <Label Text="{Binding GameOutput}" TextColor="White" FontFamily="CourierNew" />
+            <Label Text="{Binding GameOutput}" TextColor="White" FontFamily="Cascadia Code" />
         </ScrollView>
 
+        <!-- User input area -->
         <StackLayout VerticalOptions="End">
             <Entry Placeholder="Enter command" Text="{Binding UserInput}" TextColor="White" BackgroundColor="Black" 
-                   FontFamily="CourierNew" 
+                   FontFamily="Cascadia Code"
                    ReturnCommand="{Binding SubmitCommand}" 
                    ReturnCommandParameter="{Binding Path=Text, Source={x:Reference InputBox}}" 
                    x:Name="InputBox"/>
         </StackLayout>
-
     </StackLayout>
-
 </ContentPage>

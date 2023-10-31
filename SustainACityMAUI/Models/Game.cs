@@ -1,5 +1,6 @@
 ﻿namespace SustainACityMAUI.Models;
 
+/// <summary> Represents the main game logic and flow. </summary>
 public class Game
 {
     private readonly GameState _gameState;
@@ -7,6 +8,7 @@ public class Game
     private readonly CommandHandler _commandHandler;
     private readonly Random _random = new();
 
+    /// <summary> Initializes game elements like rooms and state. </summary>
     public Game()
     {
         RoomLoader roomLoader = new(Path.Combine(AppContext.BaseDirectory, "Data//Rooms.json"));
@@ -15,10 +17,13 @@ public class Game
         _commandHandler = new(_gameState, roomMap);
     }
 
+    /// <summary> Processes a user command and returns the game's response. </summary>
     public string ExecuteCommand(string userInput)
     {
         return _commandHandler.Handle(userInput);
     }
+
+    /// <summary> Returns the game's logo. </summary>
     public static string Logo()
     {
         return "\n\n" + @"
@@ -29,22 +34,24 @@ public class Game
 ███████║╚██████╔╝███████║   ██║   ██║  ██║██║██║  ╚███║     ██║  ██║    ╚██████╗██║   ██║      ██║    
 ╚══════╝ ╚═════╝ ╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝╚═╝   ╚══╝     ╚═╝  ╚═╝     ╚═════╝╚═╝   ╚═╝      ╚═╝     " + "\n\n";
     }
+
+    /// <summary> Provides an introductory message to guide players. </summary>
     public static string Welcome()
     {
-        return "Dive into a world tied to the Sustainable Development Goals (SDGs). " +
-            "Discover, interact, and make choices that matter." +
-            "Your actions echo in the corridors of destiny." +
-            CommandHandler.Help() + "\n";
+        return "Welcome to SustainACity, a game centered around the Sustainable Development Goals (SDGs). " +
+               "Navigate through the city, make decisions, and see their impact on sustainability. " +
+               CommandHandler.Help() + "\n";
     }
 
+    /// <summary> Occasionally triggers a disaster, affecting the game state. </summary>
     public string TriggerPotentialDisaster()
     {
         // 10% chance for a disaster
         if (_random.Next(100) < 10)
         {
-            Disaster disaster = new Disaster();
+            Disaster disaster = new();
             string disasterEvent = disaster.TriggerRandomDisaster();
-            _gameState.Score -= 10;  // Reduce score by 10 points
+            _gameState.Score -= 10; // Score penalty
 
             return $"\n{disasterEvent}\nScore Penalty! Current Score: {_gameState.Score}\n";
         }
