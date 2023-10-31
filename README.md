@@ -9,11 +9,11 @@ For a deep dive into the project's metrics, analysis, and more, check out our [p
 This project is organized into several key components:
 
 - 🕹️ `Game.cs`: The main game loop and core logic.
-- 🏞️ `Room.cs`: Defines the different rooms and their properties in the game world.
-- 🌐 `RoomLoader.cs`: Responsible for loading rooms and initializing the game map.
+- 🏞️ `District.cs`: Defines the different Districts and their properties in the game world.
+- 🌐 `DistrictLoader.cs`: Responsible for loading Districts and initializing the game map.
 - 📜 `CommandHandler.cs`: Handles user input commands and their corresponding actions.
 - 🚧 `Disaster.cs`: Defines potential disasters that can impact the city.
-- 🎮 `GameState.cs`: Manages the current state of the game, including player progress.
+- 🎮 `Player.cs`: Manages player progress and location.
 - 👥 `NPC.cs`: Represents Non-Player Characters within the game, such as city officials and citizens.
 - 🚀 `Quest.cs`: Defines quests and missions that players can undertake to improve their city.
 
@@ -21,7 +21,7 @@ This project is organized into several key components:
 1. Clone the repository.
 2. Build and run the project using .NET MAUI.
 3. Interact with the game using text commands.
-4. Build rooms, interact with NPCs, and undertake quests to develop and sustain your city.
+4. Build Districts, interact with NPCs, and undertake quests to develop and sustain your city.
 
 ## 🙏 Acknowledgements
 This project is a part of a student group project. Special thanks to all contributors, mentors, and supporters for their invaluable guidance and support.
