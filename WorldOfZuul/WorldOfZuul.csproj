@@ -31,6 +31,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<!-- JSON Data -->
+		<None Include="Data\**">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
 		<!-- App Icon -->
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
 
@@ -53,7 +57,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Update="Rooms.json">
+	  <None Update="Data\Rooms.json">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
 	  <None Update="Rooms.xml">

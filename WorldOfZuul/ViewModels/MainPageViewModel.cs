@@ -15,7 +15,7 @@ public class MainPageViewModel : INotifyPropertyChanged
     {
         _game = new Game();
         ProcessInputCommand = new Command<string>(ProcessInput);
-        _gameOutput = _game.PrintWelcome();
+        _gameOutput = Game.Welcome();
     }
 
     public string GameOutput
