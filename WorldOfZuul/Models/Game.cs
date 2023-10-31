@@ -10,24 +10,24 @@ public class Game
     {
         // Load rooms from JSON file
         string roomsFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Rooms.json");
-        List<Room> rooms = Room.LoadRoomsFromJson(roomsFilePath);
+        List<Room> rooms = Room.LoadRooms(roomsFilePath);
 
         // Populate the roomMap dictionary with the loaded rooms
         roomMap = rooms.ToDictionary(room => room.Coordinates, room => room);
 
         // Set the initial current room
-        _gameState = new GameState { CurrentRoom = roomMap[(0, 0)] };
+        _gameState = new() { CurrentRoom = roomMap[(0, 0)] };
 
         // List of game commands and their actions
-        commandActions = new Dictionary<string, Func<string>>
+        commandActions = new()
         {
             {"look", () => $"\n{_gameState.CurrentRoom.LongDescription}"},
-            {"back", GoBack},
-            {"north", () => Move("north")},
-            {"south", () => Move("south")},
-            {"east", () => Move("east")},
-            {"west", () => Move("west")},
-            {"help", PrintHelp}
+            {"back", Return},
+            {"north", () => Move(0, -1, "north")},
+            {"south", () => Move(0, 1, "south")},
+            {"east", () => Move(1, 0, "east")},
+            {"west", () => Move(-1, 0, "west")},
+            {"help", Help}
         };
     }
 
@@ -43,14 +43,14 @@ public class Game
         }
     }
 
-    public string PrintWelcome()
+    public string Welcome()
     {
         return "\nWelcome to the World of Zuul!" +
                "\nWorld of Zuul is a new, incredibly boring adventure game." +
-               $"{PrintHelp()}\n";
+               $"{Help()}\n";
     }
 
-    private string PrintHelp()
+    private string Help()
     {
         return "\nYou are lost. You are alone. You wander" +
                "\naround the university.\n" +
@@ -60,44 +60,21 @@ public class Game
                "\nType 'help' to print this message again.";
     }
 
-    private string Move(string direction)
+    private string Move(int x, int y, string direction)
     {
-        int x = _gameState.CurrentRoom.Coordinates.X;
-        int y = _gameState.CurrentRoom.Coordinates.Y;
+        var newCoordinates = (_gameState.CurrentRoom.Coordinates.X + x, _gameState.CurrentRoom.Coordinates.Y + y);
 
-        switch (direction)
-        {
-            case "north":
-                y--;
-                break;
-            case "south":
-                y++;
-                break;
-            case "east":
-                x++;
-                break;
-            case "west":
-                x--;
-                break;
-        }
-
-        var targetCoordinates = (x, y);
-
-        if (roomMap.ContainsKey(targetCoordinates))
+        if (roomMap.ContainsKey(newCoordinates))
         {
             _gameState.PreviousRoom = _gameState.CurrentRoom;
-            _gameState.CurrentRoom = roomMap[targetCoordinates];
+            _gameState.CurrentRoom = roomMap[newCoordinates];
 
             return $"You moved {direction}.\n{_gameState.CurrentRoom.ShortDescription}";
         }
-        else
-        {
-            return $"You can't go '{direction}'!";
-        }
+        return $"You can't go '{direction}'!";
     }
 
-
-    private string GoBack()
+    private string Return()
     {
         if (_gameState.PreviousRoom != null)
         {
