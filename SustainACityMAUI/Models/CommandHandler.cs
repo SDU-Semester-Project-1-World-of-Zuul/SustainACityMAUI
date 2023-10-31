@@ -3,20 +3,20 @@
 /// <summary> Handles user commands and game interactions. </summary>
 public class CommandHandler
 {
-    private readonly GameState _gameState;
-    private readonly Dictionary<(int, int), Room> _roomMap;
+    private readonly Player _player;
+    private readonly Dictionary<(int, int), District> _districtMap;
     private readonly Dictionary<string, Func<string>> _commandActions;
 
-    /// <summary> Initializes the command handler with game state and room map. </summary>
-    public CommandHandler(GameState gameState, Dictionary<(int, int), Room> roomMap)
+    /// <summary> Initializes the command handler with game state and District map. </summary>
+    public CommandHandler(Player player, Dictionary<(int, int), District> districtMap)
     {
-        _gameState = gameState;
-        _roomMap = roomMap;
+        _player = player;
+        _districtMap = districtMap;
 
         // Maps user input to corresponding actions.
         _commandActions = new()
         {
-            {"look", () => $"\n{_gameState.CurrentRoom.LongDescription}"},
+            {"look", () => $"\n{_player.CurrentDistrict.LongDescription}"},
             {"back", Return},
             {"north", () => Move(0, -1, "north")},
             {"south", () => Move(0, 1, "south")},
@@ -47,28 +47,28 @@ public class CommandHandler
                "\nFor this guide, type 'help'.";
     }
 
-    /// <summary> Moves the player to a new room. </summary>
+    /// <summary> Moves the player to a new District. </summary>
     private string Move(int x, int y, string direction)
     {
-        var newCoordinates = (_gameState.CurrentRoom.Coordinates.X + x, _gameState.CurrentRoom.Coordinates.Y + y);
+        var newCoordinates = (_player.CurrentDistrict.Coordinates.X + x, _player.CurrentDistrict.Coordinates.Y + y);
 
-        if (_roomMap.ContainsKey(newCoordinates))
+        if (_districtMap.ContainsKey(newCoordinates))
         {
-            _gameState.PreviousRoom = _gameState.CurrentRoom;
-            _gameState.CurrentRoom = _roomMap[newCoordinates];
+            _player.PreviousDistrict = _player.CurrentDistrict;
+            _player.CurrentDistrict = _districtMap[newCoordinates];
 
-            return $"You moved {direction}.\n{_gameState.CurrentRoom.ShortDescription}";
+            return $"You moved {direction}.\n{_player.CurrentDistrict.ShortDescription}";
         }
         return $"You can't go '{direction}'!";
     }
 
-    /// <summary> Returns player to the previous room. </summary>
+    /// <summary> Returns player to the previous District. </summary>
     private string Return()
     {
-        if (_gameState.PreviousRoom != null)
+        if (_player.PreviousDistrict != null)
         {
-            _gameState.CurrentRoom = _gameState.PreviousRoom;
-            return $"\nYou returned to the previous room.\n{_gameState.CurrentRoom.ShortDescription}";
+            _player.CurrentDistrict = _player.PreviousDistrict;
+            return $"\nYou returned to the previous District.\n{_player.CurrentDistrict.ShortDescription}";
         }
         else
         {
@@ -79,7 +79,7 @@ public class CommandHandler
     /// <summary> Engages a quest dialogue based on player's choice. </summary>
     public string Talk(string choiceType)
     {
-        var npc = _gameState.CurrentRoom.Resident;
+        var npc = _player.CurrentDistrict.Resident;
         if (npc == null || npc.Quest == null)
         {
             return "There's no one here offering a quest!";
@@ -91,14 +91,14 @@ public class CommandHandler
             return "Invalid choice!";
         }
 
-        _gameState.Score += choice.Score;
-        return $"{choice.Outcome} Your score is now {_gameState.Score}.";
+        _player.Score += choice.Score;
+        return $"{choice.Outcome} Your score is now {_player.Score}.";
     }
 
     /// <summary> Presents available quest choices to the player. </summary>
     public string PresentChoices()
     {
-        var npc = _gameState.CurrentRoom.Resident;
+        var npc = _player.CurrentDistrict.Resident;
         if (npc == null || npc.Quest == null)
         {
             return "There's no one here offering a quest!";

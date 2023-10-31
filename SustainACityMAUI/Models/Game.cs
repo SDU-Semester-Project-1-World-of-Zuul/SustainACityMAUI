@@ -3,18 +3,18 @@
 /// <summary> Represents the main game logic and flow. </summary>
 public class Game
 {
-    private readonly GameState _gameState;
-    private readonly Dictionary<(int, int), Room> roomMap = new();
+    private readonly Player _player;
+    private readonly Dictionary<(int, int), District> districtMap = new();
     private readonly CommandHandler _commandHandler;
     private readonly Random _random = new();
 
-    /// <summary> Initializes game elements like rooms and state. </summary>
+    /// <summary> Initializes game elements like Districts and state. </summary>
     public Game()
     {
-        RoomLoader roomLoader = new(Path.Combine(AppContext.BaseDirectory, "Data//Rooms.json"));
-        roomMap = roomLoader.LoadRooms();
-        _gameState = new() { CurrentRoom = roomMap[(0, 0)] };
-        _commandHandler = new(_gameState, roomMap);
+        DistrictLoader districtLoader = new(Path.Combine(AppContext.BaseDirectory, "Data//Districts.json"));
+        districtMap = districtLoader.LoadDistricts();
+        _player = new() { CurrentDistrict = districtMap[(0, 0)] };
+        _commandHandler = new(_player, districtMap);
     }
 
     /// <summary> Processes a user command and returns the game's response. </summary>
@@ -51,9 +51,9 @@ public class Game
         {
             Disaster disaster = new();
             string disasterEvent = disaster.TriggerRandomDisaster();
-            _gameState.Score -= 10; // Score penalty
+            _player.Score -= 10; // Score penalty
 
-            return $"\n{disasterEvent}\nScore Penalty! Current Score: {_gameState.Score}\n";
+            return $"\n{disasterEvent}\nScore Penalty! Current Score: {_player.Score}\n";
         }
 
         return string.Empty;
