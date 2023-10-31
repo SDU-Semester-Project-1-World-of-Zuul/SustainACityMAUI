@@ -5,6 +5,7 @@ public class Game
     private readonly GameState _gameState;
     private readonly Dictionary<(int, int), Room> roomMap = new();
     private readonly CommandHandler _commandHandler;
+    private readonly Random _random = new();
 
     public Game()
     {
@@ -36,4 +37,18 @@ public class Game
             CommandHandler.Help() + "\n";
     }
 
+    public string TriggerPotentialDisaster()
+    {
+        // 10% chance for a disaster
+        if (_random.Next(100) < 10)
+        {
+            Disaster disaster = new Disaster();
+            string disasterEvent = disaster.TriggerRandomDisaster();
+            _gameState.Score -= 10;  // Reduce score by 10 points
+
+            return $"\n{disasterEvent}\nScore Penalty! Current Score: {_gameState.Score}\n";
+        }
+
+        return string.Empty;
+    }
 }

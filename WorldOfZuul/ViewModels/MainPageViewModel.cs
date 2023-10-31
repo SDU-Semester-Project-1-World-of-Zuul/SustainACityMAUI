@@ -54,6 +54,7 @@ public class MainPageViewModel : INotifyPropertyChanged
     private void SubmitInput(string input)
     {
         AppendToOutput($"\n> {input}\n");
+        AppendToOutput(_game.TriggerPotentialDisaster()); // Might trigger a disaster
         TypeEffectAsync(_game.ExecuteCommand(input), 25);
         UserInput = "";
     }
