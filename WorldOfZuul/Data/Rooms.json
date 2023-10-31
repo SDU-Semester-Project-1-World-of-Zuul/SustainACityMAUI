@@ -1,32 +1,137 @@
 ﻿[
   {
-    "ShortDescription": "Outside",
-    "LongDescription": "You are standing outside the main entrance of the university. To the east is a large building, to the south is a computing lab, and to the west is the campus pub.",
+    "ShortDescription": "City Center",
+    "LongDescription": "You are standing in the heart of the city. Tall buildings surround you, and there's a buzz of activity. To the east is the Financial District, to the south is the Residential Area, and to the west is the Park District.",
     "X": 0,
-    "Y": 0
+    "Y": 0,
+    "Resident": {
+      "Name": "Mayor Greene",
+      "Quest": {
+        "Description": "Reduce the environmental impact of cities.",
+        "Good": {
+          "Action": "Promote green buildings.",
+          "Outcome": "The city starts adopting more sustainable building practices!",
+          "Score": 10
+        },
+        "Neutral": {
+          "Action": "Attend a city council meeting.",
+          "Outcome": "You learned more about the city's challenges, but didn't directly contribute to solutions.",
+          "Score": 0
+        },
+        "Bad": {
+          "Action": "Drive around without purpose.",
+          "Outcome": "This only contributes to air pollution!",
+          "Score": -5
+        }
+      }
+    }
   },
   {
-    "ShortDescription": "Theatre",
-    "LongDescription": "You find yourself inside a large lecture theatre. Rows of seats ascend up to the back, and there's a podium at the front. It's quite dark and quiet.",
+    "ShortDescription": "Financial District",
+    "LongDescription": "Skyscrapers tower above, housing the city's financial institutions. The streets are busy with working professionals.",
     "X": 1,
-    "Y": 0
+    "Y": 0,
+    "Resident": {
+      "Name": "Banker Bonnie",
+      "Quest": {
+        "Description": "Strengthen efforts to protect and safeguard the world’s cultural and natural heritage.",
+        "Good": {
+          "Action": "Donate to restoration of historical sites.",
+          "Outcome": "You've contributed to preserving the city's rich history!",
+          "Score": 10
+        },
+        "Neutral": {
+          "Action": "Visit a museum.",
+          "Outcome": "You appreciated the city's heritage but didn't actively contribute.",
+          "Score": 0
+        },
+        "Bad": {
+          "Action": "Ignore and walk past historical landmarks.",
+          "Outcome": "Ignoring history might lead to its degradation.",
+          "Score": -5
+        }
+      }
+    }
   },
   {
-    "ShortDescription": "Pub",
-    "LongDescription": "You've entered the campus pub. It's a cozy place, with a few students chatting over drinks. There's a bar near you and some pool tables at the far end.",
+    "ShortDescription": "Park District",
+    "LongDescription": "A breath of fresh air in the city, this district has greenery, playgrounds, and a serene lake.",
     "X": -1,
-    "Y": 0
+    "Y": 0,
+    "Resident": {
+      "Name": "Ranger Rick",
+      "Quest": {
+        "Description": "Provide universal access to safe, inclusive and accessible green and public spaces.",
+        "Good": {
+          "Action": "Plant trees and promote community gardens.",
+          "Outcome": "The district is even greener and community-driven!",
+          "Score": 10
+        },
+        "Neutral": {
+          "Action": "Attend a park event.",
+          "Outcome": "You enjoyed the green space but didn't leave a lasting impact.",
+          "Score": 0
+        },
+        "Bad": {
+          "Action": "Litter in the park.",
+          "Outcome": "That's not helping the city's sustainability goals!",
+          "Score": -5
+        }
+      }
+    }
   },
   {
-    "ShortDescription": "Lab",
-    "LongDescription": "You're in a computing lab. Desks with computers line the walls, and there's an office to the east. The hum of machines fills the room.",
+    "ShortDescription": "Residential Area",
+    "LongDescription": "Rows of houses, apartments, and some local shops define this district. Families and children are often seen playing.",
     "X": 0,
-    "Y": 1
+    "Y": 1,
+    "Resident": {
+      "Name": "Neighbor Nancy",
+      "Quest": {
+        "Description": "Ensure access for all to adequate, safe and affordable housing and basic services.",
+        "Good": {
+          "Action": "Volunteer in community housing projects.",
+          "Outcome": "You've helped ensure everyone has a roof over their heads!",
+          "Score": 10
+        },
+        "Neutral": {
+          "Action": "Participate in a local yard sale.",
+          "Outcome": "It's community engagement, but not directly aiding housing access.",
+          "Score": 0
+        },
+        "Bad": {
+          "Action": "Hoard properties and drive up rents.",
+          "Outcome": "That's going against the goal of affordable housing for all.",
+          "Score": -5
+        }
+      }
+    }
   },
   {
-    "ShortDescription": "Office",
-    "LongDescription": "You've entered what seems to be an administration office. There's a large desk with a computer on it, and some bookshelves lining one wall.",
+    "ShortDescription": "Industrial Zone",
+    "LongDescription": "Factories and warehouses dominate the landscape. You hear the distant hum of machinery.",
     "X": 1,
-    "Y": 1
+    "Y": 1,
+    "Resident": {
+      "Name": "Factory Foreman Frank",
+      "Quest": {
+        "Description": "Reduce the adverse environmental impact of industries.",
+        "Good": {
+          "Action": "Implement green manufacturing processes.",
+          "Outcome": "The industrial impact on the environment has been lessened!",
+          "Score": 10
+        },
+        "Neutral": {
+          "Action": "Take a tour of a factory.",
+          "Outcome": "You're more informed but didn't directly reduce impacts.",
+          "Score": 0
+        },
+        "Bad": {
+          "Action": "Waste resources and produce non-recyclable goods.",
+          "Outcome": "This just adds to the environmental burden.",
+          "Score": -5
+        }
+      }
+    }
   }
 ]

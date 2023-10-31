@@ -7,4 +7,5 @@ public class Room
     public int X { get; set; }
     public int Y { get; set; }
     public (int X, int Y) Coordinates => (X, Y);
+    public NPC Resident { get; set; }
 }

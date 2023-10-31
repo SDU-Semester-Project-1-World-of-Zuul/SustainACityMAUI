@@ -18,11 +18,22 @@ public class Game
     {
         return _commandHandler.Handle(userInput);
     }
-
+    public static string Logo()
+    {
+        return "\n\n" + @"
+███████╗██╗   ██╗███████╗████████╗ █████╗ ██╗███╗   ███╗     █████╗      ██████╗██╗████████╗██╗   ██╗
+██╔════╝██║   ██║██╔════╝╚══██╔══╝██╔══██╗██║██╔██╗ ██╔╝    ██╔══██╗    ██╔════╝██║╚══██╔══╝╚██╗ ██╔╝
+███████╗██║   ██║███████╗   ██║   ███████║██║██║╚██╗██║     ███████║    ██║     ██║   ██║    ╚████╔╝  
+╚════██║██║   ██║╚════██║   ██║   ██╔══██║██║██║ ╚████║     ██╔══██║    ██║     ██║   ██║     ╚██╔╝   
+███████║╚██████╔╝███████║   ██║   ██║  ██║██║██║  ╚███║     ██║  ██║    ╚██████╗██║   ██║      ██║    
+╚══════╝ ╚═════╝ ╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝╚═╝   ╚══╝     ╚═╝  ╚═╝     ╚═════╝╚═╝   ╚═╝      ╚═╝     " + "\n\n";
+    }
     public static string Welcome()
     {
-        return "\nWelcome to the World of Zuul!" +
-               "\nWorld of Zuul is a new, incredibly boring adventure game." +
-               $"{CommandHandler.Help()}\n";
+        return "Dive into a world tied to the Sustainable Development Goals (SDGs). " +
+            "Discover, interact, and make choices that matter." +
+            "Your actions echo in the corridors of destiny." +
+            CommandHandler.Help() + "\n";
     }
+
 }

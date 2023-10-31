@@ -14,8 +14,9 @@ public class MainPageViewModel : INotifyPropertyChanged
     public MainPageViewModel()
     {
         _game = new Game();
-        ProcessInputCommand = new Command<string>(ProcessInput);
-        _gameOutput = Game.Welcome();
+        SubmitCommand = new Command<string>(SubmitInput);
+        AppendToOutput(Game.Logo());
+        TypeEffectAsync(Game.Welcome(), 25);
     }
 
     public string GameOutput
@@ -24,7 +25,7 @@ public class MainPageViewModel : INotifyPropertyChanged
         set
         {
             _gameOutput = value;
-            OnPropertyChanged();
+            RaisePropertyChanged();
         }
     }
 
@@ -34,23 +35,38 @@ public class MainPageViewModel : INotifyPropertyChanged
         set
         {
             _userInput = value;
-            OnPropertyChanged();
+            RaisePropertyChanged();
         }
     }
 
-    public ICommand ProcessInputCommand { get; }
+    public ICommand SubmitCommand { get; }
 
-    private void ProcessInput(string userInput)
+    private async void TypeEffectAsync(string message, int typingDelay)
     {
-        _gameOutput += $"\n> {userInput}\n";
-        _gameOutput += _game.ExecuteCommand(userInput); // Processes game choices
-        GameOutput = _gameOutput; // Notify the View of changes
-        UserInput = ""; // Clear the input
+        foreach (char character in message)
+        {
+            _gameOutput += character;
+            GameOutput = _gameOutput;
+            await Task.Delay(typingDelay);
+        }
+    }
+
+    private void SubmitInput(string input)
+    {
+        AppendToOutput($"\n> {input}\n");
+        TypeEffectAsync(_game.ExecuteCommand(input), 25);
+        UserInput = "";
+    }
+
+    private void AppendToOutput(string text)
+    {
+        _gameOutput += text;
+        GameOutput = _gameOutput;
     }
 
     public event PropertyChangedEventHandler PropertyChanged;
 
-    protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+    private void RaisePropertyChanged([CallerMemberName] string propertyName = null)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }

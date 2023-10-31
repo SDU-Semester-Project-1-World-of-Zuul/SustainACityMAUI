@@ -13,7 +13,7 @@
         <StackLayout VerticalOptions="End">
             <Entry Placeholder="Enter command" Text="{Binding UserInput}" TextColor="White" BackgroundColor="Black" 
                    FontFamily="CourierNew" 
-                   ReturnCommand="{Binding ProcessInputCommand}" 
+                   ReturnCommand="{Binding SubmitCommand}" 
                    ReturnCommandParameter="{Binding Path=Text, Source={x:Reference InputBox}}" 
                    x:Name="InputBox"/>
         </StackLayout>

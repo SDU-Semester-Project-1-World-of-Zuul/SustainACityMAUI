@@ -5,6 +5,7 @@ public class GameState
 {
     public Room CurrentRoom { get; set; }
     public Room PreviousRoom { get; set; }
+    public int Score { get; set; }
 
-    // REMINDER: ADD SCORE HERE
+    // Add other game modifiers here
 }

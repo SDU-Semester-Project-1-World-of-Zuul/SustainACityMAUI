@@ -12,15 +12,19 @@ public class CommandHandler
         _roomMap = roomMap;
 
         _commandActions = new()
-            {
-                {"look", () => $"\n{_gameState.CurrentRoom.LongDescription}"},
-                {"back", Return},
-                {"north", () => Move(0, -1, "north")},
-                {"south", () => Move(0, 1, "south")},
-                {"east", () => Move(1, 0, "east")},
-                {"west", () => Move(-1, 0, "west")},
-                {"help", CommandHandler.Help}
-            };
+        {
+            {"look", () => $"\n{_gameState.CurrentRoom.LongDescription}"},
+            {"back", Return},
+            {"north", () => Move(0, -1, "north")},
+            {"south", () => Move(0, 1, "south")},
+            {"east", () => Move(1, 0, "east")},
+            {"west", () => Move(-1, 0, "west")},
+            {"help", Help},
+            {"talk", PresentChoices},
+            {"1", () => Talk("good")},
+            {"2", () => Talk("neutral")},
+            {"3", () => Talk("bad")}
+        };
     }
 
     public string Handle(string userInput)
@@ -29,12 +33,12 @@ public class CommandHandler
     }
     public static string Help()
     {
-        return "\nYou are lost. You are alone. You wander" +
-               "\naround the university.\n" +
-               "\nNavigate by typing 'north', 'south', 'east', or 'west'." +
-               "\nType 'look' for more details." +
-               "\nType 'back' to go to the previous room." +
-               "\nType 'help' to print this message again.";
+        return "\nIn a world tied to Sustainable Development Goals (SDGs):" +
+               "\n\nMove using 'north', 'south', 'east', 'west'." +
+               "\nSee details with 'look'." +
+               "\nReturn with 'back'." +
+               "\nEngage quests with 'talk' and select using '1', '2', or '3'." +
+               "\nFor this guide, type 'help'.";
     }
 
     private string Move(int x, int y, string direction)
@@ -62,5 +66,38 @@ public class CommandHandler
         {
             return "\nYou cannot go back from here!";
         }
+    }
+    public string Talk(string choiceType)
+    {
+        var npc = _gameState.CurrentRoom.Resident;
+        if (npc == null || npc.Quest == null)
+        {
+            return "There's no one here offering a quest!";
+        }
+
+        var choice = npc.Quest.GetChoice(choiceType);
+        if (choice == null)
+        {
+            return "Invalid choice!";
+        }
+
+        _gameState.Score += choice.Score;
+        return $"{choice.Outcome} Your score is now {_gameState.Score}.";
+    }
+
+    public string PresentChoices()
+    {
+        var npc = _gameState.CurrentRoom.Resident;
+        if (npc == null || npc.Quest == null)
+        {
+            return "There's no one here offering a quest!";
+        }
+
+        // Present the choices to the user.
+        return $"Quest: {npc.Quest.Description}\n" +
+               $"1. {npc.Quest.Good.Action}\n" +
+               $"2. {npc.Quest.Neutral.Action}\n" +
+               $"3. {npc.Quest.Bad.Action}\n" +
+               $"Type the number corresponding to your choice.";
     }
 }
