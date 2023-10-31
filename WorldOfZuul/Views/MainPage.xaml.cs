@@ -1,13 +1,12 @@
 ﻿using WorldOfZuul.ViewModels;
 
-namespace WorldOfZuul.Views
+namespace WorldOfZuul.Views;
+
+public partial class MainPage : ContentPage
 {
-    public partial class MainPage : ContentPage
+    public MainPage()
     {
-        public MainPage()
-        {
-            InitializeComponent();
-            BindingContext = new MainPageViewModel();
-        }
+        InitializeComponent();
+        BindingContext = new MainPageViewModel();
     }
 }

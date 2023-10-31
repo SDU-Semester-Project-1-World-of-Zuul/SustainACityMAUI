@@ -53,8 +53,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Update="Rooms.xml">
+	  <None Update="Rooms.json">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Rooms.xml">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	  </None>
 	</ItemGroup>
 

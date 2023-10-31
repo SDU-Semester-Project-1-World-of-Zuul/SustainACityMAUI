@@ -1,35 +1,27 @@
-namespace WorldOfZuul.Models
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text.Json;
+
+namespace WorldOfZuul.Models;
+
+public class Room
 {
-    #region Room Class
-    /// <summary> Represents a room in the game.
-    /// Each room can have multiple exits leading to other rooms. </summary>
-    public class Room
+    public string ShortDescription { get; set; }
+    public string LongDescription { get; set; }
+    public int X { get; set; }
+    public int Y { get; set; }
+
+    public (int X, int Y) Coordinates => (X, Y);
+
+    public static List<Room> LoadRoomsFromJson(string filePath)
     {
-        #region Attributes
-        public string ShortDescription { get; private set; }
-        public string LongDescription { get; private set; }
-
-        // Mapping directions (e.g., "north", "east") to adjacent rooms.
-        public Dictionary<string, Room> Exits { get; private set; } = new();
-        #endregion Room Class
-
-        #region Constructor
-        /// <summary> New room with the given short and long descriptions. </summary>
-        public Room(string shortDesc, string longDesc)
+        string jsonText = File.ReadAllText(filePath);
+        var options = new JsonSerializerOptions
         {
-            ShortDescription = shortDesc;
-            LongDescription = longDesc;
-        }
-        #endregion Constructor
+            PropertyNameCaseInsensitive = true,
+        };
 
-        #region Public Methods
-        /// <summary> Sets an exit for the current room leading to a neighboring room. </summary>
-        public void SetExit(string direction, Room? neighbor)
-        {
-            if (neighbor != null)
-                Exits[direction] = neighbor;
-        }
-        #endregion Public Methods
+        return JsonSerializer.Deserialize<List<Room>>(jsonText, options);
     }
-    #endregion Room Class
 }
