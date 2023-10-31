@@ -1,75 +1,28 @@
-# World of Zuul for .NET MAUI
-## Introduction
+
+# 🌍 World of Zuul for .NET MAUI
+## 📜 Introduction
 World of Zuul is a classic text-based adventure game. This repository contains a port of the game to .NET MAUI, allowing it to run natively on various platforms including iOS, Android, macOS, and Windows.
 
+## 📂 Project Structure
+This project is organized into several key components:
 
-<summary>Workflow - feature branch</summary>
+- 🕹️ `Game.cs`: The main game loop and core logic.
+- 🏞️ `Room.cs`: Defines the different rooms and their properties in the game world.
+- 🌐 `RoomLoader.cs`: Responsible for loading rooms and initializing the game map.
+- 📜 `CommandHandler.cs`: Handles user input commands and their corresponding actions.
+- 🚧 `Disaster.cs`: Defines potential disasters that can occur in the game.
+- 🎮 `GameState.cs`: Manages the current state of the game, including player progress.
+- 👥 `NPC.cs`: Represents Non-Player Characters within the game.
+- 🚀 `Quest.cs`: Defines quests and missions that players can embark on.
 
-**1. create new feature branch (ex. onboarding-screen):**
-```
-git branch onboarding-screen 
-```
+## 🚀 How to Play
+1. Clone the repository.
+2. Build and run the project using .NET MAUI.
+3. Interact with the game using text commands.
+4. Explore rooms, interact with NPCs, and complete quests to progress in the game.
 
-This will create a new branch based on the branch you are currently inside (meaning it will be a copy of the current branch).
+## 🙏 Acknowledgements
+This project is a part of a student initiative. Special thanks to all contributors and mentors for their guidance and support.
 
----
-
-**2. checking out into feature branch**
-```
-git checkout onboarding-screen
-```
-
-Now you are inside your feature branch and start implementing your changes.
-
----
-
-**3. commit into feature branch**
-
-Keep in mind to regularly commit your changes into your feature branches to prevent mistake to mess up you progress.
-You can commit your changes by either the VS Code integrated Git environment or by using the following command:
-```
-git commit -m "<your commit message>"
-```
----
-
-**4. merge the feature branch into develop**
-
-When you are done with working on your feature you want to merge your changes to the developer branch.
-First make sure that you committed your latest changes to your feature branch! (step 3)
-
-You can then checkout into the develop branch with:
-```
-git checkout develop
-```
-
-Git might inform you, that your are behind some commits (ex. @mzyeager pushed some changes before).
-If thats the case you need to pull the changes first:
-```
-git pull
-```
-
-then you can merge your feature branch:
-```
-git merge onboarding-screen
-```
-
-This will apply all changes and commits from the feature branch into the develop branch.
-
-After reviewing your changes (on your own) you can push and update the develop branch:
-```
-git push
-```
----
-
-**5. delete your old feature branch**
-
-After successfully implementing your feature branch you can delete your old branch:
-```
-git branch -d onboarding-screen
-```
-
-In case you pushed your local branch to the remote server, you need to adjust the delete command:
-```
-git push origin --delete onboarding-screen
-```
-</details>
+## 📌 License
+This project has not been assigned a License yet.
