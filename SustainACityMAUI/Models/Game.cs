@@ -4,7 +4,7 @@
 public class Game
 {
     private readonly Player _player;
-    private readonly Dictionary<(int, int), District> districtMap = new();
+    private readonly Dictionary<(int, int), District> _districtMap = new();
     private readonly CommandHandler _commandHandler;
     private readonly Random _random = new();
 
@@ -12,39 +12,41 @@ public class Game
     public Game()
     {
         DistrictLoader districtLoader = new(Path.Combine(AppContext.BaseDirectory, "Data//Districts.json"));
-        districtMap = districtLoader.LoadDistricts();
-        _player = new() { CurrentDistrict = districtMap[(0, 0)] };
-        _commandHandler = new(_player, districtMap);
+        _districtMap = districtLoader.LoadDistricts();
+        _player = new() { CurrentDistrict = _districtMap[(0, 0)] };
+        _commandHandler = new(_player, _districtMap);
     }
 
     /// <summary> Processes a user command and returns the game's response. </summary>
     public string ExecuteCommand(string userInput)
     {
-        return _commandHandler.Handle(userInput);
+        return TriggerPotentialDisaster() + _commandHandler.Handle(userInput);
     }
+
 
     /// <summary> Returns the game's logo. </summary>
-    public static string Logo()
+    public static string SplashScreen()
     {
-        return "\n\n" + @"
-███████╗██╗   ██╗███████╗████████╗ █████╗ ██╗███╗   ███╗     █████╗      ██████╗██╗████████╗██╗   ██╗
-██╔════╝██║   ██║██╔════╝╚══██╔══╝██╔══██╗██║██╔██╗ ██╔╝    ██╔══██╗    ██╔════╝██║╚══██╔══╝╚██╗ ██╔╝
-███████╗██║   ██║███████╗   ██║   ███████║██║██║╚██╗██║     ███████║    ██║     ██║   ██║    ╚████╔╝  
-╚════██║██║   ██║╚════██║   ██║   ██╔══██║██║██║ ╚████║     ██╔══██║    ██║     ██║   ██║     ╚██╔╝   
-███████║╚██████╔╝███████║   ██║   ██║  ██║██║██║  ╚███║     ██║  ██║    ╚██████╗██║   ██║      ██║    
-╚══════╝ ╚═════╝ ╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝╚═╝   ╚══╝     ╚═╝  ╚═╝     ╚═════╝╚═╝   ╚═╝      ╚═╝     " + "\n\n";
+        return "\n\n\n" +
+               "\t\t███████╗██╗   ██╗███████╗████████╗ █████╗ ██╗███╗   ███╗     █████╗      ██████╗██╗████████╗██╗   ██╗\n" +
+               "\t\t██╔════╝██║   ██║██╔════╝╚══██╔══╝██╔══██╗██║██╔██╗ ██╔╝    ██╔══██╗    ██╔════╝██║╚══██╔══╝╚██╗ ██╔╝\n" +
+               "\t\t███████╗██║   ██║███████╗   ██║   ███████║██║██║╚██╗██║     ███████║    ██║     ██║   ██║    ╚████╔╝ \n" +
+               "\t\t╚════██║██║   ██║╚════██║   ██║   ██╔══██║██║██║ ╚████║     ██╔══██║    ██║     ██║   ██║     ╚██╔╝  \n" +
+               "\t\t███████║╚██████╔╝███████║   ██║   ██║  ██║██║██║  ╚███║     ██║  ██║    ╚██████╗██║   ██║      ██║   \n" +
+               "\t\t╚══════╝ ╚═════╝ ╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝╚═╝   ╚══╝     ╚═╝  ╚═╝     ╚═════╝╚═╝   ╚═╝      ╚═╝   \n\n\n";
     }
 
+
     /// <summary> Provides an introductory message to guide players. </summary>
-    public static string Welcome()
+    public string Introduction()
     {
-        return "Welcome to SustainACity, a game centered around the Sustainable Development Goals (SDGs). " +
-               "Navigate through the city, make decisions, and see their impact on sustainability. " +
-               CommandHandler.Help() + "\n";
+        return "Navigate through the city, make decisions, and see their impact on sustainability. " +
+            $"{ExecuteCommand("look")}\n\n" +
+            $"{ExecuteCommand("help")}\n\n";
     }
 
     /// <summary> Occasionally triggers a disaster, affecting the game state. </summary>
-    public string TriggerPotentialDisaster()
+    private string TriggerPotentialDisaster()
     {
         // 10% chance for a disaster
         if (_random.Next(100) < 10)

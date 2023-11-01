@@ -1,4 +1,4 @@
-﻿namespace SustainACityMAUI.Models;
+namespace SustainACityMAUI.Models;
 
 /// <summary> Handles user commands and game interactions. </summary>
 public class CommandHandler
@@ -33,14 +33,16 @@ public class CommandHandler
     /// <summary> Processes user input and returns game response. </summary>
     public string Handle(string userInput)
     {
+        if (string.IsNullOrWhiteSpace(userInput))
+            return "\nI don't know that command.";
+
         return _commandActions.ContainsKey(userInput) ? _commandActions[userInput].Invoke() : "\nI don't know that command.";
     }
 
     /// <summary> Provides game directions to the user. </summary>
-    public static string Help()
+    private static string Help()
     {
-        return "\nIn a world tied to Sustainable Development Goals (SDGs):" +
-               "\n\nMove using 'north', 'south', 'east', 'west'." +
+        return "\nMove using 'north', 'south', 'east', 'west'." +
                "\nSee details with 'look'." +
                "\nReturn with 'back'." +
                "\nEngage quests with 'talk' and select using '1', '2', or '3'." +
@@ -77,7 +79,7 @@ public class CommandHandler
     }
 
     /// <summary> Engages a quest dialogue based on player's choice. </summary>
-    public string Talk(string choiceType)
+    private string Talk(string choiceType)
     {
         var npc = _player.CurrentDistrict.Resident;
         if (npc == null || npc.Quest == null)
@@ -96,7 +98,7 @@ public class CommandHandler
     }
 
     /// <summary> Presents available quest choices to the player. </summary>
-    public string PresentChoices()
+    private string PresentChoices()
     {
         var npc = _player.CurrentDistrict.Resident;
         if (npc == null || npc.Quest == null)
@@ -105,10 +107,10 @@ public class CommandHandler
         }
 
         // Present the choices to the user based of the NPCs options.
-        return $"Quest: {npc.Quest.Description}\n" +
-               $"1. {npc.Quest.Good.Action}\n" +
-               $"2. {npc.Quest.Neutral.Action}\n" +
-               $"3. {npc.Quest.Bad.Action}\n" +
-               $"Type the number corresponding to your choice.";
+        return $"Quest:\t{npc.Quest.Description}" +
+               $"\n1.\t{npc.Quest.Good.Action}" +
+               $"\n2.\t{npc.Quest.Neutral.Action}" +
+               $"\n3.\t{npc.Quest.Bad.Action}" +
+               "\nType the number corresponding to your choice.";
     }
 }

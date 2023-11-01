@@ -17,8 +17,8 @@ public class MainPageViewModel : INotifyPropertyChanged
     {
         _game = new Game();
         SubmitCommand = new Command<string>(SubmitInput);
-        AppendToOutput(Game.Logo());
-        TypeEffectAsync(Game.Welcome(), 25);
+        AppendToOutput(Game.SplashScreen());
+        TypeEffectAsync(_game.Introduction(), 25);
     }
 
     /// <summary> Represents the game's visual output. </summary>
@@ -28,7 +28,7 @@ public class MainPageViewModel : INotifyPropertyChanged
         set
         {
             _gameOutput = value;
-            RaisePropertyChanged();
+            OnPropertyChanged();
         }
     }
 
@@ -39,7 +39,7 @@ public class MainPageViewModel : INotifyPropertyChanged
         set
         {
             _userInput = value;
-            RaisePropertyChanged();
+            OnPropertyChanged();
         }
     }
 
@@ -51,8 +51,7 @@ public class MainPageViewModel : INotifyPropertyChanged
     {
         foreach (char character in message)
         {
-            _gameOutput += character;
-            GameOutput = _gameOutput;
+            AppendToOutput(character.ToString());
             await Task.Delay(typingDelay);
         }
     }
@@ -60,8 +59,7 @@ public class MainPageViewModel : INotifyPropertyChanged
     /// <summary> Handles user input and game responses. </summary>
     private void SubmitInput(string input)
     {
-        AppendToOutput($"\n> {input}\n");
-        AppendToOutput(_game.TriggerPotentialDisaster());
+        AppendToOutput($"\n\n> {input}\n");
         TypeEffectAsync(_game.ExecuteCommand(input), 25);
         UserInput = "";
     }
@@ -69,14 +67,13 @@ public class MainPageViewModel : INotifyPropertyChanged
     /// <summary> Adds text to the game output. </summary>
     private void AppendToOutput(string text)
     {
-        _gameOutput += text;
-        GameOutput = _gameOutput;
+        GameOutput += text;
     }
 
     public event PropertyChangedEventHandler PropertyChanged;
 
     /// <summary> Notifies UI of property changes. </summary>
-    private void RaisePropertyChanged([CallerMemberName] string propertyName = null)
+    private void OnPropertyChanged([CallerMemberName] string propertyName = null)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
