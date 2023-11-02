@@ -39,7 +39,7 @@ Got stuck? Get on the Discord server for support and collaboration.
 
 ## 📃 Code of Conduct
 
-Join us in creating a welcoming community. Read our [Code of Conduct](CODE_OF_CONDUCT.md) for guidance on our community standards.
+Create welcoming community, read our [Code of Conduct](CODE_OF_CONDUCT.md) for guidance on our community standards.
 
 ## 📜 License
 
