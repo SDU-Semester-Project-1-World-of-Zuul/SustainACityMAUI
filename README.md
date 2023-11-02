@@ -1,30 +1,64 @@
-# 🌍 SustainACityMAUI for .NET MAUI
-## 📜 Introduction
-SustainACityMAUI is an innovative simulation game that challenges players to build and sustain a city, balancing various environmental and societal factors. This repository contains a port of the game to .NET MAUI, allowing it to run natively on various platforms including iOS, Android, macOS, and Windows.
+<h1 align="center">🌍 SustainACity - The Sustainable City Simulation</h1>
+<p align="center">
+  <a href="https://github.com/SDU-Semester-Project-1-World-of-Zuul/SustainACityMAUI/releases">
+    <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/SustainACity/SustainACityMAUI?color=green&label=latest%20version&style=for-the-badge">
+  </a>
+  <a href="https://app.eraser.io/workspace/B3gMqhdFWqH9OIA89elQ">
+    <img alt="Project Analysis" src="https://img.shields.io/badge/analysis-Eraser-blueviolet?style=for-the-badge">
+  </a>
+</p>
 
-## 📈 Project Analysis
-For a deep dive into the project's metrics, analysis, and more, check out our [project analysis on Eraser](https://app.eraser.io/workspace/B3gMqhdFWqH9OIA89elQ).
+**SustainACityMAUI** is an immersive simulation game that empowers players to build and manage a city with an eye on sustainability. This cross-platform version, built with .NET MAUI, allows for a seamless experience across iOS, Android, macOS, and Windows.
 
-## 📂 Project Structure
-This project is organized into several key components:
+## 📚 Introduction
 
-- 🕹️ `Game.cs`: The main game loop and core logic.
-- 🏞️ `District.cs`: Defines the different Districts and their properties in the game world.
-- 🌐 `DistrictLoader.cs`: Responsible for loading Districts and initializing the game map.
-- 📜 `CommandHandler.cs`: Handles user input commands and their corresponding actions.
-- 🚧 `Disaster.cs`: Defines potential disasters that can impact the city.
-- 🎮 `Player.cs`: Manages player progress and location.
-- 👥 `NPC.cs`: Represents Non-Player Characters within the game, such as city officials and citizens.
-- 🚀 `Quest.cs`: Defines quests and missions that players can undertake to improve their city.
+The game invites players to take on the role of a city planner, making critical decisions to balance environmental, social, and economic challenges. Inspired by the UN's Sustainable Cities and Communities goal, SustainACity encourages strategic thinking and environmental awareness.
 
-## 🚀 How to Play
-1. Clone the repository.
-2. Build and run the project using .NET MAUI.
-3. Interact with the game using text commands.
-4. Build Districts, interact with NPCs, and undertake quests to develop and sustain your city.
+## 🚀 Quick Start
 
-## 🙏 Acknowledgements
-This project is a part of a student group project. Special thanks to all contributors, mentors, and supporters for their invaluable guidance and support.
+1. **Get the Code**: Clone the repository to start shaping your city.
+2. **Build and Run**: Set up your development environment with .NET MAUI and run the project.
+3. **Play and Explore**: Use text commands to build districts, manage resources, and interact with NPCs to achieve sustainable development.
 
-## 📌 License
-This project has not been assigned a license yet. For usage rights or more information, please contact the project maintainers.
+## 🛠️ Project Structure
+
+The codebase is thoughtfully organized to reflect various aspects of the game, including district management, NPC interactions, and player progression. While the exact structure may evolve, the core components are designed to be modular and scalable.
+
+## 📌 Contributing
+
+We welcome contributions from fellow city planners (developers)! To contribute:
+- **Clone and Set Up**: Fork the project and create your feature branch from `dev`.
+- **Make Your Changes**: Develop your feature with sustainability in mind.
+- **Submit a Pull Request**: Merge back into `dev` and we'll take it from there.
+
+For more details, check out our [CONTRIBUTING.md](CONTRIBUTING.md) guide.
+
+## 💬 Need Help?
+
+Got stuck? Get on the Discord server for support and collaboration.
+
+## 📃 Code of Conduct
+
+Join us in creating a welcoming community. Read our [Code of Conduct](CODE_OF_CONDUCT.md) for guidance on our community standards.
+
+## 📜 License
+
+This project under the MIT License - see the [LICENSE.md](LICENSE.md) for more details.
+
+## 🆕 Changelog
+
+For the latest changes, check out our [CHANGELOG.md](CHANGELOG.md).
+
+## 🐛 Reporting Issues
+
+If you encounter bugs or have suggestions, please report them in the issues section.
+
+## 🌟 Acknowledgements
+
+A heartfelt thank you to all contributors/group members.
+- 👏 @KonyakB
+- 👏 @olcia2098
+- 👏 @respectMathias
+- 👏 @pkyeager
+- 👏 @rikkiSnaebjornsson
+- 👏 @Zoravoid
