@@ -51,7 +51,7 @@ For the latest changes, check out our [CHANGELOG.md](CHANGELOG.md).
 
 ## 🐛 Reporting Issues
 
-If you encounter bugs or have suggestions, please report them in the issues section.
+If you encounter bugs or have suggestions, please report them in the [issues](https://github.com/SDU-Semester-Project-1-World-of-Zuul/SustainACityMAUI/issues) section.
 
 ## 🌟 Acknowledgements
 
