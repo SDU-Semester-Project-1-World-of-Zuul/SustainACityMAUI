@@ -43,7 +43,7 @@ Join us in creating a welcoming community. Read our [Code of Conduct](CODE_OF_CO
 
 ## 📜 License
 
-This project under the MIT License - see the [LICENSE.md](LICENSE.md) for more details.
+This project under the MIT License - see the [LICENSE.md](LICENSE) for more details.
 
 ## 🆕 Changelog
 
