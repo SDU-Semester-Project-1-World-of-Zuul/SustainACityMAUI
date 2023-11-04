@@ -16,7 +16,7 @@ public class CommandHandler
         // Maps user input to corresponding actions.
         _commandActions = new()
         {
-            {"look", () => $"\n{_player.CurrentDistrict.LongDescription}"},
+            {"look", () => Look()},
             {"back", Return},
             {"north", () => Move(0, -1, "north")},
             {"south", () => Move(0, 1, "south")},
@@ -37,6 +37,11 @@ public class CommandHandler
             return "\nI don't know that command.";
 
         return _commandActions.ContainsKey(userInput) ? _commandActions[userInput].Invoke() : "\nI don't know that command.";
+    }
+
+    private string Look()
+    {
+        return $"\n{_player.CurrentDistrict.LongDescription}";
     }
 
     /// <summary> Provides game directions to the user. </summary>
