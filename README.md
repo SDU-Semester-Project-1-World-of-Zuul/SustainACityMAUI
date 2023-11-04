@@ -39,11 +39,11 @@ Got stuck? Get on the Discord server for support and collaboration.
 
 ## 📃 Code of Conduct
 
-Join us in creating a welcoming community. Read our [Code of Conduct](CODE_OF_CONDUCT.md) for guidance on our community standards.
+Create welcoming community, read our [Code of Conduct](CODE_OF_CONDUCT.md) for guidance on our community standards.
 
 ## 📜 License
 
-This project under the MIT License - see the [LICENSE.md](LICENSE.md) for more details.
+This project under the MIT License - see the [LICENSE](LICENSE) for more details.
 
 ## 🆕 Changelog
 
@@ -51,7 +51,7 @@ For the latest changes, check out our [CHANGELOG.md](CHANGELOG.md).
 
 ## 🐛 Reporting Issues
 
-If you encounter bugs or have suggestions, please report them in the issues section.
+If you encounter bugs or have suggestions, please report them in the [issues](https://github.com/SDU-Semester-Project-1-World-of-Zuul/SustainACityMAUI/issues) section.
 
 ## 🌟 Acknowledgements
 

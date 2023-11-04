@@ -26,11 +26,11 @@ git commit -m "<your commit message>"
 </details>
 
 <details>
-<summary>🔄 Merge the Feature Branch into Develop</summary>
+<summary>🔄 Merge the Feature Branch into Dev</summary>
 
-Once your feature is ready, merge your changes into the `develop` branch:
+Once your feature is ready, merge your changes into the `dev` branch:
 ```bash
-git checkout develop
+git checkout dev
 git pull
 git merge onboarding-screen
 git push
