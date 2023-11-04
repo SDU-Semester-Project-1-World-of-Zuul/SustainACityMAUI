@@ -30,7 +30,6 @@ public class CommandHandler
         };
     }
 
-    //Test Webhook
     /// <summary> Processes user input and returns game response. </summary>
     public string Handle(string userInput)
     {
