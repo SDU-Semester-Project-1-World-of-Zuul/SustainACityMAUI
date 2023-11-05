@@ -1,18 +1,17 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
-using Microsoft.Maui.Dispatching;
-using System.Linq;
+using SustainACityMAUI.Helpers;
 using SustainACityMAUI.Models;
+using SustainACityMAUI.Views;
 
-namespace SustainACityMAUI.Minigames;
+namespace SustainACityMAUI.ViewModels;
 
-public class SchoolQuizMinigameViewModel : INotifyPropertyChanged
+public class SchoolQuizMinigameViewModel : ViewModel
 {
     private Player _player;
     public ObservableCollection<TriviaQuestion> Questions { get; private set; }
     public ICommand SubmitAnswerCommand { get; private set; }
-    public event PropertyChangedEventHandler PropertyChanged;
 
     private IDispatcher _dispatcher;
     private int _triviaScore;
@@ -170,12 +169,7 @@ public class SchoolQuizMinigameViewModel : INotifyPropertyChanged
     private void OnGameEnded()
     {
         _player.Score += TriviaScore; // Update game score
-        var factory = new MinigameFactory();
-        factory.NavigateBackAsync();
-    }
-
-    protected virtual void OnPropertyChanged(string propertyName)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        var navigationService = new NavigationService();
+        navigationService.NavigateBackAsync();
     }
 }

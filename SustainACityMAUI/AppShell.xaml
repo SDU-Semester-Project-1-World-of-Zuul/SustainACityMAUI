@@ -4,21 +4,25 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:SustainACityMAUI.Views"
-    xmlns:minigames="clr-namespace:SustainACityMAUI.Minigames"
     Shell.FlyoutBehavior="Disabled"
     Shell.NavBarIsVisible="False">
 
-    
+
 
     <ShellContent
         Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+        ContentTemplate="{DataTemplate local:StartView}"
+        Route="StartView" />
+    
+    <ShellContent
+        Title="Game"
+        ContentTemplate="{DataTemplate local:GameView}"
+        Route="GameView" />
 
     <!-- Define minigame routes -->
     <ShellContent
         Title="SchoolQuiz"
-        ContentTemplate="{DataTemplate minigames:SchoolQuizMinigameView}"
+        ContentTemplate="{DataTemplate local:SchoolQuizMinigameView}"
         Route="SchoolQuizMinigame" />
 
 </Shell>

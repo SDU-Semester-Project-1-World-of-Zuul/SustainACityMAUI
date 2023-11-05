@@ -32,7 +32,7 @@
 
 	<ItemGroup>
 		<!-- JSON Data -->
-		<EmbeddedResource Include="Resources\Data\Rooms.json" />
+		<EmbeddedResource Include="Resources\Data\rooms.json" />
 		<!-- App Icon -->
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
 
@@ -55,7 +55,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Minigames\SchoolQuizMinigameView.xaml">
+	  <Compile Update="Views\GameView.xaml.cs">
+	    <DependentUpon>GameView.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Views\SchoolQuizMinigameView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\StartView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

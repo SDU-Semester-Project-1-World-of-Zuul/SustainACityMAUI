@@ -4,17 +4,16 @@ using System.Windows.Input;
 using SustainACityMAUI.Models;
 using SustainACityMAUI.Commands;
 using SustainACityMAUI.Helpers;
-using SustainACityMAUI.Minigames;
 
 namespace SustainACityMAUI.ViewModels;
 
 /// <summary> Manages game interactions for the MainPage. </summary>
-public class MainPageViewModel : INotifyPropertyChanged
+public class GameViewModel : ViewModel
 {
     private string _gameOutput;
     private readonly Player _player;
     private readonly Dictionary<(int, int), Room> _roomMap;
-    private readonly MinigameFactory _minigameFactory;
+    private readonly NavigationService _navigationService;
     private string _userInput;
     private readonly Queue<string> _outputQueue = new Queue<string>();
     private bool _isTyping = false;
@@ -30,13 +29,13 @@ public class MainPageViewModel : INotifyPropertyChanged
     public ICommand SubmitCommand { get; }
 
     /// <summary> Sets up the game and initializes commands. </summary>
-    public MainPageViewModel()
+    public GameViewModel()
     {
-        _roomMap = new Dictionary<(int, int), Room>(); // Initialize with your map
-        JsonLoader jsonLoader = new("SustainACityMAUI.Resources.Data.Rooms.json");
+        _roomMap = new Dictionary<(int, int), Room>();
+        JsonLoader jsonLoader = new("SustainACityMAUI.Resources.Data.rooms.json");
         _roomMap = jsonLoader.LoadRooms().ToDictionary(room => (room.X, room.Y));
         _player = new() { CurrentRoom = _roomMap.GetValueOrDefault((0, 0))! };
-        _minigameFactory = new();
+        _navigationService = new();
 
         // Initialize commands
         MoveNorthCommand = new MoveCommand(_player, _roomMap, Direction.North, AppendToOutput);
@@ -46,7 +45,7 @@ public class MainPageViewModel : INotifyPropertyChanged
         BackCommand = new BackCommand(_player, _roomMap, AppendToOutput);
         LookCommand = new LookCommand(_player, AppendToOutput);
         HelpCommand = new HelpCommand(AppendToOutput);
-        TalkCommand = new TalkCommand(_player, _minigameFactory, AppendToOutput);
+        TalkCommand = new TalkCommand(_player, _navigationService, AppendToOutput);
     }
 
     /// <summary> Represents the game's visual output. </summary>
@@ -96,13 +95,5 @@ public class MainPageViewModel : INotifyPropertyChanged
             }
         }
         _isTyping = false;
-    }
-
-    public event PropertyChangedEventHandler PropertyChanged;
-
-    /// <summary> Notifies UI of property changes. </summary>
-    private void OnPropertyChanged([CallerMemberName] string propertyName = null)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

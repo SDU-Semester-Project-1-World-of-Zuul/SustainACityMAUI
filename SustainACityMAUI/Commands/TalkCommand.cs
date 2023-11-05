@@ -1,18 +1,18 @@
 ﻿using SustainACityMAUI.Models;
-using SustainACityMAUI.Minigames;
+using SustainACityMAUI.Helpers;
 
 namespace SustainACityMAUI.Commands;
 
 public class TalkCommand : Command
 {
     private readonly Player _player;
-    private readonly MinigameFactory _minigameFactory;
+    private readonly NavigationService _navigationService;
     private readonly Action<string> _updateAction;
 
-    public TalkCommand(Player player, MinigameFactory minigameFactory, Action<string> updateAction)
+    public TalkCommand(Player player, NavigationService navigationService, Action<string> updateAction)
     {
         _player = player;
-        _minigameFactory = minigameFactory;
+        _navigationService = navigationService;
         _updateAction = updateAction;
     }
 
@@ -27,7 +27,7 @@ public class TalkCommand : Command
 
                 try
                 {
-                    await _minigameFactory.CreateMinigameAsync(minigameName, _player);
+                    await _navigationService.NavigateToMinigameAsync(minigameName, _player);
                     _updateAction($"You finished playing {minigameName} with {_player.CurrentRoom.NPC.Name}.\n");
                 }
                 catch (Exception ex)

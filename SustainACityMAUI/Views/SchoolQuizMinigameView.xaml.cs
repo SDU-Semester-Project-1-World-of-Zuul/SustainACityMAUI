@@ -1,6 +1,7 @@
 using SustainACityMAUI.Models;
+using SustainACityMAUI.ViewModels;
 
-namespace SustainACityMAUI.Minigames;
+namespace SustainACityMAUI.Views;
 
 public partial class SchoolQuizMinigameView : ContentPage
 {

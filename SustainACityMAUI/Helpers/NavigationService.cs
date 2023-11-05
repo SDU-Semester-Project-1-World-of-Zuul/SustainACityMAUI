@@ -1,9 +1,10 @@
-﻿using SustainACityMAUI.Models;
+﻿using SustainACityMAUI.Views;
+using SustainACityMAUI.Models;
 
-namespace SustainACityMAUI.Minigames;
-public class MinigameFactory
+namespace SustainACityMAUI.Helpers;
+public class NavigationService
 {
-    public async Task CreateMinigameAsync(string minigameName, Player player)
+    public async Task NavigateToMinigameAsync(string minigameName, Player player)
     {
         switch (minigameName)
         {
