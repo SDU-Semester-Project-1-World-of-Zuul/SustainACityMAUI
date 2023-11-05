@@ -2,6 +2,9 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using SustainACityMAUI.Models;
+using SustainACityMAUI.Commands;
+using SustainACityMAUI.Helpers;
+using SustainACityMAUI.Minigames;
 
 namespace SustainACityMAUI.ViewModels;
 
@@ -9,16 +12,41 @@ namespace SustainACityMAUI.ViewModels;
 public class MainPageViewModel : INotifyPropertyChanged
 {
     private string _gameOutput;
+    private readonly Player _player;
+    private readonly Dictionary<(int, int), Room> _roomMap;
+    private readonly MinigameFactory _minigameFactory;
     private string _userInput;
-    private readonly Game _game;
+    private readonly Queue<string> _outputQueue = new Queue<string>();
+    private bool _isTyping = false;
+
+    public ICommand MoveNorthCommand { get; }
+    public ICommand MoveSouthCommand { get; }
+    public ICommand MoveEastCommand { get; }
+    public ICommand MoveWestCommand { get; }
+    public ICommand BackCommand { get; }
+    public ICommand LookCommand { get; }
+    public ICommand TalkCommand { get; }
+    public ICommand HelpCommand { get; }
+    public ICommand SubmitCommand { get; }
 
     /// <summary> Sets up the game and initializes commands. </summary>
     public MainPageViewModel()
     {
-        _game = new Game();
-        SubmitCommand = new Command<string>(SubmitInput);
-        AppendToOutput(Game.SplashScreen());
-        TypeEffectAsync(_game.Introduction(), 25);
+        _roomMap = new Dictionary<(int, int), Room>(); // Initialize with your map
+        JsonLoader jsonLoader = new("SustainACityMAUI.Resources.Data.Rooms.json");
+        _roomMap = jsonLoader.LoadRooms().ToDictionary(room => (room.X, room.Y));
+        _player = new() { CurrentRoom = _roomMap.GetValueOrDefault((0, 0))! };
+        _minigameFactory = new();
+
+        // Initialize commands
+        MoveNorthCommand = new MoveCommand(_player, _roomMap, Direction.North, AppendToOutput);
+        MoveSouthCommand = new MoveCommand(_player, _roomMap, Direction.South, AppendToOutput);
+        MoveEastCommand = new MoveCommand(_player, _roomMap, Direction.East, AppendToOutput);
+        MoveWestCommand = new MoveCommand(_player, _roomMap, Direction.West, AppendToOutput);
+        BackCommand = new BackCommand(_player, _roomMap, AppendToOutput);
+        LookCommand = new LookCommand(_player, AppendToOutput);
+        HelpCommand = new HelpCommand(AppendToOutput);
+        TalkCommand = new TalkCommand(_player, _minigameFactory, AppendToOutput);
     }
 
     /// <summary> Represents the game's visual output. </summary>
@@ -32,7 +60,7 @@ public class MainPageViewModel : INotifyPropertyChanged
         }
     }
 
-    /// <summary> Holds the user's current input. </summary>
+    // Temp for testing TODO Buttons instead
     public string UserInput
     {
         get { return _userInput; }
@@ -43,31 +71,31 @@ public class MainPageViewModel : INotifyPropertyChanged
         }
     }
 
-    /// <summary> Processes the user's input. </summary>
-    public ICommand SubmitCommand { get; }
-
-    /// <summary> Animates text typing. </summary>
-    private async void TypeEffectAsync(string message, int typingDelay)
+    /// <summary> Adds text to the game output with a typewriter effect. </summary>
+    private void AppendToOutput(string text)
     {
-        foreach (char character in message)
+        _outputQueue.Enqueue(text);
+        if (!_isTyping)
         {
-            AppendToOutput(character.ToString());
-            await Task.Delay(typingDelay);
+            _isTyping = true;
+            _ = TypewriterPrintAsync();
         }
     }
 
-    /// <summary> Handles user input and game responses. </summary>
-    private void SubmitInput(string input)
+    /// <summary> Processes the output queue with a typewriter effect. </summary>
+    private async Task TypewriterPrintAsync()
     {
-        AppendToOutput($"\n\n> {input}\n");
-        TypeEffectAsync(_game.ExecuteCommand(input), 25);
-        UserInput = "";
-    }
-
-    /// <summary> Adds text to the game output. </summary>
-    private void AppendToOutput(string text)
-    {
-        GameOutput += text;
+        while (_outputQueue.Count > 0)
+        {
+            var message = _outputQueue.Dequeue();
+            foreach (char character in message)
+            {
+                GameOutput += character;
+                OnPropertyChanged(nameof(GameOutput));
+                await Task.Delay(20); // Or your preferred delay
+            }
+        }
+        _isTyping = false;
     }
 
     public event PropertyChangedEventHandler PropertyChanged;

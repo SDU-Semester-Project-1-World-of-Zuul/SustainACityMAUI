@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SustainACityMAUI.Minigames.SchoolQuizMinigameView"
+             Title="SchoolQuizMinigameView">
+
+    <VerticalStackLayout Spacing="25" Padding="30">
+
+        <!-- Timer and Score Display -->
+        <HorizontalStackLayout Spacing="15">
+            <Label Text="Time Remaining:" FontSize="Medium" />
+            <Label Text="{Binding TimeRemaining}" FontSize="Medium" FontAttributes="Bold" />
+            <Label Text="Score:" FontSize="Medium" />
+            <Label Text="{Binding TriviaScore}" FontSize="Medium" FontAttributes="Bold" />
+        </HorizontalStackLayout>
+
+        <!-- Question Display -->
+        <Frame Padding="15" CornerRadius="10">
+            <Label Text="{Binding CurrentQuestion.Query}" FontSize="Large" />
+        </Frame>
+
+        <!-- Answer Options -->
+        <CollectionView x:Name="optionsCollectionView" SelectionMode="Single" 
+                ItemsSource="{Binding CurrentQuestion.Options}"
+                SelectedItem="{Binding CurrentAnswer, Mode=TwoWay}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="10" Margin="5" CornerRadius="10">
+                        <Label Text="{Binding .}" VerticalOptions="Center" HorizontalOptions="Center"/>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Submit Answer Button -->
+        <Button Text="Submit Answer" CornerRadius="10" Command="{Binding SubmitAnswerCommand}" CommandParameter="{Binding CurrentAnswer}" />
+
+
+    </VerticalStackLayout>
+</ContentPage>

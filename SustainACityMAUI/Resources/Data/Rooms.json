@@ -1,0 +1,32 @@
+﻿[
+  {
+    "Name": "Cathedra Oculi Sanguinei",
+    "Description": "It's an old cathedral where the paint is peeling off the walls. Inside, the atmosphere is dimly lit with dust floating in the air and the hauntingly beautiful sound of a piano resonating through the pews.",
+    "X": 0,
+    "Y": 0,
+    "NPC": {
+      "Name": "The Pianist",
+      "Minigame": "WIPMinigame"
+    }
+  },
+  {
+    "Name": "Springfield Elementary",
+    "Description": "Springfield Elementary, once a beacon of hope and knowledge, now looks more like a relic of the past. The paint's faded memories of student art projects. The swings in the playground have developed an unscheduled 'squeak-period'. Principal Skinner, however, stands outside, with an unmistakable gleam in his eyes, holding a banner that reads 'Help Restore Our Glory... and also our Science Lab'. The school's mission? To teach sustainability, not just practice it.",
+    "X": 1,
+    "Y": 0,
+    "NPC": {
+      "Name": "Principal Skinner",
+      "Minigame": "SchoolQuizMinigame"
+    }
+  },
+  {
+    "Name": "The Grand Central Transit Hub",
+    "Description": "This bustling nexus stands as a testament to the city's commitment to connectivity and modern infrastructure. Gleaming under the bright lights, the vast airport terminal's curved roof mimics the flight of an airplane, while the train station's grand arches echo the rhythmic motion of the engines that pass beneath. The glass corridor over the road acts as a symphony of movement, casting reflections of the commuters' hurried dance. Here, the pulse of the city is tangible, with the comings and goings of people from all walks of life. The air is thick with the smell of diesel and the sound of rolling luggage, announcements, and distant trains. Despite the commotion, there's an underlying order to the chaos, as everyone seems to find their path.",
+    "X": -1,
+    "Y": 0,
+    "NPC": {
+      "Name": "The Chauffeur",
+      "Minigame": "BalancingActMinigame"
+    }
+  }
+]

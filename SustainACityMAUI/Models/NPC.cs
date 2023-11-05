@@ -4,5 +4,5 @@
 public class NPC
 {
     public string Name { get; set; }    // NPC's name.
-    public Quest Quest { get; set; }    //  Quest associated with the NPC.
+    public string Minigame { get; set; }
 }

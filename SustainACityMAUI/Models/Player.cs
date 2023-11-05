@@ -3,9 +3,9 @@ namespace SustainACityMAUI.Models;
 /// <summary> Represents the stats of the player. </summary>
 public class Player
 {
-    public District CurrentDistrict { get; set; }   // The District the player is currently in.
-    public District PreviousDistrict { get; set; }  // The District the player was in previously.
-    public int Score { get; set; }          // The player's current score.
-
-    // Add other player modifiers here
+    public string Name { get; set; }
+    public Room CurrentRoom { get; set; }
+    public Stack<(int X, int Y)> MovementHistory { get; } = new Stack<(int X, int Y)>();
+    public int Score { get; set; }
+    // Player-specific methods and properties
 }
