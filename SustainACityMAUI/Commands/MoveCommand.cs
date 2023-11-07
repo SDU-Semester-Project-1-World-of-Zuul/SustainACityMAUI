@@ -43,8 +43,8 @@ public class MoveCommand : Command
 
         if (_roomMap.TryGetValue(newCoordinates, out Room newRoom))
         {
+            _player.MovementHistory.Push((_player.CurrentRoom.X, _player.CurrentRoom.Y)); // Add old coordinates to the history
             _player.CurrentRoom = newRoom;
-            _player.MovementHistory.Push(newCoordinates);
             _updateAction?.Invoke($"Player moves {_direction} to {newRoom.Name}.\n");  // Update UI with the new room name
         }
         else
