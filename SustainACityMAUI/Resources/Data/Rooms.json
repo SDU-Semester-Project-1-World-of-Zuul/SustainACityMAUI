@@ -1,9 +1,19 @@
 ﻿[
   {
+    "Name": "Central Plaza",
+    "Description": "The Central Plaza is the beating heart of the city, a place where fresh beginnings are as common as the morning dew. It's an open, vibrant space where the city's diverse tapestry converges—a blend of greenery, fountains, and bustling cafes. The cobblestone pathways guide newcomers and regulars alike, each step a potential story. Here, the community gathers, ideas exchange, and the journey of every citizen commences. Players can orient themselves, gather resources, and plan their next move in this ever-evolving urban landscape.",
+    "X": 0,
+    "Y": 0,
+    "NPC": {
+      "Name": "The Guide",
+      "Minigame": "OrientationMinigame"
+    }
+  },
+  {
     "Name": "Cathedra Oculi Sanguinei",
     "Description": "It's an old cathedral where the paint is peeling off the walls. Inside, the atmosphere is dimly lit with dust floating in the air and the hauntingly beautiful sound of a piano resonating through the pews.",
     "X": 0,
-    "Y": 0,
+    "Y": 1,
     "NPC": {
       "Name": "The Pianist",
       "Minigame": "WIPMinigame"
@@ -27,6 +37,16 @@
     "NPC": {
       "Name": "The Chauffeur",
       "Minigame": "BalancingActMinigame"
+    }
+  },
+  {
+    "Name": "Emergency Response District",
+    "Description": "A nexus of readiness and vigilance, the Emergency Response District is etched with the echo of sirens and the resolute activity of service vehicles. Each building stands robust and authoritative—a symphony of fire stations, police headquarters, and bustling hospitals. The air thrums with the pulse of urgency, yet a practiced calm prevails. It's here that the player weaves through the intricate tapestry of disaster and relief, sharpening response times, deploying resources, and knitting the fabric of the community with safety workshops.",
+    "X": 0,
+    "Y": -1,
+    "NPC": {
+      "Name": "The Coordinator",
+      "Minigame": "CrisisManagementMinigame"
     }
   }
 ]
