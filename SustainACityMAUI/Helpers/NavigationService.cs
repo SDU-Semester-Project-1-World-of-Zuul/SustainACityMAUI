@@ -1,25 +1,31 @@
-﻿using SustainACityMAUI.Views;
-using SustainACityMAUI.Models;
+﻿using SustainACityMAUI.Models;
 
 namespace SustainACityMAUI.Helpers;
+
 public class NavigationService
 {
     public async Task NavigateToMinigameAsync(string minigameName, Player player)
     {
-        switch (minigameName)
+        // Combines the minigame name with the namespace
+        string typeName = $"SustainACityMAUI.Views.{minigameName}Page";
+
+        // Get the Type from the minigame name
+        Type viewType = Type.GetType(typeName);
+
+        // Check if the type is a Page and create an instance
+        if (viewType?.IsSubclassOf(typeof(Page)) == true)
         {
-            case "SchoolQuizMinigame":
-                var view = new SchoolQuizMinigameView(player);
-                await Application.Current.MainPage.Navigation.PushAsync(view);
-                break;
-            default:
-                throw new ArgumentException("Invalid minigame name\n");
+            Page view = (Page)Activator.CreateInstance(viewType, player);
+            await Application.Current.MainPage.Navigation.PushAsync(view);
+        }
+        else
+        {
+            throw new ArgumentException($"No page found for minigame name: {minigameName}", nameof(minigameName));
         }
     }
 
     public async void NavigateBackAsync()
     {
-        // Assuming you have navigation setup similar to this
         await Shell.Current.GoToAsync(".."); // ".." navigates up the navigation stack
     }
 }

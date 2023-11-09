@@ -55,16 +55,22 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Views\GameView.xaml.cs">
-	    <DependentUpon>GameView.xaml</DependentUpon>
+	  <Compile Update="Views\GamePage.xaml.cs">
+	    <DependentUpon>GamePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\QuizMinigamePage.xaml.cs">
+	    <DependentUpon>QuizMinigamePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\StartMenuPage.xaml.cs">
+	    <DependentUpon>StartMenuPage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Views\SchoolQuizMinigameView.xaml">
+	  <MauiXaml Update="Views\QuizMinigamePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\StartView.xaml">
+	  <MauiXaml Update="Views\StartMenuPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

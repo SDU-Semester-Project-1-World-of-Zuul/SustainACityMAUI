@@ -1,0 +1,11 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SustainACityMAUI.Views.StartMenuPage">
+
+    <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+        <Label Text="Sustain A City" FontSize="150" FontFamily="PixelFont.ttf#PixelFont" TextColor="White" HorizontalOptions="Center" Margin="0,0,0,20"/>
+        <Button Text="Start Game" Command="{Binding StartGameCommand}" />
+        <Button Text="Exit Game" Command="{Binding ExitGameCommand}" />
+    </StackLayout>
+
+</ContentPage>

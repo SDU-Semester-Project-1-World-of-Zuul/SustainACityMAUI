@@ -8,7 +8,7 @@ using SustainACityMAUI.Helpers;
 namespace SustainACityMAUI.ViewModels;
 
 /// <summary> Manages game interactions for the MainPage. </summary>
-public class GameViewModel : ViewModel
+public class Game : ViewModel
 {
     private string _gameOutput;
     private readonly Player _player;
@@ -29,7 +29,7 @@ public class GameViewModel : ViewModel
     public ICommand SubmitCommand { get; }
 
     /// <summary> Sets up the game and initializes commands. </summary>
-    public GameViewModel()
+    public Game()
     {
         _roomMap = new Dictionary<(int, int), Room>();
         JsonLoader jsonLoader = new("SustainACityMAUI.Resources.Data.rooms.json");

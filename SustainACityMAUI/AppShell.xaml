@@ -11,18 +11,7 @@
 
     <ShellContent
         Title="Home"
-        ContentTemplate="{DataTemplate local:StartView}"
-        Route="StartView" />
-    
-    <ShellContent
-        Title="Game"
-        ContentTemplate="{DataTemplate local:GameView}"
-        Route="GameView" />
-
-    <!-- Define minigame routes -->
-    <ShellContent
-        Title="SchoolQuiz"
-        ContentTemplate="{DataTemplate local:SchoolQuizMinigameView}"
-        Route="SchoolQuizMinigame" />
+        ContentTemplate="{DataTemplate local:StartMenuPage}"
+        Route="StartMenuPage" />
 
 </Shell>

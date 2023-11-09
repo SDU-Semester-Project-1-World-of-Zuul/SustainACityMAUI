@@ -5,9 +5,9 @@ using System.Windows.Input;
 
 namespace SustainACityMAUI.ViewModels;
 
-public class StartViewModel : ViewModel
+public class StartMenu : ViewModel
 {
-    public StartViewModel()
+    public StartMenu()
     {
         StartGameCommand = new Command(StartGame);
         ExitGameCommand = new Command(ExitGame);
@@ -21,7 +21,7 @@ public class StartViewModel : ViewModel
 
     private void StartGame()
     {
-        Application.Current.MainPage.Navigation.PushAsync(new GameView());
+        Application.Current.MainPage.Navigation.PushAsync(new GamePage());
     }
 
     private void ExitGame()

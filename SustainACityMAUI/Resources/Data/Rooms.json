@@ -26,7 +26,7 @@
     "Y": 0,
     "NPC": {
       "Name": "Principal Skinner",
-      "Minigame": "SchoolQuizMinigame"
+      "Minigame": "QuizMinigame"
     }
   },
   {

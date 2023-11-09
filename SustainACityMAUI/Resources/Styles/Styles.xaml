@@ -24,22 +24,71 @@
     </Style>
 
     <Style TargetType="Button">
-        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Primary}}" />
-        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
-        <Setter Property="FontFamily" Value="OpenSansRegular"/>
+        <Setter Property="TextColor" Value="{StaticResource WhiteBrush}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource PrimaryBrush}" />
+        <Setter Property="FontFamily" Value="Segoe UI"/>
         <Setter Property="FontSize" Value="14"/>
-        <Setter Property="CornerRadius" Value="8"/>
+        <Setter Property="CornerRadius" Value="4"/>
         <Setter Property="Padding" Value="14,10"/>
+        <Setter Property="Opacity" Value="1" />
         <Setter Property="MinimumHeightRequest" Value="44"/>
         <Setter Property="MinimumWidthRequest" Value="44"/>
         <Setter Property="VisualStateManager.VisualStateGroups">
             <VisualStateGroupList>
                 <VisualStateGroup x:Name="CommonStates">
                     <VisualState x:Name="Normal" />
+                    <VisualState x:Name="PointerOver">
+                        <VisualState.Setters>
+                            <Setter Property="TextColor" Value="{StaticResource BlackBrush}" />
+                            <Setter Property="BackgroundColor" Value="{StaticResource SecondaryBrush}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Pressed">
+                        <VisualState.Setters>
+                            <Setter Property="TextColor" Value="{StaticResource WhiteBrush}" />
+                            <Setter Property="BackgroundColor" Value="{StaticResource TertiaryBrush}" />
+                        </VisualState.Setters>
+                    </VisualState>
                     <VisualState x:Name="Disabled">
                         <VisualState.Setters>
-                            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource Gray200}}" />
-                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}" />
+                            <Setter Property="TextColor" Value="{StaticResource Gray400Brush}" />
+                            <Setter Property="BackgroundColor" Value="{StaticResource Gray900Brush}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+    
+    <Style x:Key="AccentButtonStyle" TargetType="Button">
+        <Setter Property="TextColor" Value="White" />
+        <Setter Property="BackgroundColor" Value="{StaticResource Yellow100Accent}" />
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="CornerRadius" Value="8"/>
+        <Setter Property="Padding" Value="15,10"/>
+        <Setter Property="MinimumHeightRequest" Value="50"/>
+        <Setter Property="MinimumWidthRequest" Value="50"/>
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="PointerOver">
+                        <VisualState.Setters>
+                            <Setter Property="TextColor" Value="{StaticResource BlackBrush}" />
+                            <Setter Property="BackgroundColor" Value="{StaticResource Yellow200Accent}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Pressed">
+                        <VisualState.Setters>
+                            <Setter Property="TextColor" Value="{StaticResource WhiteBrush}" />
+                            <Setter Property="BackgroundColor" Value="{StaticResource Yellow300Accent}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="TextColor" Value="{StaticResource Gray400Brush}" />
+                            <Setter Property="BackgroundColor" Value="{StaticResource Gray900Brush}" />
                         </VisualState.Setters>
                     </VisualState>
                 </VisualStateGroup>

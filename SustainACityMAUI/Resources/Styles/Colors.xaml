@@ -4,19 +4,22 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
-    <Color x:Key="Primary">#512BD4</Color>
-    <Color x:Key="Secondary">#DFD8F7</Color>
-    <Color x:Key="Tertiary">#2B0B98</Color>
-    <Color x:Key="White">White</Color>
-    <Color x:Key="Black">Black</Color>
-    <Color x:Key="Gray100">#E1E1E1</Color>
-    <Color x:Key="Gray200">#C8C8C8</Color>
-    <Color x:Key="Gray300">#ACACAC</Color>
-    <Color x:Key="Gray400">#919191</Color>
-    <Color x:Key="Gray500">#6E6E6E</Color>
-    <Color x:Key="Gray600">#404040</Color>
+    <!-- Colors -->
+    <Color x:Key="Primary">#FF0000</Color>
+    <Color x:Key="Secondary">#FFFFFF</Color>
+    <Color x:Key="Tertiary">#000000</Color>
+    <Color x:Key="White">#FFFFFF</Color>
+    <Color x:Key="Black">#000000</Color>
+    <Color x:Key="Gray100">#F5F5F5</Color>
+    <Color x:Key="Gray200">#EEEEEE</Color>
+    <Color x:Key="Gray300">#E0E0E0</Color>
+    <Color x:Key="Gray400">#BDBDBD</Color>
+    <Color x:Key="Gray500">#9E9E9E</Color>
+    <Color x:Key="Gray600">#757575</Color>
     <Color x:Key="Gray900">#212121</Color>
-    <Color x:Key="Gray950">#141414</Color>
+    <Color x:Key="Gray950">#0D0D0D</Color>
+
+    <!-- Brush colors -->
     <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}"/>
     <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource Secondary}"/>
     <SolidColorBrush x:Key="TertiaryBrush" Color="{StaticResource Tertiary}"/>
@@ -31,14 +34,15 @@
     <SolidColorBrush x:Key="Gray900Brush" Color="{StaticResource Gray900}"/>
     <SolidColorBrush x:Key="Gray950Brush" Color="{StaticResource Gray950}"/>
 
-    <Color x:Key="Yellow100Accent">#F7B548</Color>
-    <Color x:Key="Yellow200Accent">#FFD590</Color>
-    <Color x:Key="Yellow300Accent">#FFE5B9</Color>
-    <Color x:Key="Cyan100Accent">#28C2D1</Color>
-    <Color x:Key="Cyan200Accent">#7BDDEF</Color>
-    <Color x:Key="Cyan300Accent">#C3F2F4</Color>
-    <Color x:Key="Blue100Accent">#3E8EED</Color>
-    <Color x:Key="Blue200Accent">#72ACF1</Color>
-    <Color x:Key="Blue300Accent">#A7CBF6</Color>
+    <!-- Accent colors -->
+    <Color x:Key="Yellow100Accent">#FCCB58</Color>
+    <Color x:Key="Yellow200Accent">#FEDC9B</Color>
+    <Color x:Key="Yellow300Accent">#FEF1C8</Color>
+    <Color x:Key="Cyan100Accent">#3CB1C2</Color>
+    <Color x:Key="Cyan200Accent">#A7DCE6</Color>
+    <Color x:Key="Cyan300Accent">#D1EEF2</Color>
+    <Color x:Key="Blue100Accent">#1874CD</Color>
+    <Color x:Key="Blue200Accent">#6799DB</Color>
+    <Color x:Key="Blue300Accent">#A3C3E8</Color>
 
 </ResourceDictionary>

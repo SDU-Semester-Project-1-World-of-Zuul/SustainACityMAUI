@@ -2,11 +2,11 @@
 
 namespace SustainACityMAUI.Views;
 
-public partial class GameView : ContentPage
+public partial class GamePage : ContentPage
 {
-    public GameView()
+    public GamePage()
     {
         InitializeComponent();
-        BindingContext = new GameViewModel();
+        BindingContext = new Game();
     }
 }

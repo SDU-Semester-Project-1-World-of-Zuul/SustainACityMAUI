@@ -7,7 +7,7 @@ using SustainACityMAUI.Views;
 
 namespace SustainACityMAUI.ViewModels;
 
-public class SchoolQuizMinigameViewModel : ViewModel
+public class QuizMinigame : ViewModel
 {
     private Player _player;
     public ObservableCollection<TriviaQuestion> Questions { get; private set; }
@@ -76,7 +76,7 @@ public class SchoolQuizMinigameViewModel : ViewModel
         }
     }
 
-    public SchoolQuizMinigameViewModel(Player player)
+    public QuizMinigame(Player player)
     {
         _player = player;
         _dispatcher = Dispatcher.GetForCurrentThread();
