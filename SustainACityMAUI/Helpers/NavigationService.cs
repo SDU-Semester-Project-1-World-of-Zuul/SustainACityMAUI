@@ -4,10 +4,10 @@ namespace SustainACityMAUI.Helpers;
 
 public class NavigationService
 {
-    public async Task NavigateToMinigameAsync(string minigameName, Player player)
+    public async Task NavigateToMinigameAsync(Player player)
     {
         // Combines the minigame name with the namespace
-        string typeName = $"SustainACityMAUI.Views.{minigameName}Page";
+        string typeName = $"SustainACityMAUI.Views.{player.CurrentRoom.NPC.Minigame}Page";
 
         // Get the Type from the minigame name
         Type viewType = Type.GetType(typeName);
@@ -20,7 +20,7 @@ public class NavigationService
         }
         else
         {
-            throw new ArgumentException($"No page found for minigame name: {minigameName}", nameof(minigameName));
+            throw new ArgumentException($"No page found for minigame name: {player.CurrentRoom.NPC.Minigame}", nameof(player.CurrentRoom.NPC.Minigame));
         }
     }
 

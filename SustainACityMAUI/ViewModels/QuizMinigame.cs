@@ -10,6 +10,7 @@ namespace SustainACityMAUI.ViewModels;
 public class QuizMinigame : ViewModel
 {
     private Player _player;
+    private readonly NavigationService _navigationService;
     public ObservableCollection<TriviaQuestion> Questions { get; private set; }
     public ICommand SubmitAnswerCommand { get; private set; }
 
@@ -79,6 +80,7 @@ public class QuizMinigame : ViewModel
     public QuizMinigame(Player player)
     {
         _player = player;
+        _navigationService = new();
         _dispatcher = Dispatcher.GetForCurrentThread();
         Questions = new ObservableCollection<TriviaQuestion>(GetShuffledQuestions());
         CurrentQuestion = Questions.FirstOrDefault();
@@ -169,7 +171,6 @@ public class QuizMinigame : ViewModel
     private void OnGameEnded()
     {
         _player.Score += TriviaScore; // Update game score
-        var navigationService = new NavigationService();
-        navigationService.NavigateBackAsync();
+        _navigationService.NavigateBackAsync();
     }
 }

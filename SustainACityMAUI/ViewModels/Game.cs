@@ -32,7 +32,7 @@ public class Game : ViewModel
     public Game()
     {
         _roomMap = new Dictionary<(int, int), Room>();
-        JsonLoader jsonLoader = new("SustainACityMAUI.Resources.Data.rooms.json");
+        JsonLoader jsonLoader = new("rooms.json");
         _roomMap = jsonLoader.LoadRooms().ToDictionary(room => (room.X, room.Y));
         _player = new() { CurrentRoom = _roomMap.GetValueOrDefault((0, 0))! };
         _navigationService = new();
@@ -44,7 +44,7 @@ public class Game : ViewModel
         MoveWestCommand = new MoveCommand(_player, _roomMap, Direction.West, AppendToOutput);
         BackCommand = new BackCommand(_player, _roomMap, AppendToOutput);
         LookCommand = new LookCommand(_player, AppendToOutput);
-        HelpCommand = new HelpCommand(AppendToOutput);
+        HelpCommand = new HelpCommand(async (message) => await PopupAsync("Help", message));
         TalkCommand = new TalkCommand(_player, _navigationService, AppendToOutput);
     }
 
@@ -95,5 +95,10 @@ public class Game : ViewModel
             }
         }
         _isTyping = false;
+    }
+
+    public async Task PopupAsync(string popupName, string message)
+    {
+        await App.Current.MainPage.DisplayAlert(popupName, message, "Ok");
     }
 }

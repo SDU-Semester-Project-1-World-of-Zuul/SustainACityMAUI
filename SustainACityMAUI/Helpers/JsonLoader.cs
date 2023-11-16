@@ -11,7 +11,7 @@ public class JsonLoader
 
     public JsonLoader(string resourceName)
     {
-        _resourceName = resourceName;
+        _resourceName = "SustainACityMAUI.Resources.Data." + resourceName;
     }
 
     public List<Room> LoadRooms()

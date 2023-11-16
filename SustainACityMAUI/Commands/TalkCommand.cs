@@ -22,13 +22,12 @@ public class TalkCommand : Command
         {
             if (!string.IsNullOrEmpty(_player.CurrentRoom.NPC.Minigame))
             {
-                var minigameName = _player.CurrentRoom.NPC.Minigame;
-                _updateAction($"You start talking to {_player.CurrentRoom.NPC.Name} and they challenge you to a game of {minigameName}.\n");
+                _updateAction($"You start talking to {_player.CurrentRoom.NPC.Name} and they challenge you to a game of {_player.CurrentRoom.NPC.Minigame}.\n");
 
                 try
                 {
-                    await _navigationService.NavigateToMinigameAsync(minigameName, _player);
-                    _updateAction($"You finished playing {minigameName} with {_player.CurrentRoom.NPC.Name}.\n");
+                    await _navigationService.NavigateToMinigameAsync(_player);
+                    _updateAction($"You finished playing {_player.CurrentRoom.NPC.Minigame} with {_player.CurrentRoom.NPC.Name}.\n");
                 }
                 catch (Exception ex)
                 {
