@@ -7,6 +7,11 @@
           RowDefinitions="Auto, *, Auto"
           ColumnDefinitions="*, Auto, *">
 
+        <!-- Background image -->
+        <Image Source="{Binding CurrentRoomImagePath}" Aspect="Center"
+               Grid.Row="0" Grid.Column="0"
+               Grid.RowSpan="3" Grid.ColumnSpan="3" />
+
         <!-- Help icon in the top right corner -->
         <Button Grid.Row="0" Grid.Column="2" 
                 Text="❓" FontSize="Large"
@@ -15,17 +20,36 @@
                 Margin="10" WidthRequest="40" HeightRequest="40"/>
 
         <!-- Dialog Box -->
-        <StackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"
+        <StackLayout IsVisible="{Binding IsDialogVisible}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"
              VerticalOptions="Center" HorizontalOptions="Fill" Padding="10">
             <Frame CornerRadius="15" BorderColor="Black" Padding="10"
            HasShadow="True" BackgroundColor="White"
            HeightRequest="150" HorizontalOptions="Fill" VerticalOptions="Center">
-                <ScrollView VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                    <Label Text="{Binding GameOutput}" TextColor="Black"
-                   FontFamily="Cascadia Code" FontSize="Small"
-                   VerticalOptions="Start" HorizontalOptions="FillAndExpand"
-                   Margin="5"/>
-                </ScrollView>
+                <StackLayout Orientation="Vertical">
+                    <!-- Place the speaker label in the top left corner -->
+                    <Label Text="{Binding Speaker}" FontSize="Small"
+                   VerticalOptions="Start" HorizontalOptions="Start"
+                   TextColor="Black" Margin="10,0,0,0">
+                    </Label>
+                    <ScrollView x:Name="dialogScrollView" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                        <Label Text="{Binding DialogBox}" TextColor="Black"
+                       FontFamily="Cascadia Code" FontSize="Small"
+                       VerticalOptions="Start" HorizontalOptions="FillAndExpand"
+                       Margin="5">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SkipDialogCommand}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </ScrollView>
+                    <!-- Place the arrow and skip button in the bottom right corner -->
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                        <Label Text="→" FontSize="Medium" TextColor="Black" Margin="0,0,10,0">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SkipDialogCommand}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </StackLayout>
+                </StackLayout>
             </Frame>
         </StackLayout>
 

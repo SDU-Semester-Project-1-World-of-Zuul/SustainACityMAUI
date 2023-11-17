@@ -15,14 +15,13 @@ public class HelpCommand : Command
     {
         StringBuilder helpMessage = new();
 
-        helpMessage.AppendLine("Here are the tools at your disposal:");
-        helpMessage.AppendLine("➡️ 'N, S, E, W' - Use these compass buttons to explore the city's districts.");
-        helpMessage.AppendLine("👁 'Look' - Reveal the secrets of a location and uncover hidden resources.");
-        helpMessage.AppendLine("🗨️ 'Talk' - Engage with the citizens and wise entities that will offer quests and lore.");
-        helpMessage.AppendLine("🔙 'Back' - Retrace your steps carefully to previously visited sites.");
-        helpMessage.AppendLine("🆘 '❓' - Summon this guide anytime you seek wisdom or wish to review your tools.");
-        helpMessage.AppendLine("Embark on your quest with courage and sustain our city's harmony with nature!");
+        helpMessage.AppendLine("ACTION\t\tDESCRIPTION\n");
+        helpMessage.AppendLine("[N] [S] [E] [W]\tMove through city districts.");
+        helpMessage.AppendLine("[Look]\t\tDiscover location secrets.");
+        helpMessage.AppendLine("[Talk]\t\tInteract for quests and info.");
+        helpMessage.AppendLine("[Back]\t\tGo to previous location.");
+        helpMessage.AppendLine("[❓]\t\tShow this help guide.");
 
-        _updateAction($"{helpMessage}\n");
+        _updateAction(helpMessage.ToString());
     }
 }

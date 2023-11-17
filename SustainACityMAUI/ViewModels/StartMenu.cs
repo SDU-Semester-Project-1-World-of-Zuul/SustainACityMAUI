@@ -1,6 +1,4 @@
 ﻿using SustainACityMAUI.Views;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
 namespace SustainACityMAUI.ViewModels;
@@ -26,8 +24,6 @@ public class StartMenu : ViewModel
 
     private void ExitGame()
     {
-        // Add logic to exit the game here
-        // For example, close the application
         Application.Current.Quit();
     }
 }

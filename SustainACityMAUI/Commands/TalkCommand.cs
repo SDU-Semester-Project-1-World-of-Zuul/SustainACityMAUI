@@ -6,42 +6,39 @@ namespace SustainACityMAUI.Commands;
 public class TalkCommand : Command
 {
     private readonly Player _player;
-    private readonly NavigationService _navigationService;
-    private readonly Action<string> _updateAction;
+    private readonly Action<string, string> _updateAction;
 
-    public TalkCommand(Player player, NavigationService navigationService, Action<string> updateAction)
+    public TalkCommand(Player player, Action<string, string> updateAction)
     {
         _player = player;
-        _navigationService = navigationService;
         _updateAction = updateAction;
     }
 
     public override async void Execute(object parameter)
     {
-        if (_player.CurrentRoom?.NPC != null)
+        if (_player.CurrentRoom?.NPC == null)
         {
-            if (!string.IsNullOrEmpty(_player.CurrentRoom.NPC.Minigame))
-            {
-                _updateAction($"You start talking to {_player.CurrentRoom.NPC.Name} and they challenge you to a game of {_player.CurrentRoom.NPC.Minigame}.\n");
+            _updateAction(null, "There is no one here to talk to.\n");
+            return;
+        }
 
-                try
-                {
-                    await _navigationService.NavigateToMinigameAsync(_player);
-                    _updateAction($"You finished playing {_player.CurrentRoom.NPC.Minigame} with {_player.CurrentRoom.NPC.Name}.\n");
-                }
-                catch (Exception ex)
-                {
-                    _updateAction($"Failed to navigate to the minigame: {ex.Message}\n");
-                }
-            }
-            else
-            {
-                _updateAction($"You talk to {_player.CurrentRoom.NPC.Name}, but they don't have a minigame for you.\n");
-            }
+        // Add NPC dialog and Quests into talk here
+        // Add sub-commands (Minigame should be changed to its own sub-command)
+
+        // Navigate to minigame logic
+        bool canNavigate = await NavigationService.NavigateToMinigameAsync(_player);
+
+        if (_player.CurrentRoom.NPC.Minigame == null)
+        {
+            _updateAction(null, $"You talk to {_player.CurrentRoom.NPC.Name}, but they don't have a minigame for you.\n");
+        }
+        else if (canNavigate)
+        {
+            _updateAction(null, $"You finished playing {_player.CurrentRoom.NPC.Minigame} with {_player.CurrentRoom.NPC.Name}.\n");
         }
         else
         {
-            _updateAction("There is no one here to talk to.\n");
+            _updateAction(null, $"You talk to {_player.CurrentRoom.NPC.Name}, but they don't have a minigame for you.\n");
         }
     }
 }

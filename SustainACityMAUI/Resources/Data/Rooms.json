@@ -7,7 +7,8 @@
     "NPC": {
       "Name": "The Guide",
       "Minigame": "OrientationMinigame"
-    }
+    },
+    "ImgPath": ""
   },
   {
     "Name": "Cathedra Oculi Sanguinei",
@@ -17,7 +18,8 @@
     "NPC": {
       "Name": "The Pianist",
       "Minigame": "WIPMinigame"
-    }
+    },
+    "ImgPath": "churchdistrict.png"
   },
   {
     "Name": "Springfield Elementary",
@@ -27,7 +29,8 @@
     "NPC": {
       "Name": "Principal Skinner",
       "Minigame": "QuizMinigame"
-    }
+    },
+    "ImgPath": "schooldistrict.png"
   },
   {
     "Name": "The Grand Central Transit Hub",
@@ -37,7 +40,8 @@
     "NPC": {
       "Name": "The Chauffeur",
       "Minigame": "BalancingActMinigame"
-    }
+    },
+    "ImgPath": "transportdistrict.png"
   },
   {
     "Name": "Emergency Response District",
@@ -47,6 +51,7 @@
     "NPC": {
       "Name": "The Coordinator",
       "Minigame": "CrisisManagementMinigame"
-    }
+    },
+    "ImgPath": ""
   }
 ]

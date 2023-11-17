@@ -1,5 +1,4 @@
-﻿using System.Windows.Input;
-using SustainACityMAUI.Models;
+﻿using SustainACityMAUI.Models;
 
 namespace SustainACityMAUI.Commands;
 
@@ -8,7 +7,8 @@ public class MoveCommand : Command
     private readonly Player _player;
     private readonly Dictionary<(int, int), Room> _roomMap;
     private readonly Direction _direction;
-    private readonly Action<string> _updateAction;  // Delegate for updating the UI
+    private readonly Action<string, string> _updateAction;  // Delegate for updating the UI
+    private readonly Action _onMovedAction;
 
     private readonly Dictionary<Direction, (int x, int y)> _directions = new()
     {
@@ -18,12 +18,13 @@ public class MoveCommand : Command
         {Direction.West, (-1, 0)}
     };
 
-    public MoveCommand(Player player, Dictionary<(int, int), Room> roomMap, Direction direction, Action<string> updateAction)
+    public MoveCommand(Player player, Dictionary<(int, int), Room> roomMap, Direction direction, Action<string, string> updateAction, Action onMovedAction)
     {
         _player = player;
         _roomMap = roomMap;
         _direction = direction;
         _updateAction = updateAction;  // Assign the delegate
+        _onMovedAction = onMovedAction;
     }
 
     public override bool CanExecute(object parameter)
@@ -35,21 +36,25 @@ public class MoveCommand : Command
     {
         if (!_directions.TryGetValue(_direction, out var movement))
         {
-            _updateAction?.Invoke("Invalid direction.\n");  // Use the update action to provide feedback
-            return;
+            throw new InvalidOperationException($"Invalid direction encountered: {_direction}");
         }
 
-        var newCoordinates = (_player.CurrentRoom.X + movement.x, _player.CurrentRoom.Y + movement.y);
+        // Calculate new Coordinates
+        var deltaX = _player.CurrentRoom.X + movement.x;
+        var deltaY = _player.CurrentRoom.Y + movement.y;
+        var newCoordinates = (deltaX, deltaY);
 
         if (_roomMap.TryGetValue(newCoordinates, out Room newRoom))
         {
             _player.MovementHistory.Push((_player.CurrentRoom.X, _player.CurrentRoom.Y)); // Add old coordinates to the history
             _player.CurrentRoom = newRoom;
-            _updateAction?.Invoke($"Player moves {_direction} to {newRoom.Name}.\n");  // Update UI with the new room name
+
+            _onMovedAction?.Invoke();
+            _updateAction?.Invoke(null, $"You move {_direction} to {newRoom.Name}.\n");  // Update UI with the new room name
         }
         else
         {
-            _updateAction?.Invoke("You can't move in that direction.\n");  // Provide feedback that the move is not possible
+            _updateAction?.Invoke(null, "You can't move in that direction.\n");  // Provide feedback that the move is not possible
         }
     }
 }

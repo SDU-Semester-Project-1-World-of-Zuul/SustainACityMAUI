@@ -8,4 +8,5 @@ public class Room
     public int X { get; set; }
     public int Y { get; set; }
     public NPC NPC { get; set; }
+    public string ImgPath { get; set; }
 }

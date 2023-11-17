@@ -1,20 +1,17 @@
 ﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Windows.Input;
 using SustainACityMAUI.Helpers;
 using SustainACityMAUI.Models;
-using SustainACityMAUI.Views;
 
 namespace SustainACityMAUI.ViewModels;
 
 public class QuizMinigame : ViewModel
 {
-    private Player _player;
-    private readonly NavigationService _navigationService;
-    public ObservableCollection<TriviaQuestion> Questions { get; private set; }
-    public ICommand SubmitAnswerCommand { get; private set; }
+    private readonly Player _player;
+    public ObservableCollection<TriviaQuestion> Questions { get; }
+    public ICommand SubmitAnswerCommand { get; }
 
-    private IDispatcher _dispatcher;
+    private readonly IDispatcher _dispatcher;
     private int _triviaScore;
     private int _timeRemaining;
     private TriviaQuestion _currentQuestion;
@@ -80,18 +77,19 @@ public class QuizMinigame : ViewModel
     public QuizMinigame(Player player)
     {
         _player = player;
-        _navigationService = new();
         _dispatcher = Dispatcher.GetForCurrentThread();
-        Questions = new ObservableCollection<TriviaQuestion>(GetShuffledQuestions());
+        Questions = new ObservableCollection<TriviaQuestion>(ShuffledQuestions);
         CurrentQuestion = Questions.FirstOrDefault();
         SubmitAnswerCommand = new Command<string>(SubmitAnswer);
         TimeRemaining = 60;
         StartTimer();
     }
 
-    private IEnumerable<TriviaQuestion> GetShuffledQuestions()
+    private static IEnumerable<TriviaQuestion> ShuffledQuestions
     {
-        var questions = new List<TriviaQuestion>
+        get
+        {
+            var questions = new List<TriviaQuestion> // Should probably be a json file
         {
             // Populate with school and sustainability-themed questions
             new TriviaQuestion(
@@ -103,7 +101,7 @@ public class QuizMinigame : ViewModel
                 "Identify an alternative to driving that can reduce the school's carbon footprint.",
                 new[] {"Carpooling", "Walking", "Biking", "All of the above"},
                 "All of the above"),
-            
+
             // Additional school-related questions
             new TriviaQuestion(
                 "What is the most energy-efficient way to conduct a class during daytime?",
@@ -125,7 +123,8 @@ public class QuizMinigame : ViewModel
                 isBonus: true)
         };
 
-        return questions.OrderBy(q => Guid.NewGuid());
+            return questions.OrderBy(_ => Guid.NewGuid());
+        }
     }
 
     private void StartTimer()
@@ -151,9 +150,7 @@ public class QuizMinigame : ViewModel
         if (Questions.Count > 0)
         {
             if (currentAnswer == CurrentQuestion.CorrectAnswer)
-            {
                 TriviaScore += CurrentQuestion.IsBonus ? 2 : 1; // Update score only if correct
-            }
 
             // Proceed to the next question whether the answer was correct or not
             Questions.Remove(CurrentQuestion);
@@ -163,14 +160,12 @@ public class QuizMinigame : ViewModel
 
         // If there are no more questions, end the game
         if (Questions.Count == 0)
-        {
             OnGameEnded();
-        }
     }
 
     private void OnGameEnded()
     {
         _player.Score += TriviaScore; // Update game score
-        _navigationService.NavigateBackAsync();
+        NavigationService.NavigateBackAsync();
     }
 }

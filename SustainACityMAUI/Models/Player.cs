@@ -7,5 +7,4 @@ public class Player
     public Room CurrentRoom { get; set; }
     public Stack<(int X, int Y)> MovementHistory { get; } = new Stack<(int X, int Y)>();
     public int Score { get; set; }
-    // Player-specific methods and properties
 }

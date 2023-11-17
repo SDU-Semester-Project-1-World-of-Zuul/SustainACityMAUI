@@ -1,5 +1,3 @@
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using SustainACityMAUI.Models;
 using SustainACityMAUI.Commands;
@@ -10,13 +8,14 @@ namespace SustainACityMAUI.ViewModels;
 /// <summary> Manages game interactions for the MainPage. </summary>
 public class Game : ViewModel
 {
-    private string _gameOutput;
+    private string _dialogBox;
+    private string _speaker;
     private readonly Player _player;
     private readonly Dictionary<(int, int), Room> _roomMap;
-    private readonly NavigationService _navigationService;
     private string _userInput;
-    private readonly Queue<string> _outputQueue = new Queue<string>();
+    private readonly Queue<string> _outputQueue = new();
     private bool _isTyping = false;
+    private bool _skipDialog = false;
 
     public ICommand MoveNorthCommand { get; }
     public ICommand MoveSouthCommand { get; }
@@ -27,6 +26,7 @@ public class Game : ViewModel
     public ICommand TalkCommand { get; }
     public ICommand HelpCommand { get; }
     public ICommand SubmitCommand { get; }
+    public ICommand SkipDialogCommand { get; }
 
     /// <summary> Sets up the game and initializes commands. </summary>
     public Game()
@@ -35,34 +35,49 @@ public class Game : ViewModel
         JsonLoader jsonLoader = new("rooms.json");
         _roomMap = jsonLoader.LoadRooms().ToDictionary(room => (room.X, room.Y));
         _player = new() { CurrentRoom = _roomMap.GetValueOrDefault((0, 0))! };
-        _navigationService = new();
 
         // Initialize commands
-        MoveNorthCommand = new MoveCommand(_player, _roomMap, Direction.North, AppendToOutput);
-        MoveSouthCommand = new MoveCommand(_player, _roomMap, Direction.South, AppendToOutput);
-        MoveEastCommand = new MoveCommand(_player, _roomMap, Direction.East, AppendToOutput);
-        MoveWestCommand = new MoveCommand(_player, _roomMap, Direction.West, AppendToOutput);
-        BackCommand = new BackCommand(_player, _roomMap, AppendToOutput);
-        LookCommand = new LookCommand(_player, AppendToOutput);
-        HelpCommand = new HelpCommand(async (message) => await PopupAsync("Help", message));
-        TalkCommand = new TalkCommand(_player, _navigationService, AppendToOutput);
+        MoveNorthCommand = new MoveCommand(_player, _roomMap, Direction.North, AppendDialog, OnPlayerMoved);
+        MoveSouthCommand = new MoveCommand(_player, _roomMap, Direction.South, AppendDialog, OnPlayerMoved);
+        MoveEastCommand = new MoveCommand(_player, _roomMap, Direction.East, AppendDialog, OnPlayerMoved);
+        MoveWestCommand = new MoveCommand(_player, _roomMap, Direction.West, AppendDialog, OnPlayerMoved);
+        BackCommand = new BackCommand(_player, _roomMap, AppendDialog);
+        LookCommand = new LookCommand(_player, AppendDialog);
+        TalkCommand = new TalkCommand(_player, AppendDialog);
+        HelpCommand = new HelpCommand(async (message) => await PopupAsync("Help", message, "Ok"));
+        SkipDialogCommand = new Microsoft.Maui.Controls.Command(() => _skipDialog = true);
     }
 
-    /// <summary> Represents the game's visual output. </summary>
-    public string GameOutput
+    public event Action ScrollToBottomRequested;
+
+    public string CurrentRoomImagePath { get => _player.CurrentRoom.ImgPath ?? null; }
+
+    /// <summary> Represents game dialog. </summary>
+    public string DialogBox
     {
-        get { return _gameOutput; }
+        get => _dialogBox;
         set
         {
-            _gameOutput = value;
+            _dialogBox = value;
+            OnPropertyChanged();
+            ScrollToBottomRequested?.Invoke(); // Request to scroll
+            OnPropertyChanged(nameof(IsDialogVisible)); // Notify property change for visibility
+        }
+    }
+
+    public string Speaker
+    {
+        get => _speaker;
+        set
+        {
+            _speaker = value;
             OnPropertyChanged();
         }
     }
 
-    // Temp for testing TODO Buttons instead
     public string UserInput
     {
-        get { return _userInput; }
+        get => _userInput;
         set
         {
             _userInput = value;
@@ -70,35 +85,54 @@ public class Game : ViewModel
         }
     }
 
-    /// <summary> Adds text to the game output with a typewriter effect. </summary>
-    private void AppendToOutput(string text)
+    public bool IsDialogVisible => !string.IsNullOrEmpty(DialogBox);
+
+    public void OnPlayerMoved()
     {
+        OnPropertyChanged(nameof(CurrentRoomImagePath));
+    }
+
+    /// <summary> Adds text to the dialog box with an effect. </summary>
+    private void AppendDialog(string speaker, string text)
+    {
+        _skipDialog = false; // Reset skip dialog flag
+        DialogBox = ""; // Clear dialog box
+        Speaker = speaker ?? "Narrator"; // If null use Narrator
+
         _outputQueue.Enqueue(text);
         if (!_isTyping)
         {
             _isTyping = true;
-            _ = TypewriterPrintAsync();
+            _ = DialogEffectAsync();
         }
     }
 
-    /// <summary> Processes the output queue with a typewriter effect. </summary>
-    private async Task TypewriterPrintAsync()
+    private async Task DialogEffectAsync()
     {
         while (_outputQueue.Count > 0)
         {
             var message = _outputQueue.Dequeue();
-            foreach (char character in message)
+
+            for (int i = 0; i < message.Length; i++)
             {
-                GameOutput += character;
-                OnPropertyChanged(nameof(GameOutput));
-                await Task.Delay(20); // Or your preferred delay
+                DialogBox += message[i];
+
+                if (!(_skipDialog && message[i] != '.') || i == message.Length - 1)
+                {
+                    await Task.Delay(30);
+                }
+
+                if (_skipDialog && message[i] == '.')
+                {
+                    _skipDialog = false;
+                }
             }
+            _isTyping = false;
         }
-        _isTyping = false;
     }
 
-    public async Task PopupAsync(string popupName, string message)
+    public static async Task PopupAsync(string popupName, string message, string cancel)
     {
-        await App.Current.MainPage.DisplayAlert(popupName, message, "Ok");
+        await App.Current.MainPage.DisplayAlert(popupName, message, cancel);
     }
 }
