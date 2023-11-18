@@ -3,13 +3,27 @@
              x:Class="SustainACityMAUI.Views.StartMenuPage">
 
     <Grid>
-        <Image Source="start.png" Aspect="Center" />
-        <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-            <Label Text="Sustain A City" FontSize="150" FontFamily="PixelFont.ttf#PixelFont" TextColor="Red" HorizontalOptions="Center" Margin="0,0,0,20"/>
-            <Button Text="Start Game" Command="{Binding StartGameCommand}" />
-            <Button Text="Exit Game" Command="{Binding ExitGameCommand}" />
-        </StackLayout>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Image that fills the remaining space -->
+        <Image Source="start.png" Aspect="AspectFill" Grid.Column="1" />
+
+        <!-- Frame that occupies one-fourth of the left side with square edges -->
+        <Frame Grid.Column="0" BackgroundColor="DarkRed" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" CornerRadius="0">
+            <StackLayout>
+                <StackLayout VerticalOptions="Start" HorizontalOptions="Center">
+                    <Label Text="Sustain A City" FontSize="Title" FontFamily="Courier New" TextColor="WhiteSmoke" HorizontalOptions="Center" Margin="0,20,0,0"/>
+                </StackLayout>
+                <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
+                    <Button Text="Start" Command="{Binding StartGameCommand}" HorizontalOptions="Center"/>
+                    <Button Text="About" Command="{Binding AboutCommand}" HorizontalOptions="Center"/>
+                    <Button Text="Exit" Command="{Binding ExitGameCommand}" HorizontalOptions="Center"/>
+                </StackLayout>
+            </StackLayout>
+        </Frame>
     </Grid>
-    
 
 </ContentPage>

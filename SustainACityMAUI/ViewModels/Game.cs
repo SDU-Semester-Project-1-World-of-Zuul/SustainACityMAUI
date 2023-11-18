@@ -31,6 +31,7 @@ public class Game : ViewModel
     /// <summary> Sets up the game and initializes commands. </summary>
     public Game()
     {
+        // Room loading section
         _roomMap = new Dictionary<(int, int), Room>();
         JsonLoader jsonLoader = new("rooms.json");
         _roomMap = jsonLoader.LoadRooms().ToDictionary(room => (room.X, room.Y));
@@ -41,7 +42,7 @@ public class Game : ViewModel
         MoveSouthCommand = new MoveCommand(_player, _roomMap, Direction.South, AppendDialog, OnPlayerMoved);
         MoveEastCommand = new MoveCommand(_player, _roomMap, Direction.East, AppendDialog, OnPlayerMoved);
         MoveWestCommand = new MoveCommand(_player, _roomMap, Direction.West, AppendDialog, OnPlayerMoved);
-        BackCommand = new BackCommand(_player, _roomMap, AppendDialog);
+        BackCommand = new BackCommand(_player, _roomMap, AppendDialog, OnPlayerMoved);
         LookCommand = new LookCommand(_player, AppendDialog);
         TalkCommand = new TalkCommand(_player, AppendDialog);
         HelpCommand = new HelpCommand(async (message) => await PopupAsync("Help", message, "Ok"));
@@ -70,6 +71,11 @@ public class Game : ViewModel
         get => _speaker;
         set
         {
+            if (_speaker != value)
+            {
+                DialogBox = "";
+            }
+
             _speaker = value;
             OnPropertyChanged();
         }
@@ -96,7 +102,6 @@ public class Game : ViewModel
     private void AppendDialog(string speaker, string text)
     {
         _skipDialog = false; // Reset skip dialog flag
-        DialogBox = ""; // Clear dialog box
         Speaker = speaker ?? "Narrator"; // If null use Narrator
 
         _outputQueue.Enqueue(text);
@@ -112,21 +117,30 @@ public class Game : ViewModel
         while (_outputQueue.Count > 0)
         {
             var message = _outputQueue.Dequeue();
+            _isTyping = true;
 
             for (int i = 0; i < message.Length; i++)
             {
-                DialogBox += message[i];
-
-                if (!(_skipDialog && message[i] != '.') || i == message.Length - 1)
+                if (_skipDialog)
                 {
-                    await Task.Delay(30);
-                }
+                    int nextPeriod = message.IndexOf('.', i);
+                    if (nextPeriod == -1) nextPeriod = message.Length - 1;
 
-                if (_skipDialog && message[i] == '.')
-                {
+                    // Append up to the next period and continue with the effect
+                    DialogBox += message[i..(nextPeriod + 1)];
+                    i = nextPeriod; // Update the index to continue from the next character
                     _skipDialog = false;
                 }
+                else
+                {
+                    DialogBox += message[i];
+                    if (_outputQueue.Count == 0) // Only delay if not skipping and no new message
+                    {
+                        await Task.Delay(30);
+                    }
+                }
             }
+
             _isTyping = false;
         }
     }

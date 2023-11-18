@@ -40,7 +40,7 @@ public class QuizMinigame : ViewModel
         set
         {
             _currentAnswer = value;
-            OnPropertyChanged(nameof(CurrentAnswer));
+            OnPropertyChanged();
         }
     }
 
@@ -50,7 +50,7 @@ public class QuizMinigame : ViewModel
         set
         {
             _triviaScore = value;
-            OnPropertyChanged(nameof(TriviaScore));
+            OnPropertyChanged();
         }
     }
 
@@ -60,7 +60,7 @@ public class QuizMinigame : ViewModel
         set
         {
             _timeRemaining = value;
-            OnPropertyChanged(nameof(TimeRemaining));
+            OnPropertyChanged();
         }
     }
 
@@ -70,7 +70,7 @@ public class QuizMinigame : ViewModel
         private set
         {
             _currentQuestion = value;
-            OnPropertyChanged(nameof(CurrentQuestion));
+            OnPropertyChanged();
         }
     }
 
@@ -112,8 +112,6 @@ public class QuizMinigame : ViewModel
                 "Which school supply can be reused to minimize waste?",
                 new[] {"Pencil shavings", "Adhesive stickers", "Plastic binders", "Single-use pens"},
                 "Plastic binders"),
-
-            // ... Other questions
 
             // A challenging question that adds a twist
             new TriviaQuestion(

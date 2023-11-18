@@ -1,6 +1,8 @@
 ﻿namespace SustainACityMAUI.Models;
 
 /// <summary> Represents random disaster events within the game. </summary>
+
+// UNUSED and NOT PROPERLY WRITTEN
 public class Disaster
 {
     // RNG for disaster selection

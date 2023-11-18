@@ -38,7 +38,7 @@ public class TalkCommand : Command
         }
         else
         {
-            _updateAction(null, $"You talk to {_player.CurrentRoom.NPC.Name}, but they don't have a minigame for you.\n");
+            _updateAction(null, "There is no-one to talk to.\n");
         }
     }
 }

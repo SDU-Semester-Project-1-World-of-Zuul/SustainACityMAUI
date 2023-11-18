@@ -1,7 +1,6 @@
 ﻿using SustainACityMAUI.Models;
 using System.Text.Json;
 using System.Reflection;
-using System.IO;
 
 namespace SustainACityMAUI.Helpers;
 
@@ -22,6 +21,6 @@ public class JsonLoader
 
         string json = reader.ReadToEnd();
         var rooms = JsonSerializer.Deserialize<List<Room>>(json);
-        return rooms ?? new List<Room>();
+        return rooms ?? throw new InvalidOperationException($"Could not load rooms: {_resourceName}");
     }
 }
