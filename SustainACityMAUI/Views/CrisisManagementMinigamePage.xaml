@@ -1,0 +1,36 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SustainACityMAUI.Views.CrisisManagementMinigamePage"
+             x:Name="Page">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Back"
+                     Command="{Binding GoBackCommand}" />
+    </ContentPage.ToolbarItems>
+    <StackLayout>
+        <Label Text="Welcome to the Flooding Simulator Game. In this game, you'll have to make strategic decisions each day to manage the flooding situation in your city. Your decisions will have consequences, so choose wisely. The game lasts for 10 days, and at the end, you'll see the results of your choices." />
+        <Label Text="Flooding Simulator Game"
+               FontSize="24"
+               FontAttributes="Bold"
+               HorizontalOptions="Center" />
+        <CollectionView ItemsSource="{Binding Days}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout>
+                        <Label Text="{Binding Day}" />
+                        <StackLayout BindableLayout.ItemsSource="{Binding Decisions}">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <Button Text="{Binding}"
+                                            Command="{Binding Path=BindingContext.SelectDecisionCommand, Source={x:Reference Page}}"
+                                            CommandParameter="{Binding}" />
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <Button Text="Submit Decisions"
+                Command="{Binding SubmitDecisionsCommand}" />
+    </StackLayout>
+</ContentPage>
