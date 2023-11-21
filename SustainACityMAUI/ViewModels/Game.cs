@@ -16,6 +16,7 @@ public class Game : ViewModel
     private readonly Queue<string> _outputQueue = new();
     private bool _isTyping = false;
     private bool _skipDialog = false;
+    private bool _isInventoryVisible;
 
     public ICommand MoveNorthCommand { get; }
     public ICommand MoveSouthCommand { get; }
@@ -27,6 +28,7 @@ public class Game : ViewModel
     public ICommand HelpCommand { get; }
     public ICommand SubmitCommand { get; }
     public ICommand SkipDialogCommand { get; }
+    public ICommand InventoryCommand { get; }
 
     /// <summary> Sets up the game and initializes commands. </summary>
     public Game()
@@ -34,7 +36,7 @@ public class Game : ViewModel
         // Room loading section
         _roomMap = new Dictionary<(int, int), Room>();
         JsonLoader jsonLoader = new("rooms.json");
-        _roomMap = jsonLoader.LoadRooms().ToDictionary(room => (room.X, room.Y));
+        _roomMap = jsonLoader.LoadData<Room>().ToDictionary(room => (room.X, room.Y));
         _player = new() { CurrentRoom = _roomMap.GetValueOrDefault((0, 0))! };
 
         // Initialize commands
@@ -47,6 +49,7 @@ public class Game : ViewModel
         TalkCommand = new TalkCommand(_player, AppendDialog);
         HelpCommand = new HelpCommand(async (message) => await PopupAsync("Help", message, "Ok"));
         SkipDialogCommand = new Microsoft.Maui.Controls.Command(() => _skipDialog = true);
+        InventoryCommand = new Microsoft.Maui.Controls.Command(() => IsInventoryVisible = !IsInventoryVisible);
     }
 
     public event Action ScrollToBottomRequested;
@@ -87,6 +90,16 @@ public class Game : ViewModel
         set
         {
             _userInput = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public bool IsInventoryVisible
+    {
+        get => _isInventoryVisible;
+        set
+        {
+            _isInventoryVisible = value;
             OnPropertyChanged();
         }
     }

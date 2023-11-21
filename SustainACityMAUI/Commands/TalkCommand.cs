@@ -26,7 +26,7 @@ public class TalkCommand : Command
         // Add sub-commands (Minigame should be changed to its own sub-command)
 
         // Navigate to minigame logic
-        bool canNavigate = await NavigationService.NavigateToMinigameAsync(_player);
+        bool canNavigate = await NavigationService.NavigateToPageAsync(_player.CurrentRoom.NPC.Minigame, _player);
 
         if (_player.CurrentRoom.NPC.Minigame == null)
         {

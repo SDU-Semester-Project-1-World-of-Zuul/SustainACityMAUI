@@ -26,7 +26,7 @@
     </PropertyGroup>
     <ItemGroup>
         <!-- JSON Data -->
-        <EmbeddedResource Include="Resources\Data\rooms.json" />
+		<EmbeddedResource Include="Resources\Data\*.json" />
         <!-- App Icon -->
         <MauiIcon Include="Resources\AppIcon\appicon.svg"
                   ForegroundFile="Resources\AppIcon\appiconfg.svg"

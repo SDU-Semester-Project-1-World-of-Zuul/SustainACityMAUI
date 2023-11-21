@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:SustainACityMAUI.Views"
              x:Class="SustainACityMAUI.Views.GamePage">
 
     <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" RowDefinitions="Auto, *, Auto" ColumnDefinitions="*, Auto, *">
@@ -75,19 +76,25 @@
                 </StackLayout>
 
                 <!-- Interaction control section -->
-                <StackLayout Grid.Row="1" Grid.Column="2" 
-                     HorizontalOptions="End" Orientation="Vertical" Padding="10">
+                <StackLayout Grid.Row="1" Grid.Column="2" HorizontalOptions="End" Orientation="Vertical" Padding="10">
                     <Label Text="Interact" TextColor="White" FontAttributes="Bold"/>
                     <Grid ColumnDefinitions="Auto, Auto, Auto" RowDefinitions="Auto, Auto">
                         <Button Text="Look" Grid.Column="0" Command="{Binding LookCommand}"/>
                         <Button Text="Talk" Grid.Column="1" Command="{Binding TalkCommand}"/>
                         <Button Text="Back" Grid.Column="2" Command="{Binding BackCommand}"/>
+                        <Button Text="Inventory" Grid.Row="1" Grid.Column="1" Command="{Binding InventoryCommand}"/>
                     </Grid>
                 </StackLayout>
             </Grid>
         </Frame>
 
-
+        <!-- Inventory -->
+        <ContentView IsVisible="{Binding IsInventoryVisible}"
+                     Grid.Row="0" Grid.Column="0"
+                     Grid.RowSpan="3" Grid.ColumnSpan="3"
+                     HorizontalOptions="Center" VerticalOptions="Center">
+            <local:InventoryView/>
+        </ContentView>
     </Grid>
-
+    
 </ContentPage>

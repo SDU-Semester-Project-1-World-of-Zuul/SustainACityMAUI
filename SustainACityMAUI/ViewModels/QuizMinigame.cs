@@ -164,6 +164,6 @@ public class QuizMinigame : ViewModel
     private void OnGameEnded()
     {
         _player.Score += TriviaScore; // Update game score
-        NavigationService.NavigateBackAsync();
+        _ = NavigationService.NavigateBackAsync();
     }
 }
