@@ -4,54 +4,54 @@
     "Description": "The Central Plaza is the beating heart of the city, a place where fresh beginnings are as common as the morning dew. It's an open, vibrant space where the city's diverse tapestry converges—a blend of greenery, fountains, and bustling cafes. The cobblestone pathways guide newcomers and regulars alike, each step a potential story. Here, the community gathers, ideas exchange, and the journey of every citizen commences. Players can orient themselves, gather resources, and plan their next move in this ever-evolving urban landscape.",
     "X": 0,
     "Y": 0,
+    "ImgPath": "plazadistrict.png",
     "NPC": {
       "Name": "The Guide",
       "Minigame": "OrientationMinigame"
-    },
-    "ImgPath": "plazadistrict.png"
+    }
   },
   {
     "Name": "Cathedra Oculi Sanguinei",
     "Description": "It's an old cathedral where the paint is peeling off the walls. Inside, the atmosphere is dimly lit with dust floating in the air and the hauntingly beautiful sound of a piano resonating through the pews.",
     "X": 0,
     "Y": 1,
+    "ImgPath": "churchdistrict.png",
     "NPC": {
       "Name": "The Pianist",
       "Minigame": "WIPMinigame"
-    },
-    "ImgPath": "churchdistrict.png"
+    }
   },
   {
     "Name": "Springfield Elementary",
     "Description": "Springfield Elementary, once a beacon of hope and knowledge, now looks more like a relic of the past. The paint's faded memories of student art projects. The swings in the playground have developed an unscheduled 'squeak-period'. Principal Skinner, however, stands outside, with an unmistakable gleam in his eyes, holding a banner that reads 'Help Restore Our Glory... and also our Science Lab'. The school's mission? To teach sustainability, not just practice it.",
     "X": 1,
     "Y": 0,
+    "ImgPath": "schooldistrict.png",
     "NPC": {
       "Name": "Principal Skinner",
       "Minigame": "QuizMinigame"
-    },
-    "ImgPath": "schooldistrict.png"
+    }
   },
   {
     "Name": "The Grand Central Transit Hub",
     "Description": "This bustling nexus stands as a testament to the city's commitment to connectivity and modern infrastructure. Gleaming under the bright lights, the vast airport terminal's curved roof mimics the flight of an airplane, while the train station's grand arches echo the rhythmic motion of the engines that pass beneath. The glass corridor over the road acts as a symphony of movement, casting reflections of the commuters' hurried dance. Here, the pulse of the city is tangible, with the comings and goings of people from all walks of life. The air is thick with the smell of diesel and the sound of rolling luggage, announcements, and distant trains. Despite the commotion, there's an underlying order to the chaos, as everyone seems to find their path.",
     "X": -1,
     "Y": 0,
+    "ImgPath": "transportdistrict.png",
     "NPC": {
       "Name": "The Chauffeur",
       "Minigame": "BalancingActMinigame"
-    },
-    "ImgPath": "transportdistrict.png"
+    }
   },
   {
     "Name": "Emergency Response District",
     "Description": "A nexus of readiness and vigilance, the Emergency Response District is etched with the echo of sirens and the resolute activity of service vehicles. Each building stands robust and authoritative—a symphony of fire stations, police headquarters, and bustling hospitals. The air thrums with the pulse of urgency, yet a practiced calm prevails. It's here that the player weaves through the intricate tapestry of disaster and relief, sharpening response times, deploying resources, and knitting the fabric of the community with safety workshops.",
     "X": 0,
     "Y": -1,
+    "ImgPath": "emergencydistrict.png",
     "NPC": {
       "Name": "The Coordinator",
       "Minigame": "CrisisManagementMinigame"
-    },
-    "ImgPath": "emergencydistrict.png"
+    }
   }
 ]

@@ -7,6 +7,6 @@ public class Room
     public string Description { get; set; }
     public int X { get; set; }
     public int Y { get; set; }
-    public NPC NPC { get; set; }
     public string ImgPath { get; set; }
+    public NPC NPC { get; set; }
 }

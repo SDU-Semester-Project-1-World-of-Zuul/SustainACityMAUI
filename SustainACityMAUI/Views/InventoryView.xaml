@@ -13,7 +13,7 @@
             <ScrollView Grid.Row="0">
                 <StackLayout Spacing="10" Padding="15">
                     <!-- Items in the Inventory -->
-                    <CollectionView ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}">
+                    <CollectionView ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" SelectionMode="Single">
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
                                 <Frame CornerRadius="10" Padding="10" Margin="5"
@@ -33,12 +33,12 @@
 
             <!-- Buttons Section -->
             <Frame Grid.Row="1" BackgroundColor="#998B0000" BorderColor="Transparent" CornerRadius="15"
-                   Padding="10" Margin="0, -30, 0, 0" VerticalOptions="End">
+       Padding="10" Margin="0, -30, 0, 0" VerticalOptions="End">
                 <StackLayout>
+                    <Label Text="{Binding SelectedItem.Description}" HorizontalOptions="Center" TextColor="White"/>
                     <Label Text="Actions" HorizontalOptions="StartAndExpand" TextColor="White" FontAttributes="Bold"/>
                     <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="Center">
                         <Button Text="Use" Command="{Binding UseItemCommand}" CommandParameter="{Binding SelectedItem}"/>
-                        <Button Text="Look" Command="{Binding LookItemCommand}" CommandParameter="{Binding SelectedItem}"/>
                         <Button Text="Pick Up" Command="{Binding PickUpItemCommand}" CommandParameter="{Binding SelectedItem}"/>
                     </StackLayout>
                 </StackLayout>

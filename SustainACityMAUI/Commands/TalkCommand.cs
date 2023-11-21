@@ -28,9 +28,9 @@ public class TalkCommand : Command
         // Navigate to minigame logic
         bool canNavigate = await NavigationService.NavigateToPageAsync(_player.CurrentRoom.NPC.Minigame, _player);
 
-        if (_player.CurrentRoom.NPC.Minigame == null)
+        if (_player.CurrentRoom.NPC.Name == null)
         {
-            _updateAction(null, $"You talk to {_player.CurrentRoom.NPC.Name}, but they don't have a minigame for you.\n");
+            _updateAction(null, "There is no-one to talk to.\n");
         }
         else if (canNavigate)
         {
@@ -38,7 +38,7 @@ public class TalkCommand : Command
         }
         else
         {
-            _updateAction(null, "There is no-one to talk to.\n");
+            _updateAction(null, $"You talk to {_player.CurrentRoom.NPC.Name}, but they don't have a minigame for you.\n");
         }
     }
 }

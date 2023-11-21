@@ -10,7 +10,6 @@ public class Game : ViewModel
 {
     private string _dialogBox;
     private string _speaker;
-    private readonly Player _player;
     private readonly Dictionary<(int, int), Room> _roomMap;
     private string _userInput;
     private readonly Queue<string> _outputQueue = new();
@@ -37,16 +36,16 @@ public class Game : ViewModel
         _roomMap = new Dictionary<(int, int), Room>();
         JsonLoader jsonLoader = new("rooms.json");
         _roomMap = jsonLoader.LoadData<Room>().ToDictionary(room => (room.X, room.Y));
-        _player = new() { CurrentRoom = _roomMap.GetValueOrDefault((0, 0))! };
+        Player = new() { CurrentRoom = _roomMap.GetValueOrDefault((0, 0))! };
 
         // Initialize commands
-        MoveNorthCommand = new MoveCommand(_player, _roomMap, Direction.North, AppendDialog, OnPlayerMoved);
-        MoveSouthCommand = new MoveCommand(_player, _roomMap, Direction.South, AppendDialog, OnPlayerMoved);
-        MoveEastCommand = new MoveCommand(_player, _roomMap, Direction.East, AppendDialog, OnPlayerMoved);
-        MoveWestCommand = new MoveCommand(_player, _roomMap, Direction.West, AppendDialog, OnPlayerMoved);
-        BackCommand = new BackCommand(_player, _roomMap, AppendDialog, OnPlayerMoved);
-        LookCommand = new LookCommand(_player, AppendDialog);
-        TalkCommand = new TalkCommand(_player, AppendDialog);
+        MoveNorthCommand = new MoveCommand(Player, _roomMap, Direction.North, AppendDialog, OnPlayerMoved);
+        MoveSouthCommand = new MoveCommand(Player, _roomMap, Direction.South, AppendDialog, OnPlayerMoved);
+        MoveEastCommand = new MoveCommand(Player, _roomMap, Direction.East, AppendDialog, OnPlayerMoved);
+        MoveWestCommand = new MoveCommand(Player, _roomMap, Direction.West, AppendDialog, OnPlayerMoved);
+        BackCommand = new BackCommand(Player, _roomMap, AppendDialog, OnPlayerMoved);
+        LookCommand = new LookCommand(Player, AppendDialog);
+        TalkCommand = new TalkCommand(Player, AppendDialog);
         HelpCommand = new HelpCommand(async (message) => await PopupAsync("Help", message, "Ok"));
         SkipDialogCommand = new Microsoft.Maui.Controls.Command(() => _skipDialog = true);
         InventoryCommand = new Microsoft.Maui.Controls.Command(() => IsInventoryVisible = !IsInventoryVisible);
@@ -54,7 +53,9 @@ public class Game : ViewModel
 
     public event Action ScrollToBottomRequested;
 
-    public string CurrentRoomImagePath { get => _player.CurrentRoom.ImgPath ?? null; }
+    public Player Player { get; }
+
+    public string CurrentRoomImagePath { get => Player.CurrentRoom.ImgPath; }
 
     /// <summary> Represents game dialog. </summary>
     public string DialogBox
