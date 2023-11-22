@@ -1,9 +1,9 @@
-﻿using SustainACityMAUI.Models;
-using SustainACityMAUI.Helpers;
+﻿using SustainACityMAUI.Helpers;
+using SustainACityMAUI.Models;
 
 namespace SustainACityMAUI.Commands;
 
-public class TalkCommand : Command
+public class TalkCommand : BaseCommand
 {
     private readonly Player _player;
     private readonly Action<string, string> _updateAction;
@@ -26,7 +26,7 @@ public class TalkCommand : Command
         // Add sub-commands (Minigame should be changed to its own sub-command)
 
         // Navigate to minigame logic
-        bool canNavigate = await NavigationService.NavigateToPageAsync(_player.CurrentRoom.NPC.Minigame, _player);
+        var canNavigate = await NavigationService.NavigateToPageAsync(_player.CurrentRoom.NPC.Minigame, _player);
 
         if (_player.CurrentRoom.NPC.Name == null)
         {

@@ -2,7 +2,7 @@
 
 namespace SustainACityMAUI.Commands;
 
-public class MoveCommand : Command
+public class MoveCommand : BaseCommand
 {
     private readonly Player _player;
     private readonly Dictionary<(int, int), Room> _roomMap;

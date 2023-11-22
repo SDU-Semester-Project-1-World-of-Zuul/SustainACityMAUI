@@ -2,7 +2,7 @@
 
 namespace SustainACityMAUI.Commands;
 
-public class BackCommand : Command
+public class BackCommand : BaseCommand
 {
     private readonly Player _player;
     private readonly Dictionary<(int, int), Room> _roomMap;

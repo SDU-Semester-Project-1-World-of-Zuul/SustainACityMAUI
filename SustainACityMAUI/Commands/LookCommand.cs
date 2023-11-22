@@ -1,10 +1,8 @@
-﻿using System;
-using System.Windows.Input;
-using SustainACityMAUI.Models;
+﻿using SustainACityMAUI.Models;
 
 namespace SustainACityMAUI.Commands
 {
-    public class LookCommand : Command
+    public class LookCommand : BaseCommand
     {
         private readonly Player _player;
         private readonly Action<string, string> _updateAction;

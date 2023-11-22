@@ -2,7 +2,7 @@
 
 namespace SustainACityMAUI.Commands;
 
-public abstract class Command : ICommand
+public abstract class BaseCommand : ICommand
 {
     public event EventHandler CanExecuteChanged;
 

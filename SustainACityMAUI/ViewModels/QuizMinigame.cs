@@ -1,20 +1,21 @@
-﻿using System.Collections.ObjectModel;
-using System.Windows.Input;
-using SustainACityMAUI.Helpers;
+﻿using SustainACityMAUI.Helpers;
 using SustainACityMAUI.Models;
+using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace SustainACityMAUI.ViewModels;
 
-public class QuizMinigame : ViewModel
+public class QuizMinigame : BaseViewModel
 {
     private readonly Player _player;
     public ObservableCollection<TriviaQuestion> Questions { get; }
-    public ICommand SubmitAnswerCommand { get; }
+    public ICommand SubmitAnswerCommand => new Command<string>(SubmitAnswer);
 
     private readonly IDispatcher _dispatcher;
     private int _triviaScore;
     private int _timeRemaining;
     private TriviaQuestion _currentQuestion;
+    private string _currentAnswer;
 
     public struct TriviaQuestion
     {
@@ -31,9 +32,6 @@ public class QuizMinigame : ViewModel
             IsBonus = isBonus;
         }
     }
-
-    private string _currentAnswer;
-
     public string CurrentAnswer
     {
         get => _currentAnswer;
@@ -80,7 +78,6 @@ public class QuizMinigame : ViewModel
         _dispatcher = Dispatcher.GetForCurrentThread();
         Questions = new ObservableCollection<TriviaQuestion>(ShuffledQuestions);
         CurrentQuestion = Questions.FirstOrDefault();
-        SubmitAnswerCommand = new Command<string>(SubmitAnswer);
         TimeRemaining = 60;
         StartTimer();
     }

@@ -1,24 +1,18 @@
-﻿using System.Collections.ObjectModel;
-using System.Windows.Input;
-using SustainACityMAUI.Helpers;
-using SustainACityMAUI.Models;
+﻿using SustainACityMAUI.Models;
 
 namespace SustainACityMAUI.ViewModels;
 
-public class Inventory : ViewModel
+public class Inventory : BaseViewModel
 {
     private readonly Player _player;
-    ICommand UseItemCommand { get; }
-    ICommand LookItemCommand { get; }
-    ICommand PickUpItemCommand { get; }
+    private Item _selectedItem;
+
     public Inventory(Player player)
     {
         _player = player;
     }
 
     public List<Item> Items => _player.Inventory;
-
-    private Item _selectedItem;
 
     public Item SelectedItem
     {

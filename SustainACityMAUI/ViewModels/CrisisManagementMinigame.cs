@@ -5,7 +5,7 @@ using SustainACityMAUI.Models;
 
 namespace SustainACityMAUI.ViewModels;
 
-public class CrisisManagementMinigame : ViewModel
+public class CrisisManagementMinigame : BaseViewModel
 {
     private readonly Player _player;
     private List<DayDecision> _days;
@@ -83,7 +83,7 @@ public class CrisisManagementMinigame : ViewModel
     {
         // Implement decision selection
     }
-    public class DayDecision : ViewModel
+    public class DayDecision : BaseViewModel
     {
         private string _day;
         private string _selectedDecision;

@@ -1,12 +1,12 @@
-using System.Windows.Input;
-using SustainACityMAUI.Models;
 using SustainACityMAUI.Commands;
 using SustainACityMAUI.Helpers;
+using SustainACityMAUI.Models;
+using System.Windows.Input;
 
 namespace SustainACityMAUI.ViewModels;
 
 /// <summary> Manages game interactions for the MainPage. </summary>
-public class Game : ViewModel
+public class Game : BaseViewModel
 {
     private string _dialogBox;
     private string _speaker;
@@ -17,45 +17,33 @@ public class Game : ViewModel
     private bool _skipDialog = false;
     private bool _isInventoryVisible;
 
-    public ICommand MoveNorthCommand { get; }
-    public ICommand MoveSouthCommand { get; }
-    public ICommand MoveEastCommand { get; }
-    public ICommand MoveWestCommand { get; }
-    public ICommand BackCommand { get; }
-    public ICommand LookCommand { get; }
-    public ICommand TalkCommand { get; }
-    public ICommand HelpCommand { get; }
-    public ICommand SubmitCommand { get; }
-    public ICommand SkipDialogCommand { get; }
-    public ICommand InventoryCommand { get; }
+    public ICommand MoveNorthCommand => new MoveCommand(Player, _roomMap, Direction.North, AppendDialog, OnPlayerMoved);
+    public ICommand MoveSouthCommand => new MoveCommand(Player, _roomMap, Direction.South, AppendDialog, OnPlayerMoved);
+    public ICommand MoveEastCommand => new MoveCommand(Player, _roomMap, Direction.East, AppendDialog, OnPlayerMoved);
+    public ICommand MoveWestCommand => new MoveCommand(Player, _roomMap, Direction.West, AppendDialog, OnPlayerMoved);
+    public ICommand BackCommand => new BackCommand(Player, _roomMap, AppendDialog, OnPlayerMoved);
+    public ICommand LookCommand => new LookCommand(Player, AppendDialog);
+    public ICommand TalkCommand => new TalkCommand(Player, AppendDialog);
+    public ICommand HelpCommand => new HelpCommand(async (message) => await PopupAsync("Help", message, "Ok"));
+    public ICommand SkipDialogCommand => new Command(() => _skipDialog = true);
+    public ICommand InventoryCommand => new Command(() => IsInventoryVisible = !IsInventoryVisible);
 
-    /// <summary> Sets up the game and initializes commands. </summary>
+    /// <summary> Sets up the game. </summary>
     public Game()
     {
-        // Room loading section
-        _roomMap = new Dictionary<(int, int), Room>();
-        JsonLoader jsonLoader = new("rooms.json");
+        // Initialization
+        var jsonLoader = new JsonLoader("rooms.json");
         _roomMap = jsonLoader.LoadData<Room>().ToDictionary(room => (room.X, room.Y));
-        Player = new() { CurrentRoom = _roomMap.GetValueOrDefault((0, 0))! };
 
-        // Initialize commands
-        MoveNorthCommand = new MoveCommand(Player, _roomMap, Direction.North, AppendDialog, OnPlayerMoved);
-        MoveSouthCommand = new MoveCommand(Player, _roomMap, Direction.South, AppendDialog, OnPlayerMoved);
-        MoveEastCommand = new MoveCommand(Player, _roomMap, Direction.East, AppendDialog, OnPlayerMoved);
-        MoveWestCommand = new MoveCommand(Player, _roomMap, Direction.West, AppendDialog, OnPlayerMoved);
-        BackCommand = new BackCommand(Player, _roomMap, AppendDialog, OnPlayerMoved);
-        LookCommand = new LookCommand(Player, AppendDialog);
-        TalkCommand = new TalkCommand(Player, AppendDialog);
-        HelpCommand = new HelpCommand(async (message) => await PopupAsync("Help", message, "Ok"));
-        SkipDialogCommand = new Microsoft.Maui.Controls.Command(() => _skipDialog = true);
-        InventoryCommand = new Microsoft.Maui.Controls.Command(() => IsInventoryVisible = !IsInventoryVisible);
+        Player = new() { CurrentRoom = _roomMap.GetValueOrDefault((0, 0))! };
     }
 
     public event Action ScrollToBottomRequested;
 
     public Player Player { get; }
 
-    public string CurrentRoomImagePath { get => Player.CurrentRoom.ImgPath; }
+    public string CurrentRoomImagePath => Player.CurrentRoom.ImgPath;
+    public bool IsDialogVisible => !string.IsNullOrEmpty(DialogBox);
 
     /// <summary> Represents game dialog. </summary>
     public string DialogBox
@@ -105,8 +93,6 @@ public class Game : ViewModel
         }
     }
 
-    public bool IsDialogVisible => !string.IsNullOrEmpty(DialogBox);
-
     public void OnPlayerMoved()
     {
         OnPropertyChanged(nameof(CurrentRoomImagePath));
@@ -128,35 +114,45 @@ public class Game : ViewModel
 
     private async Task DialogEffectAsync()
     {
-        while (_outputQueue.Count > 0)
+        while (_outputQueue.Any())
         {
             var message = _outputQueue.Dequeue();
-            _isTyping = true;
+            await TypeOutMessage(message);
+        }
+    }
 
-            for (int i = 0; i < message.Length; i++)
+    private async Task TypeOutMessage(string message)
+    {
+        _isTyping = true;
+
+        for (int i = 0; i < message.Length; i++)
+        {
+            if (_skipDialog)
             {
-                if (_skipDialog)
+                i = SkipToNextPeriod(message, i); // Skip to the next period
+            }
+            else
+            {
+                DialogBox += message[i];
+                if (_outputQueue.Count == 0) // Only delay if not skipping and no new message
                 {
-                    int nextPeriod = message.IndexOf('.', i);
-                    if (nextPeriod == -1) nextPeriod = message.Length - 1;
-
-                    // Append up to the next period and continue with the effect
-                    DialogBox += message[i..(nextPeriod + 1)];
-                    i = nextPeriod; // Update the index to continue from the next character
-                    _skipDialog = false;
-                }
-                else
-                {
-                    DialogBox += message[i];
-                    if (_outputQueue.Count == 0) // Only delay if not skipping and no new message
-                    {
-                        await Task.Delay(30);
-                    }
+                    await Task.Delay(30);
                 }
             }
-
-            _isTyping = false;
         }
+
+        _isTyping = false;
+    }
+
+    private int SkipToNextPeriod(string message, int currentIndex)
+    {
+        int nextPeriod = message.IndexOf('.', currentIndex);
+        if (nextPeriod == -1) nextPeriod = message.Length - 1;
+
+        DialogBox += message[currentIndex..(nextPeriod + 1)];
+        _skipDialog = false;
+
+        return nextPeriod; // Return updated index
     }
 
     public static async Task PopupAsync(string popupName, string message, string cancel)

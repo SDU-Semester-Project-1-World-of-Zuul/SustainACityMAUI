@@ -4,10 +4,10 @@ public static class NavigationService
 {
     public static async Task<bool> NavigateToPageAsync(string pageName, object parameter = null)
     {
-        string typeName = $"SustainACityMAUI.Views.{pageName}Page";
+        var typeName = $"SustainACityMAUI.Views.{pageName}Page";
 
         // Get the Type from the page name
-        Type viewType = Type.GetType(typeName);
+        var viewType = Type.GetType(typeName);
 
         // Check if the type is a Page and create an instance
         if (viewType?.IsSubclassOf(typeof(Page)) == true)
