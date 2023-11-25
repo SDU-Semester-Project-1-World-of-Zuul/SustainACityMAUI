@@ -4,5 +4,7 @@
 public class NPC
 {
     public string Name { get; set; }
-    public string Minigame { get; set; }
+    public string ImgPath { get; set; }
+    public List<Dialogue> Dialogues { get; set; }
+    public Quest Quest { get; set; }
 }

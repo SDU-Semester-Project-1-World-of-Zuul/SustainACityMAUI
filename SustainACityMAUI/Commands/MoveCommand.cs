@@ -50,11 +50,11 @@ public class MoveCommand : BaseCommand
             _player.CurrentRoom = newRoom;
 
             _onMovedAction?.Invoke();
-            _updateAction?.Invoke(null, $"You move {_direction} to {newRoom.Name}.\n");  // Update UI with the new room name
+            _updateAction(null, $"You move {_direction} to {newRoom.Name}.");  // Update UI with the new room name
         }
         else
         {
-            _updateAction?.Invoke(null, "You can't move in that direction.\n");  // Provide feedback that the move is not possible
+            _updateAction(null, "You can't move in that direction.");  // Provide feedback that the move is not possible
         }
     }
 }

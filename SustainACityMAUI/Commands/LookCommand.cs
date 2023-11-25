@@ -20,7 +20,7 @@ namespace SustainACityMAUI.Commands
 
         public override void Execute(object parameter)
         {
-            var description = $"{_player.CurrentRoom?.Description ?? "There is nothing to look at."}\n"; // Null-check
+            var description = _player.CurrentRoom?.Description ?? "There is nothing to look at."; // Null-check
             _updateAction(null, description);
         }
     }

@@ -11,21 +11,26 @@ public class Game : BaseViewModel
     private string _dialogBox;
     private string _speaker;
     private readonly Dictionary<(int, int), Room> _roomMap;
-    private string _userInput;
-    private readonly Queue<string> _outputQueue = new();
+    private readonly Queue<DialogItem> _dialogQueue = new();
     private bool _isTyping = false;
     private bool _skipDialog = false;
     private bool _isInventoryVisible;
+    private List<string> _responseOptions = new();
+    private CancellationTokenSource _cancellationTokenSource = new();
+    private const string _makeshiftBuffer = "\u200B\u200B\u200B\u200B\u200B"; // Five zero-width spaces
+    private const string _narrator = "Narrator";
+    private const string _delimiter = "\n\n---\n";
 
-    public ICommand MoveNorthCommand => new MoveCommand(Player, _roomMap, Direction.North, AppendDialog, OnPlayerMoved);
-    public ICommand MoveSouthCommand => new MoveCommand(Player, _roomMap, Direction.South, AppendDialog, OnPlayerMoved);
-    public ICommand MoveEastCommand => new MoveCommand(Player, _roomMap, Direction.East, AppendDialog, OnPlayerMoved);
-    public ICommand MoveWestCommand => new MoveCommand(Player, _roomMap, Direction.West, AppendDialog, OnPlayerMoved);
-    public ICommand BackCommand => new BackCommand(Player, _roomMap, AppendDialog, OnPlayerMoved);
-    public ICommand LookCommand => new LookCommand(Player, AppendDialog);
-    public ICommand TalkCommand => new TalkCommand(Player, AppendDialog);
+    public ICommand MoveNorthCommand => new MoveCommand(Player, _roomMap, Direction.North, DialogWrite, OnPlayerMoved);
+    public ICommand MoveSouthCommand => new MoveCommand(Player, _roomMap, Direction.South, DialogWrite, OnPlayerMoved);
+    public ICommand MoveEastCommand => new MoveCommand(Player, _roomMap, Direction.East, DialogWrite, OnPlayerMoved);
+    public ICommand MoveWestCommand => new MoveCommand(Player, _roomMap, Direction.West, DialogWrite, OnPlayerMoved);
+    public ICommand BackCommand => new BackCommand(Player, _roomMap, DialogWrite, OnPlayerMoved);
+    public ICommand LookCommand => new LookCommand(Player, DialogWrite);
+    public ICommand TalkCommand => new TalkCommand(Player, options => ResponseOptions = options, DialogWrite);
     public ICommand HelpCommand => new HelpCommand(async (message) => await PopupAsync("Help", message, "Ok"));
-    public ICommand SkipDialogCommand => new Command(() => _skipDialog = true);
+    public ICommand SkipDialogCommand => new Command(SkipDialog);
+
     public ICommand InventoryCommand => new Command(() => IsInventoryVisible = !IsInventoryVisible);
 
     /// <summary> Sets up the game. </summary>
@@ -39,22 +44,33 @@ public class Game : BaseViewModel
     }
 
     public event Action ScrollToBottomRequested;
-
     public Player Player { get; }
-
     public string CurrentRoomImagePath => Player.CurrentRoom.ImgPath;
     public bool IsDialogVisible => !string.IsNullOrEmpty(DialogBox);
+    public bool IsOptionsVisible => !_isTyping && ResponseOptions.Count > 0;
+    public bool AreActionButtonsEnabled => ResponseOptions.Count == 0;
 
-    /// <summary> Represents game dialog. </summary>
+    public List<string> ResponseOptions
+    {
+        get => _responseOptions;
+        set
+        {
+            _responseOptions = value;
+            OnPropertyChanged();
+            OnPropertyChanged(nameof(AreActionButtonsEnabled)); // Notify change for button enabled state
+        }
+    }
+
     public string DialogBox
     {
         get => _dialogBox;
         set
         {
-            _dialogBox = value;
-            OnPropertyChanged();
-            ScrollToBottomRequested?.Invoke(); // Request to scroll
-            OnPropertyChanged(nameof(IsDialogVisible)); // Notify property change for visibility
+            _dialogBox = value; // Set the dialog text
+            OnPropertyChanged(); // Notify the change
+            ScrollToBottomRequested?.Invoke();              // Request to scroll
+            OnPropertyChanged(nameof(IsDialogVisible));     // Notify property change for visibility
+            OnPropertyChanged(nameof(IsOptionsVisible));    // Notify property change for visibility
         }
     }
 
@@ -63,22 +79,7 @@ public class Game : BaseViewModel
         get => _speaker;
         set
         {
-            if (_speaker != value)
-            {
-                DialogBox = "";
-            }
-
             _speaker = value;
-            OnPropertyChanged();
-        }
-    }
-
-    public string UserInput
-    {
-        get => _userInput;
-        set
-        {
-            _userInput = value;
             OnPropertyChanged();
         }
     }
@@ -93,66 +94,103 @@ public class Game : BaseViewModel
         }
     }
 
-    public void OnPlayerMoved()
+    private void DialogWrite(string speaker, string text)
     {
-        OnPropertyChanged(nameof(CurrentRoomImagePath));
+        var dialogItem = new DialogItem
+        {
+            Speaker = speaker ?? _narrator,
+            Text = _makeshiftBuffer + text + "\n"
+        };
+
+        _dialogQueue.Enqueue(dialogItem);
+        _ = ProcessDialogQueueAsync();
     }
 
-    /// <summary> Adds text to the dialog box with an effect. </summary>
-    private void AppendDialog(string speaker, string text)
+    private async Task ProcessDialogQueueAsync()
     {
-        _skipDialog = false; // Reset skip dialog flag
-        Speaker = speaker ?? "Narrator"; // If null use Narrator
-
-        _outputQueue.Enqueue(text);
-        if (!_isTyping)
+        if (_dialogQueue.Any())
         {
-            _isTyping = true;
-            _ = DialogEffectAsync();
+            var dialogItem = _dialogQueue.Dequeue();
+
+            if (Speaker != dialogItem.Speaker)
+            {
+                // Append a delimiter or newline to indicate a new speaker
+                dialogItem.Text = _delimiter + dialogItem.Text;
+                Speaker = dialogItem.Speaker;
+            }
+
+            _cancellationTokenSource.Cancel();
+            _cancellationTokenSource = new();
+            _skipDialog = false;
+
+            await DisplayTextAsync(dialogItem.Text, _cancellationTokenSource.Token);
         }
     }
 
-    private async Task DialogEffectAsync()
-    {
-        while (_outputQueue.Any())
-        {
-            var message = _outputQueue.Dequeue();
-            await TypeOutMessage(message);
-        }
-    }
-
-    private async Task TypeOutMessage(string message)
+    private async Task DisplayTextAsync(string text, CancellationToken cancelToken)
     {
         _isTyping = true;
+        int i = 0;
 
-        for (int i = 0; i < message.Length; i++)
+        try
         {
-            if (_skipDialog)
+            for (i = 0; i < text.Length; i++)
             {
-                i = SkipToNextPeriod(message, i); // Skip to the next period
-            }
-            else
-            {
-                DialogBox += message[i];
-                if (_outputQueue.Count == 0) // Only delay if not skipping and no new message
+                if (_skipDialog)
                 {
-                    await Task.Delay(30);
+                    var (newText, newIndex) = SkipToNextPeriod(text, i);
+                    DialogBox += newText;
+                    i = newIndex;
+                }
+                else
+                {
+                    DialogBox += text[i];
+                    if (_dialogQueue.Count == 0)    // Only delay if not skipping and no new message
+                    {
+                        await Task.Delay(30, cancelToken);
+                    }
                 }
             }
         }
-
-        _isTyping = false;
+        catch (TaskCanceledException)
+        {
+            DialogBox += text[(i + 1)..]; // Add remaining text on cancellation
+        }
+        finally
+        {
+            _isTyping = false;
+            OnPropertyChanged(nameof(IsOptionsVisible));
+        }
     }
 
-    private int SkipToNextPeriod(string message, int currentIndex)
+    private (string, int) SkipToNextPeriod(string text, int index)
     {
-        int nextPeriod = message.IndexOf('.', currentIndex);
-        if (nextPeriod == -1) nextPeriod = message.Length - 1;
-
-        DialogBox += message[currentIndex..(nextPeriod + 1)];
+        int nextPeriod = text.IndexOf('.', index);
+        nextPeriod = nextPeriod != -1 ? nextPeriod : text.Length - 1;
         _skipDialog = false;
 
-        return nextPeriod; // Return updated index
+        return (text[index..(nextPeriod + 1)], nextPeriod);  // Return updated index
+    }
+
+    private void SkipDialog()
+    {
+        if (_isTyping)
+        {
+            if (!_skipDialog)
+            {
+                _skipDialog = true;
+            }
+            else
+            {
+                _cancellationTokenSource.Cancel();
+                _cancellationTokenSource = new();
+            }
+        }
+    }
+
+    public void OnPlayerMoved()
+    {
+        OnPropertyChanged(nameof(CurrentRoomImagePath));
     }
 
     public static async Task PopupAsync(string popupName, string message, string cancel)

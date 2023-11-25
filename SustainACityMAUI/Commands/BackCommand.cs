@@ -27,7 +27,7 @@ public class BackCommand : BaseCommand
         // Check if there is a previous room to go back to
         if (!_player.MovementHistory.Any())
         {
-            _updateAction(null, "There's nowhere to go back to.\n");
+            _updateAction(null, "There's nowhere to go back to.");
             return;
         }
 
@@ -39,11 +39,11 @@ public class BackCommand : BaseCommand
         {
             _player.CurrentRoom = lastRoom;
             _onMovedAction?.Invoke();
-            _updateAction(null, $"You moved back to {_player.CurrentRoom.Name}.\n");
+            _updateAction(null, $"You moved back to {_player.CurrentRoom.Name}.");
         }
         else
         {
-            _updateAction(null, "The way back seems to be blocked now.\n");
+            _updateAction(null, "The way back seems to be blocked now.");
         }
     }
 }

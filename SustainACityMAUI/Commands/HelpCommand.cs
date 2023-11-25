@@ -22,6 +22,9 @@ public class HelpCommand : BaseCommand
         helpMessage.AppendLine("[Back]\t\tGo to previous location.");
         helpMessage.AppendLine("[Inventory]\tTo view and interact with items.");
         helpMessage.AppendLine("[❓]\t\tShow this help guide.");
+        helpMessage.AppendLine("\nDIALOG OPTIONS\n");
+        helpMessage.AppendLine("[Dialog Options]\tChoose from available responses in a conversation.");
+        helpMessage.AppendLine("[→]\t\tPress to skip to the next part of the dialog.");
 
         _updateAction(helpMessage.ToString());
     }

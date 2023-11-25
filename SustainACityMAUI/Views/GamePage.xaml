@@ -2,25 +2,78 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:SustainACityMAUI.Views"
-             x:Class="SustainACityMAUI.Views.GamePage">
+             x:Class="SustainACityMAUI.Views.GamePage"
+             x:Name="thisPage">
 
-    <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" RowDefinitions="Auto, *, Auto" ColumnDefinitions="*, Auto, *">
+    <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" 
+          RowDefinitions="Auto, *, Auto, Auto" ColumnDefinitions="*, Auto, *">
         <!-- Background image -->
         <Image Source="{Binding CurrentRoomImagePath}" Aspect="Center"
-           Grid.Row="0" Grid.Column="0"
-           Grid.RowSpan="3" Grid.ColumnSpan="3" />
+               Grid.Row="0" Grid.Column="0"
+               Grid.RowSpan="4" Grid.ColumnSpan="3" />
 
         <!-- Help icon in the top right corner -->
         <Button Grid.Row="0" Grid.Column="2" 
-            Text="❓" FontSize="Large"
-            Command="{Binding HelpCommand}" BackgroundColor="Transparent" 
-            HorizontalOptions="End" VerticalOptions="Start" 
-            Margin="10" WidthRequest="40" HeightRequest="40"/>
+                Text="❓" FontSize="Large"
+                Command="{Binding HelpCommand}" BackgroundColor="Transparent" 
+                HorizontalOptions="End" VerticalOptions="Start" 
+                Margin="10" WidthRequest="40" HeightRequest="40"/>
+
+        <!-- Dialog Options Frame -->
+        <Frame Grid.Row="1" Grid.Column="3" CornerRadius="15" BorderColor="Black" Padding="2"
+               HasShadow="True" BackgroundColor="White"
+               HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand" IsVisible="{Binding IsOptionsVisible}">
+            <ScrollView Orientation="Vertical" Padding="0">
+                <StackLayout BindableLayout.ItemsSource="{Binding ResponseOptions}" Padding="0" HorizontalOptions="Start">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Button Text="{Binding}" TextColor="Black"
+                            FontFamily="Cascadia Code" FontSize="Small"
+                            VerticalOptions="Start" HorizontalOptions="Start"
+                            Margin="1"
+                            Command="{Binding Path=BindingContext.TalkCommand, Source={x:Reference thisPage}}" 
+                            CommandParameter="{Binding .}" />
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+            </ScrollView>
+        </Frame>
+
+        <!-- Dialog Box -->
+        <Frame Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" CornerRadius="15" BorderColor="Black" Padding="10"
+               HasShadow="True" BackgroundColor="White" HeightRequest="150"
+               HorizontalOptions="FillAndExpand" VerticalOptions="End" IsVisible="{Binding IsDialogVisible}">
+            <StackLayout Orientation="Vertical">
+                <!-- Place the speaker label in the top left corner -->
+                <Label Text="{Binding Speaker}" FontSize="Small"
+                                   VerticalOptions="Start" HorizontalOptions="Start"
+                                   TextColor="Black" Margin="10,0,0,0">
+                </Label>
+                <ScrollView x:Name="dialogScrollView" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                    <Label Text="{Binding DialogBox}" TextColor="Black"
+                                       FontFamily="Cascadia Code" FontSize="Small"
+                                       VerticalOptions="Start" HorizontalOptions="FillAndExpand"
+                                       Margin="5">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SkipDialogCommand}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </ScrollView>
+                <!-- Place the arrow and skip button in the bottom right corner -->
+                <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                    <Label Text="→" FontSize="Medium" TextColor="Black" Margin="0,0,10,0">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SkipDialogCommand}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+            </StackLayout>
+        </Frame>
 
         <!-- Action / button area frame -->
-        <Frame Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" 
-       BackgroundColor="#808B0000" CornerRadius="0" Padding="0"
-       HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <Frame Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" 
+               BackgroundColor="#808B0000" CornerRadius="0" Padding="0"
+               HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
             <Grid>
                 <!-- Define the Grid structure -->
                 <Grid.RowDefinitions>
@@ -33,45 +86,15 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <!-- Dialog Box -->
-                <Frame Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" CornerRadius="15" BorderColor="Black" Padding="10"
-               HasShadow="True" BackgroundColor="White" HeightRequest="150" 
-               HorizontalOptions="FillAndExpand" VerticalOptions="End" IsVisible="{Binding IsDialogVisible}">
-                    <StackLayout Orientation="Vertical">
-                        <!-- Place the speaker label in the top left corner -->
-                        <Label Text="{Binding Speaker}" FontSize="Small"
-                   VerticalOptions="Start" HorizontalOptions="Start"
-                   TextColor="Black" Margin="10,0,0,0">
-                        </Label>
-                        <ScrollView x:Name="dialogScrollView" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                            <Label Text="{Binding DialogBox}" TextColor="Black"
-                       FontFamily="Cascadia Code" FontSize="Small"
-                       VerticalOptions="Start" HorizontalOptions="FillAndExpand"
-                       Margin="5">
-                                <Label.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding SkipDialogCommand}"/>
-                                </Label.GestureRecognizers>
-                            </Label>
-                        </ScrollView>
-                        <!-- Place the arrow and skip button in the bottom right corner -->
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="End">
-                            <Label Text="→" FontSize="Medium" TextColor="Black" Margin="0,0,10,0">
-                                <Label.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding SkipDialogCommand}"/>
-                                </Label.GestureRecognizers>
-                            </Label>
-                        </StackLayout>
-                    </StackLayout>
-                </Frame>
                 <!-- Movement control section -->
-                <StackLayout Grid.Row="1" Grid.Column="0" 
-                     HorizontalOptions="Start" Orientation="Vertical" Padding="10">
+                <StackLayout Grid.Row="1" Grid.Column="0" HorizontalOptions="Start" Orientation="Vertical" Padding="10">
                     <Label Text="Move" TextColor="White" FontAttributes="Bold"/>
                     <Grid ColumnDefinitions="Auto, Auto, Auto" RowDefinitions="Auto, Auto">
-                        <Button Text="N" Grid.Column="1" Command="{Binding MoveNorthCommand}"/>
-                        <Button Text="W" Grid.Column="0" Grid.Row="1" Command="{Binding MoveWestCommand}"/>
-                        <Button Text="E" Grid.Column="2" Grid.Row="1" Command="{Binding MoveEastCommand}"/>
-                        <Button Text="S" Grid.Column="1" Grid.Row="1" Command="{Binding MoveSouthCommand}"/>
+                        <!-- Bind IsEnabled for each movement button -->
+                        <Button Text="N" Grid.Column="1" Command="{Binding MoveNorthCommand}" IsEnabled="{Binding AreActionButtonsEnabled}"/>
+                        <Button Text="W" Grid.Column="0" Grid.Row="1" Command="{Binding MoveWestCommand}" IsEnabled="{Binding AreActionButtonsEnabled}"/>
+                        <Button Text="E" Grid.Column="2" Grid.Row="1" Command="{Binding MoveEastCommand}" IsEnabled="{Binding AreActionButtonsEnabled}"/>
+                        <Button Text="S" Grid.Column="1" Grid.Row="1" Command="{Binding MoveSouthCommand}" IsEnabled="{Binding AreActionButtonsEnabled}"/>
                     </Grid>
                 </StackLayout>
 
@@ -79,10 +102,10 @@
                 <StackLayout Grid.Row="1" Grid.Column="2" HorizontalOptions="End" Orientation="Vertical" Padding="10">
                     <Label Text="Interact" TextColor="White" FontAttributes="Bold"/>
                     <Grid ColumnDefinitions="Auto, Auto, Auto" RowDefinitions="Auto, Auto">
-                        <Button Text="Look" Grid.Column="0" Command="{Binding LookCommand}"/>
-                        <Button Text="Talk" Grid.Column="1" Command="{Binding TalkCommand}"/>
-                        <Button Text="Back" Grid.Column="2" Command="{Binding BackCommand}"/>
-                        <Button Text="Inventory" Grid.Row="1" Grid.Column="1" Command="{Binding InventoryCommand}"/>
+                        <Button Text="Look" Grid.Column="0" Command="{Binding LookCommand}" IsEnabled="{Binding AreActionButtonsEnabled}"/>
+                        <Button Text="Talk" Grid.Column="1" Command="{Binding TalkCommand}" IsEnabled="{Binding AreActionButtonsEnabled}"/>
+                        <Button Text="Back" Grid.Column="2" Command="{Binding BackCommand}" IsEnabled="{Binding AreActionButtonsEnabled}"/>
+                        <Button Text="Inventory" Grid.Row="1" Grid.Column="1" Command="{Binding InventoryCommand}" IsEnabled="{Binding AreActionButtonsEnabled}"/>
                     </Grid>
                 </StackLayout>
             </Grid>
@@ -91,10 +114,9 @@
         <!-- Inventory -->
         <ContentView IsVisible="{Binding IsInventoryVisible}"
                      Grid.Row="0" Grid.Column="0"
-                     Grid.RowSpan="3" Grid.ColumnSpan="3"
+                     Grid.RowSpan="4" Grid.ColumnSpan="3"
                      HorizontalOptions="Center" VerticalOptions="Center">
             <local:InventoryView BindingContext="{Binding Player}" />
         </ContentView>
     </Grid>
-    
 </ContentPage>

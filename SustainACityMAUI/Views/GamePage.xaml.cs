@@ -4,14 +4,15 @@ namespace SustainACityMAUI.Views;
 
 public partial class GamePage : ContentPage
 {
+    private readonly Game viewModel;
+
     public GamePage()
     {
         InitializeComponent();
-        BindingContext = new Game();
-        if (BindingContext is Game viewModel)
-        {
-            viewModel.ScrollToBottomRequested += ScrollToBottom;
-        }
+        viewModel = new Game();
+        BindingContext = viewModel;
+
+        viewModel.ScrollToBottomRequested += ScrollToBottom;
     }
 
     private async void ScrollToBottom()
