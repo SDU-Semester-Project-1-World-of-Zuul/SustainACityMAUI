@@ -22,7 +22,7 @@ public class CrisisManagementMinigame : BaseViewModel
     private bool _isListViewVisible = false;
     private bool _isScoreLabelVisible = false;
 
-    private bool _isSubmitButtonVisible = true;
+    private bool _isSubmitButtonVisible = false;
     private int _temperature;
     private int _rainfall;
     private int _drainage;
@@ -255,6 +255,7 @@ public class CrisisManagementMinigame : BaseViewModel
     {
         // Start the timer
         timer.Start();
+        IsSubmitButtonVisible = true;
 
         // Generate initial data
         GenerateData();
