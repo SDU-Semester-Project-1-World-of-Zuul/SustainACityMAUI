@@ -70,7 +70,7 @@ public class TalkCommand : BaseCommand
             // Handle minigame response
             _ = HandleMinigameResponse(npc);
         }
-        else if (dialogue.FollowUpDialogue != null)
+        else if (dialogue.FollowUpDialogue != null && !dialogue.FollowUpDialogue.Responses.Contains(response))
         {
             // Continue with the follow-up dialogue based on the chosen response
             var nextDialogue = dialogue.FollowUpDialogue;
