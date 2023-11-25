@@ -2,35 +2,119 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SustainACityMAUI.Views.CrisisManagementMinigamePage"
              x:Name="Page">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Back"
-                     Command="{Binding GoBackCommand}" />
-    </ContentPage.ToolbarItems>
-    <StackLayout>
-        <Label Text="Welcome to the Flooding Simulator Game. In this game, you'll have to make strategic decisions each day to manage the flooding situation in your city. Your decisions will have consequences, so choose wisely. The game lasts for 10 days, and at the end, you'll see the results of your choices." />
-        <Label Text="Flooding Simulator Game"
-               FontSize="24"
-               FontAttributes="Bold"
-               HorizontalOptions="Center" />
-        <CollectionView ItemsSource="{Binding Days}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <StackLayout>
-                        <Label Text="{Binding Day}" />
-                        <StackLayout BindableLayout.ItemsSource="{Binding Decisions}">
-                            <BindableLayout.ItemTemplate>
-                                <DataTemplate>
-                                    <Button Text="{Binding}"
-                                            Command="{Binding Path=BindingContext.SelectDecisionCommand, Source={x:Reference Page}}"
-                                            CommandParameter="{Binding}" />
-                                </DataTemplate>
-                            </BindableLayout.ItemTemplate>
-                        </StackLayout>
-                    </StackLayout>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-        <Button Text="Submit Decisions"
-                Command="{Binding SubmitDecisionsCommand}" />
-    </StackLayout>
+    <ScrollView>
+        <StackLayout>
+            <Label Text="Emergency Response District"
+                   HorizontalOptions="CenterAndExpand"
+                   FontSize="Large"
+                   FontAttributes="Bold"
+                   Margin="0,20,0,20" />
+            <Label Text="As the crisis manager of the Emergency Response District, you are tasked with managing an impending flood disaster. Your mission is to keep the water level as low as possible by making strategic and quick decisions. &#xA;&#xA;In this game, every second represents 2 hours, and every 12 seconds represents a day. With each passing day, the water level will increase, threatening to flood our district. Your task is to rank and submit your actions as quickly as possible. The faster you act, the more points you will earn. &#xA;&#xA;Scoring the best in this game requires both speed and strategy. Quick decisions will earn you time points, but remember that not all actions are equal. Actions are ranked based on their effectiveness in reducing the water level. Higher-ranked actions will earn you more points, so choose wisely. &#xA;&#xA;Every 24 hours, the environmental factors change, affecting the water level. Keep an eye on the temperature, rainfall, and drainage system, as these will influence the effectiveness of your actions. &#xA;&#xA;Remember, if the water level gets too high, it won't be game over, but it will significantly affect your score. Time is of the essence, and every decision you make could mean the difference between a high score and a low one. &#xA;&#xA;Are you ready to take on the challenge and save the district? Can you make the right choices under pressure and lead our district to safety? The future of our district is in your hands. Let's see how fast you can act when every second counts!"
+                   HorizontalOptions="CenterAndExpand"
+                   FontSize="Medium"
+                   Margin="0,10,0,10" />
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0"
+                       Text="{Binding Temperature, StringFormat='🌡️ Temperature: {0}°C'}"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       FontSize="Large"
+                       TextColor="Red"
+                       Padding="10" />
+                <Label Grid.Column="1"
+                       Text="{Binding Rainfall, StringFormat='🌧️ Rainfall: {0}mm'}"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       FontSize="Large"
+                       TextColor="Blue"
+                       Padding="10" />
+                <Label Grid.Column="2"
+                       Text="{Binding Drainage, StringFormat='🚰 Drainage System: {0}%'}"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       FontSize="Large"
+                       TextColor="Green"
+                       Padding="10" />
+                <Label x:Name="WaterLevelLabel"
+                       Grid.Column="3"
+                       Text="{Binding WaterLevel, StringFormat='🌊 Water Level: {0}'}"
+                       BackgroundColor="{Binding WaterLevel}"
+                       HorizontalOptions="CenterAndExpand"
+                       FontSize="Large"
+                       TextColor="White"
+                       Margin="0,10,0,10" />
+                <Label x:Name="TimerLabel"
+                       Grid.Column="4"
+                       Text="⏱️ Time: 0 seconds"
+                       HorizontalOptions="CenterAndExpand"
+                       FontSize="Large"
+                       TextColor="White"
+                       Margin="0,10,0,10" />
+            </Grid>
+            <Button x:Name="StartGameButton"
+                    Text="Start Game"
+                    Command="{Binding StartGameCommand}"
+                    BackgroundColor="Blue"
+                    TextColor="White"
+                    IsVisible="{Binding IsStartButtonVisible}" />
+            <ListView x:Name="ActionListView"
+                      ItemsSource="{Binding Actions}"
+                      IsVisible="{Binding IsListViewVisible}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0"
+                                       Text="{Binding Name}"
+                                       FontSize="Large"
+                                       HorizontalTextAlignment="Center"
+                                       VerticalOptions="Center" />
+                                <Button Grid.Column="1"
+                                        Text="Read More 🔍"
+                                        Command="{Binding BindingContext.ShowDetailsCommand, Source={x:Reference Page}}"
+                                        CommandParameter="{Binding}" />
+                                <Button Grid.Column="2"
+                                        Text="▲"
+                                        Command="{Binding BindingContext.MoveUpCommand, Source={x:Reference Page}}"
+                                        CommandParameter="{Binding}" />
+                                <Button Grid.Column="3"
+                                        Text="▼"
+                                        Command="{Binding BindingContext.MoveDownCommand, Source={x:Reference Page}}"
+                                        CommandParameter="{Binding}" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Label x:Name="ScoreLabel"
+                   Text="{Binding Score, StringFormat='Congrats! 🎉 Score: {0}'}"
+                   IsVisible="{Binding IsScoreLabelVisible}"
+                   FontSize="Large"
+                   TextColor="White"
+                   Margin="0,10,0,10" />
+            <Button x:Name="SubmitButton"
+                    Text="Submit"
+                    Command="{Binding SubmitCommand}"
+                    BackgroundColor="Blue"
+                    TextColor="White"
+                    IsVisible="{Binding IsSubmitButtonVisible}"
+                    Margin="0,20,0,20" />
+        </StackLayout>
+    </ScrollView>
 </ContentPage>
