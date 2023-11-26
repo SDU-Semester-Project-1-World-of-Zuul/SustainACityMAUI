@@ -158,10 +158,9 @@ public class CrisisManagementMinigame : BaseViewModel
       IsListViewVisible = true;
   });
 
-    [Obsolete]
     public ICommand GoBackCommand => new Command(() =>
     {
-        MessagingCenter.Send(this, "GoBack");
+        _ = NavigationService.NavigateBackAsync();
     });
 
     [Obsolete]
