@@ -1,4 +1,4 @@
-[
+﻿[
     {
         "Name": "Central Plaza",
         "Description": "The Central Plaza is the beating heart of the city, a place where fresh beginnings are as common as the morning dew. It's an open, vibrant space where the city's diverse tapestry converges—a blend of greenery, fountains, and bustling cafes. The cobblestone pathways guide newcomers and regulars alike, each step a potential story. Here, the community gathers, ideas exchange, and the journey of every citizen commences. Players can orient themselves, gather resources, and plan their next move in this ever-evolving urban landscape.",
@@ -147,5 +147,34 @@
                 "Minigame": "CrisisManagementMinigame"
             }
         }
-    }    
+    },
+    {
+        "Name": "Slums",
+        "Description": "You enter the part of the city most people don't like to talk about. Poorly built houses, unfinished infrastructure and you can barely walk from all the people stumbling on the streets, since there is no sidewalk in this part of the town. ",
+        "X": 0,
+        "Y": -2,
+        "ImgPath": "slums.png",
+        "NPC": {
+            "Name": "Ron Swanson",
+            "Dialogues": [
+                {
+                    "Text": "Welcome to the slums, I know most people have their pre-existing thoughts about this part of town, but i promise you, people like to exaggerate.",
+                    "Responses": [
+                        "How can I help?.",
+                        "What more can you tell me about slums?"
+                    ],
+                    "FollowUpDialogue": {
+                        "Text": "Would you like to take part in a charity game and help our community?",
+                        "Responses": ["Of course I do!", "I want to look around first."]
+                    }
+                }
+            ],
+            "Quest": {
+                "Title": "Charity game for the slums",
+                "Description": "Show how much you know about the ways society could eliminate the poor living conditions of slums.",
+                "IsCompleted": false,
+                "Minigame": "WordGuess"
+            }
+        }
+    }
 ]

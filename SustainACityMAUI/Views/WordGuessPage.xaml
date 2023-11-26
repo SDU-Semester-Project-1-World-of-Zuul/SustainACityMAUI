@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SustainACityMAUI.Views.WordGuessPage">
+    
+    <VerticalStackLayout Spacing="25" Padding="30">
+
+        <!-- Timer and Score Display -->
+        <HorizontalStackLayout Spacing="15">
+            <Label Text="Time Remaining:" FontSize="Medium" />
+            <Label Text="{Binding TimeRemaining}" FontSize="Medium" FontAttributes="Bold" />
+            <Label Text="Score:" FontSize="Medium" />
+            <Label Text="{Binding Score}" FontSize="Medium" FontAttributes="Bold" />
+        </HorizontalStackLayout>
+
+        <!-- Question Display -->
+        <Frame Padding="15" CornerRadius="10">
+            <Label Text="{Binding CurrentWord.Shuffled}" FontSize="Large" HorizontalTextAlignment="Center"/>
+        </Frame>
+        <Frame Padding="15" CornerRadius="10">
+        <Label Text="{Binding CurrentWord.Explanation}" FontSize="Medium" HorizontalTextAlignment="Center"/>
+        </Frame>
+        
+        <!-- Answer Options -->
+        <Entry x:Name="inputTextBox"
+               Placeholder="Enter your guess here"
+               ReturnCommand="{Binding SubmitAnswerCommand}" 
+               ReturnCommandParameter="{Binding CurrentAnswer}"
+               />
+        
+        <!-- Submit Answer Button -->
+        <Button Text="Submit Answer" CornerRadius="10" Command="{Binding SubmitAnswerCommand}" CommandParameter="{Binding CurrentAnswer}" Style="{StaticResource AccentButtonStyle}" />
+
+
+    </VerticalStackLayout>
+</ContentPage>
