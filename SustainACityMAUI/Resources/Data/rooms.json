@@ -1,180 +1,372 @@
 ﻿[
-    {
-        "Name": "Central Plaza",
-        "Description": "The Central Plaza is the beating heart of the city, a place where fresh beginnings are as common as the morning dew. It's an open, vibrant space where the city's diverse tapestry converges—a blend of greenery, fountains, and bustling cafes. The cobblestone pathways guide newcomers and regulars alike, each step a potential story. Here, the community gathers, ideas exchange, and the journey of every citizen commences. Players can orient themselves, gather resources, and plan their next move in this ever-evolving urban landscape.",
-        "X": 0,
-        "Y": 0,
-        "ImgPath": "plazadistrict.png",
-        "NPC": {
-            "Name": "The Guide",
-            "ImgPath": "guide.png",
-            "Dialogues": [
-                {
-                    "Text": "Welcome to Central Plaza! What can I help you with today?",
-                    "Responses": [
-                        "Tell me more about this place.",
-                        "Do you have any tasks for me?"
-                    ],
-                    "FollowUpDialogue": {
-                        "Text": "This place is known for its unique history and vibrant community. If you're looking for tasks, I might have something interesting for you.",
-                        "Responses": ["I'm interested in the task.", "I'm just exploring for now."]
-                    }
-                }
-            ],
-            "Quest": {
-                "Title": "The Secret of Central Plaza",
-                "Description": "Uncover the hidden secret of Central Plaza.",
-                "IsCompleted": false,
-                "Minigame": "OrientationMinigame"
+  {
+    "Name": "Central Plaza",
+    "Description": "At first glance, Central Plaza seems like a vibrant urban paradise, yet a closer look reveals an unsettling perfection. The plants are unnaturally green, and the fountains flow with a mesmerizing, almost hypnotic quality. The laughter of the citizens feels too harmonious, as if rehearsed. In the air lingers a faint, inexplicable scent of sulfur, and the shadows seem to dance with a life of their own.",
+    "X": 0,
+    "Y": 0,
+    "ImgPath": "plazadistrict.png",
+    "NPC": {
+      "Name": "The Guide",
+      "ImgPath": "guide.png",
+      "Dialogues": [
+        {
+          "Id": "centralPlazaStart",
+          "Text": "Welcome to Central Plaza! A place where every path leads to a new destiny. What hidden desire brings you here today?",
+          "Responses": [
+            {
+              "Text": "Tell me more about this place.",
+              "NextDialogueId": "centralPlazaMore"
+            },
+            {
+              "Text": "Do you have any tasks for me?",
+              "NextDialogueId": "offerQuest"
             }
-        }
-    },
-    {
-        "Name": "Cathedra Oculi Sanguinei",
-        "Description": "It's an old cathedral where the paint is peeling off the walls. Inside, the atmosphere is dimly lit with dust floating in the air and the hauntingly beautiful sound of a piano resonating through the pews.",
-        "X": 0,
-        "Y": 1,
-        "ImgPath": "churchdistrict.png",
-        "NPC": {
-            "Name": "The Pianist",
-            "ImgPath": "pianist.png",
-            "Dialogues": [
-                {
-                    "Text": "You enter the Cathedra Oculi Sanguinei, where echoes of the past resonate. What brings you to this solemn place?",
-                    "Responses": [
-                        "I'm drawn to the beauty of this place.",
-                        "I sense there's something more here."
-                    ],
-                    "FollowUpDialogue": {
-                        "Text": "Many have come seeking the cathedral's secrets. Few have understood its true beauty and the mysteries it holds.",
-                        "Responses": ["Can you tell me more?", "I must explore this on my own."]
-                    }
-                }
-            ],
-            "Quest": {
-                "Title": "Mystery of the Cathedra Oculi Sanguinei",
-                "Description": "Unravel the hidden truths behind the haunting melodies of the Cathedra Oculi Sanguinei.",
-                "IsCompleted": false,
-                "Minigame": "MysteryMinigame"
+          ]
+        },
+        {
+          "Id": "centralPlazaMore",
+          "Text": "Ah, the secrets of this plaza are as deep as they are ancient. Some say that the ground we walk on whispers tales from times forgotten. Would you like to delve deeper into these mysteries?",
+          "Responses": [
+            {
+              "Text": "I'm interested in the task.",
+              "NextDialogueId": "offerQuest"
+            },
+            {
+              "Text": "I'm just exploring for now.",
+              "NextDialogueId": "centralPlazaEnd"
             }
+          ]
+        },
+        {
+          "Id": "centralPlazaEnd",
+          "Text": "Feel free to explore and return if you change your mind.",
+          "Responses": []
         }
-    },
-    {
-        "Name": "Springfield Elementary",
-        "Description": "Springfield Elementary, once a beacon of hope and knowledge, now looks more like a relic of the past. The paint's faded memories of student art projects. The swings in the playground have developed an unscheduled 'squeak-period'. Principal Skinner, however, stands outside, with an unmistakable gleam in his eyes, holding a banner that reads 'Help Restore Our Glory... and also our Science Lab'. The school's mission? To teach sustainability, not just practice it.",
-        "X": 1,
-        "Y": 0,
-        "ImgPath": "schooldistrict.png",
-        "NPC": {
-            "Name": "Principal Skinner",
-            "ImgPath": "principal.png",
-            "Dialogues": [
-                {
-                    "Text": "Welcome to Springfield Elementary! We're striving to restore our school's glory. How can you assist us today?",
-                    "Responses": [
-                        "I want to help restore the school.",
-                        "What's special about this school?"
-                    ],
-                    "FollowUpDialogue": {
-                        "Text": "Our mission is to teach and practice sustainability. We believe in nurturing future generations to build a better world. Would you like to contribute to our cause?",
-                        "Responses": ["Yes, I'd love to help!", "I'm just exploring for now."]
-                    }
-                }
-            ],
-            "Quest": {
-                "Title": "Restoring Springfield's Glory",
-                "Description": "Help Principal Skinner in his mission to restore Springfield Elementary to its former glory.",
-                "IsCompleted": false,
-                "Minigame": "QuizMinigame"
-            }
-        }
-    },
-    {
-        "Name": "The Grand Central Transit Hub",
-        "Description": "This bustling nexus stands as a testament to the city's commitment to connectivity and modern infrastructure. Gleaming under the bright lights, the vast airport terminal's curved roof mimics the flight of an airplane, while the train station's grand arches echo the rhythmic motion of the engines that pass beneath. The glass corridor over the road acts as a symphony of movement, casting reflections of the commuters' hurried dance. Here, the pulse of the city is tangible, with the comings and goings of people from all walks of life. The air is thick with the smell of diesel and the sound of rolling luggage, announcements, and distant trains. Despite the commotion, there's an underlying order to the chaos, as everyone seems to find their path.",
-        "X": -1,
-        "Y": 0,
-        "ImgPath": "transportdistrict.png",
-        "NPC": {
-            "Name": "The Chauffeur",
-            "ImgPath": "chauffeur.png",
-            "Dialogues": [
-                {
-                    "Text": "Welcome to The Grand Central Transit Hub, a place where paths converge. What journey are you on today?",
-                    "Responses": [
-                        "I'm exploring the wonders of the city.",
-                        "I'm in search of a challenge."
-                    ],
-                    "FollowUpDialogue": {
-                        "Text": "Whether you're here to explore or to test your mettle, there's always something happening at the Transit Hub. Care to partake in our latest challenge?",
-                        "Responses": ["Yes, I'm up for the challenge.", "Not right now, thank you."]
-                    }
-                }
-            ],
-            "Quest": {
-                "Title": "The Conductor's Challenge",
-                "Description": "Navigate the complexities of the Transit Hub and prove your mettle in the Conductor's Challenge.",
-                "IsCompleted": false,
-                "Minigame": "BalancingActMinigame"
-            }
-        }
-    },
-    {
-        "Name": "Emergency Response District",
-        "Description": "A nexus of readiness and vigilance, the Emergency Response District is etched with the echo of sirens and the resolute activity of service vehicles. Each building stands robust and authoritative—a symphony of fire stations, police headquarters, and bustling hospitals. The air thrums with the pulse of urgency, yet a practiced calm prevails. It's here that the player weaves through the intricate tapestry of disaster and relief, sharpening response times, deploying resources, and knitting the fabric of the community with safety workshops.",
-        "X": 0,
-        "Y": -1,
-        "ImgPath": "emergencydistrict.png",
-        "NPC": {
-            "Name": "The Coordinator",
-            "Dialogues": [
-                {
-                    "Text": "Welcome to the Emergency Response District. Are you here to assist in our operations or learn about our protocols?",
-                    "Responses": [
-                        "I'm here to assist.",
-                        "I want to learn about your protocols."
-                    ],
-                    "FollowUpDialogue": {
-                        "Text": "Your assistance is valuable to us. We're always looking for help in managing crises and educating the public. Are you ready to take on a challenge?",
-                        "Responses": ["Yes, count me in!", "I need to think about it."]
-                    }
-                }
-            ],
-            "Quest": {
-                "Title": "Crisis Coordination Challenge",
-                "Description": "Assist in managing a simulated crisis scenario and contribute to the district's emergency response efforts.",
-                "IsCompleted": false,
-                "Minigame": "CrisisManagementMinigame"
-            }
-        }
-    },
-    {
-        "Name": "Slums",
-        "Description": "You enter the part of the city most people don't like to talk about. Poorly built houses, unfinished infrastructure and you can barely walk from all the people stumbling on the streets, since there is no sidewalk in this part of the town. ",
-        "X": 0,
-        "Y": -2,
-        "ImgPath": "slums.png",
-        "NPC": {
-            "Name": "Ron Swanson",
-            "Dialogues": [
-                {
-                    "Text": "Welcome to the slums, I know most people have their pre-existing thoughts about this part of town, but i promise you, people like to exaggerate.",
-                    "Responses": [
-                        "How can I help?.",
-                        "What more can you tell me about slums?"
-                    ],
-                    "FollowUpDialogue": {
-                        "Text": "Would you like to take part in a charity game and help our community?",
-                        "Responses": ["Of course I do!", "I want to look around first."]
-                    }
-                }
-            ],
-            "Quest": {
-                "Title": "Charity game for the slums",
-                "Description": "Show how much you know about the ways society could eliminate the poor living conditions of slums.",
-                "IsCompleted": false,
-                "Minigame": "WordGuess"
-            }
-        }
+      ],
+      "Quest": {
+        "Type": "MinigameQuest",
+        "Title": "The Secret of Central Plaza",
+        "Description": "Uncover the hidden secret of Central Plaza.",
+        "IsCompleted": false,
+        "MinigamePage": "OrientationMinigame"
+      }
     }
+  },
+  {
+    "Name": "Cathedra Oculi Sanguinei",
+    "Description": "The cathedral, shrouded in a perpetual twilight, seems to absorb rather than reflect light. Its architecture, an unsettling blend of gothic and unknown styles, seems to twist and writhe subtly when not looked at directly. The air inside is heavy, filled with the echoes of a past that never was, and the piano's melodies sound almost mournful, as if mourning for souls long lost.",
+    "X": 0,
+    "Y": 1,
+    "ImgPath": "churchdistrict.png",
+    "NPC": {
+      "Name": "The Pianist",
+      "ImgPath": "pianist.png",
+      "Dialogues": [
+        {
+          "Id": "cathedralStart",
+          "Text": "You step into the Cathedra Oculi Sanguinei, where every note tells a story. What shadow of curiosity guides your steps?",
+          "Responses": [
+            {
+              "Text": "I'm drawn to the beauty of this place.",
+              "NextDialogueId": "cathedralBeauty"
+            },
+            {
+              "Text": "I sense there's something more here.",
+              "NextDialogueId": "offerQuest"
+            }
+          ]
+        },
+        {
+          "Id": "cathedralBeauty",
+          "Text": "The cathedral holds many secrets, some draped in beauty, others shrouded in whispers. The melodies here are said to echo from the depths of time itself. Dare you uncover what lies beneath?",
+          "Responses": [
+            {
+              "Text": "Can you tell me more?",
+              "NextDialogueId": "cathedralSecrets"
+            },
+            {
+              "Text": "I must explore this on my own.",
+              "NextDialogueId": "cathedralEnd"
+            }
+          ]
+        },
+        {
+          "Id": "cathedralSecrets",
+          "Text": "Each melody, each note played in this cathedral carries a piece of history, an untold story waiting to be revealed. Perhaps you could be the one to uncover these lost tales.",
+          "Responses": [
+            {
+              "Text": "I'm interested in the task.",
+              "NextDialogueId": "offerQuest"
+            }
+          ]
+        },
+        {
+          "Id": "cathedralEnd",
+          "Text": "May your journey through the cathedral reveal the answers you seek.",
+          "Responses": []
+        }
+      ],
+      "Quest": {
+        "Type": "MinigameQuest",
+        "Title": "Mystery of the Cathedra Oculi Sanguinei",
+        "Description": "Unravel the hidden truths behind the haunting melodies of the Cathedra Oculi Sanguinei.",
+        "IsCompleted": false,
+        "MinigamePage": "MysteryMinigame"
+      }
+    }
+  },
+  {
+    "Name": "Springfield Elementary",
+    "Description": "Springfield Elementary presents a façade of a nurturing educational institution, yet there's an underlying melancholy. The walls, adorned with faded paintings, seem to whisper forgotten stories. The swings creak rhythmically, like a chant from another realm. Principal Skinner's eyes, too bright, hold a knowledge beyond the mundane, and his banner about sustainability seems to hide a deeper, darker message.",
+    "X": 1,
+    "Y": 0,
+    "ImgPath": "schooldistrict.png",
+    "NPC": {
+      "Name": "Principal Skinner",
+      "ImgPath": "principal.png",
+      "Dialogues": [
+        {
+          "Id": "schoolStart",
+          "Text": "Ah, welcome to Springfield Elementary! Here we educate more than just the mind. How can you assist in our mission to enlighten?",
+          "Responses": [
+            {
+              "Text": "I want to help restore the school.",
+              "NextDialogueId": "schoolHelp"
+            },
+            {
+              "Text": "What's special about this school?",
+              "NextDialogueId": "schoolSpecial"
+            }
+          ]
+        },
+        {
+          "Id": "schoolHelp",
+          "Text": "Our teachings go beyond the mere sustainability of cities. There are lessons here that reach into the essence of existence. Would you care to join us in this grand educational endeavor?",
+          "Responses": [
+            {
+              "Text": "Yes, I'd love to help!",
+              "NextDialogueId": "offerQuest"
+            },
+            {
+              "Text": "I'm just exploring for now.",
+              "NextDialogueId": "schoolEnd"
+            }
+          ]
+        },
+        {
+          "Id": "schoolSpecial",
+          "Text": "Springfield Elementary is a beacon of sustainability and advanced learning. We're not just teaching the youth; we're preparing them for a future where they can make a real difference.",
+          "Responses": [
+            {
+              "Text": "That's admirable. How can I contribute?",
+              "NextDialogueId": "offerQuest"
+            },
+            {
+              "Text": "Interesting, but I must move on.",
+              "NextDialogueId": "schoolEnd"
+            }
+          ]
+        },
+        {
+          "Id": "schoolEnd",
+          "Text": "Feel free to return anytime. Our doors are always open to those seeking knowledge.",
+          "Responses": []
+        }
+      ],
+      "Quest": {
+        "Type": "MinigameQuest",
+        "Title": "Restoring Springfield's Glory",
+        "Description": "Help Principal Skinner in his mission to restore Springfield Elementary to its former glory.",
+        "IsCompleted": false,
+        "MinigamePage": "QuizMinigame"
+      }
+    }
+  },
+  {
+    "Name": "The Grand Central Transit Hub",
+    "Description": "The Grand Central Transit Hub, a marvel of connectivity, hides a disconcerting symmetry in its design, with patterns that almost seem to shift when not observed directly. The constant movement of the crowd creates an uncanny harmony, as if each person is unknowingly part of a larger, unseen plan. The air sometimes carries a faint, almost imperceptible whisper, reminiscent of distant, otherworldly chants, and the architecture, with its overly grand scale, evokes a sense of insignificance in the cosmic scheme.",
+    "X": -1,
+    "Y": 0,
+    "ImgPath": "transportdistrict.png",
+    "NPC": {
+      "Name": "The Chauffeur",
+      "ImgPath": "chauffeur.png",
+      "Dialogues": [
+        {
+          "Id": "transitHubStart",
+          "Text": "Greetings at The Grand Central Transit Hub, where every journey has its price. What is it that you seek at the crossroads of the world?",
+          "Responses": [
+            {
+              "Text": "I'm exploring the wonders of the city.",
+              "NextDialogueId": "transitHubExplore"
+            },
+            {
+              "Text": "I'm in search of a challenge.",
+              "NextDialogueId": "offerQuest"
+            }
+          ]
+        },
+        {
+          "Id": "transitHubExplore",
+          "Text": "This place is more than a hub; it's where destinies intertwine. Our challenges are not merely for amusement; they are gateways to deeper understandings. Will you step through this portal?",
+          "Responses": [
+            {
+              "Text": "Yes, I'm up for the challenge.",
+              "NextDialogueId": "offerQuest"
+            },
+            {
+              "Text": "Not right now, thank you.",
+              "NextDialogueId": "transitHubEnd"
+            }
+          ]
+        },
+        {
+          "Id": "transitHubEnd",
+          "Text": "May your travels through the city bring you the answers you seek.",
+          "Responses": []
+        }
+      ],
+      "Quest": {
+        "Type": "MinigameQuest",
+        "Title": "The Conductor's Challenge",
+        "Description": "Navigate the complexities of the Transit Hub and prove your mettle in the Conductor's Challenge.",
+        "IsCompleted": false,
+        "MinigamePage": "BalancingActMinigame"
+      }
+    }
+  },
+  {
+    "Name": "Emergency Response District",
+    "Description": "In the Emergency Response District, the constant bustle hides a strange calm, as if the urgency is just a façade. The buildings, stern and imposing, seem to watch over the district with an almost sentient gaze. The lights flicker in a pattern that feels meaningful, yet eludes understanding. Here, amidst the orchestrated chaos of sirens and commands, one might catch glimpses of shadowy figures that appear and disappear in the blink of an eye, as if the very fabric of reality is thinner here.",
+    "X": 0,
+    "Y": -1,
+    "ImgPath": "emergencydistrict.png",
+    "NPC": {
+      "Name": "The Coordinator",
+      "ImgPath": "coordinator.png",
+      "Dialogues": [
+        {
+          "Id": "emergencyStart",
+          "Text": "Welcome to the Emergency Response District. Here, we confront more than mere calamities. Are you prepared to face the unknown?",
+          "Responses": [
+            {
+              "Text": "I'm here to assist.",
+              "NextDialogueId": "emergencyAssist"
+            },
+            {
+              "Text": "I want to learn about your protocols.",
+              "NextDialogueId": "emergencyLearn"
+            }
+          ]
+        },
+        {
+          "Id": "emergencyAssist",
+          "Text": "Our operations extend beyond the visible crises. There's a rhythm to our work, a pattern that aligns with something greater. Do you feel brave enough to join our intricate dance of order and chaos?",
+          "Responses": [
+            {
+              "Text": "Yes, count me in!",
+              "NextDialogueId": "offerQuest"
+            },
+            {
+              "Text": "I need to think about it.",
+              "NextDialogueId": "emergencyEnd"
+            }
+          ]
+        },
+        {
+          "Id": "emergencyLearn",
+          "Text": "Our protocols are not merely about managing emergencies. They are about understanding the underlying order in apparent chaos. It's a knowledge that few possess. Would you like to delve deeper?",
+          "Responses": [
+            {
+              "Text": "I'm intrigued. Tell me more.",
+              "NextDialogueId": "offerQuest"
+            },
+            {
+              "Text": "Perhaps another time.",
+              "NextDialogueId": "emergencyEnd"
+            }
+          ]
+        },
+        {
+          "Id": "emergencyEnd",
+          "Text": "The district will always be here, standing against the tide of chaos. Return when you are ready.",
+          "Responses": []
+        }
+      ],
+      "Quest": {
+        "Type": "MinigameQuest",
+        "Title": "Crisis Coordination Challenge",
+        "Description": "Assist in managing a simulated crisis scenario and contribute to the district's emergency response efforts.",
+        "IsCompleted": false,
+        "MinigamePage": "CrisisManagementMinigame"
+      }
+    }
+  },
+  {
+    "Name": "Slums",
+    "Description": "The Slums, a place seemingly forgotten by time and progress, echo with a surreal sense of despair and resilience. The buildings, haphazard and decaying, seem to groan under an invisible weight. The air is thick with a mist that never quite lifts, and the faces of the people, while warm, carry a hint of something unspeakable behind their smiles. The very ground seems to pulse with a rhythm that is both enticing and unsettling, as if beckoning players to look closer at the hidden truths of this forsaken place.",
+    "X": 0,
+    "Y": -2,
+    "ImgPath": "slums.png",
+    "NPC": {
+      "Name": "Ron Swanson",
+      "ImgPath": "ronswanson.png",
+      "Dialogues": [
+        {
+          "Id": "slumsStart",
+          "Text": "Welcome to the slums, I know most people have their pre-existing thoughts about this part of town, but I promise you, people like to exaggerate.",
+          "Responses": [
+            {
+              "Text": "How can I help?",
+              "NextDialogueId": "slumsHelp"
+            },
+            {
+              "Text": "What more can you tell me about the slums?",
+              "NextDialogueId": "slumsMore"
+            }
+          ]
+        },
+        {
+          "Id": "slumsHelp",
+          "Text": "We're always looking for help here. It's not just about improving conditions, but also about understanding the heart of this community. Are you willing to take part?",
+          "Responses": [
+            {
+              "Text": "Of course I do!",
+              "NextDialogueId": "offerQuest"
+            },
+            {
+              "Text": "I want to look around first.",
+              "NextDialogueId": "slumsEnd"
+            }
+          ]
+        },
+        {
+          "Id": "slumsMore",
+          "Text": "This place has a spirit of its own. It's about more than just the struggle; it's about the stories, the resilience, and the unnoticed beauty amidst the chaos.",
+          "Responses": [
+            {
+              "Text": "I'd like to contribute. How can I help?",
+              "NextDialogueId": "offerQuest"
+            },
+            {
+              "Text": "I see. I'll keep that in mind as I explore.",
+              "NextDialogueId": "slumsEnd"
+            }
+          ]
+        },
+        {
+          "Id": "slumsEnd",
+          "Text": "Take your time. Every step here tells a story. Come back if you feel like you can make a difference.",
+          "Responses": []
+        }
+      ],
+      "Quest": {
+        "Type": "MinigameQuest",
+        "Title": "Charity Game for the Slums",
+        "Description": "Show how much you know about the ways society could eliminate the poor living conditions of slums.",
+        "IsCompleted": false,
+        "MinigamePage": "WordGuess"
+      }
+    }
+  }
 ]

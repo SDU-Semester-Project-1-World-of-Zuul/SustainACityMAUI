@@ -37,8 +37,14 @@ public class Game : BaseViewModel
     public Game()
     {
         // Initialization
-        var jsonLoader = new JsonLoader("rooms.json");
-        _roomMap = jsonLoader.LoadData<Room>().ToDictionary(room => (room.X, room.Y));
+        var questTypes = new Dictionary<string, Type>
+        {
+            { "MinigameQuest", typeof(MinigameQuest) }
+        };
+        var jsonLoader = new JsonLoader("rooms.json", questTypes);
+        var rooms = jsonLoader.LoadData<Room>();
+
+        _roomMap = rooms.ToDictionary(room => (room.X, room.Y));
 
         Player = new() { CurrentRoom = _roomMap.GetValueOrDefault((0, 0))! };
     }

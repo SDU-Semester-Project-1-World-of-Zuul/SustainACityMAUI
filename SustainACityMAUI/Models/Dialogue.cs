@@ -2,7 +2,7 @@
 
 public class Dialogue
 {
+    public string Id { get; set; }
     public string Text { get; set; }
-    public List<string> Responses { get; set; }
-    public Dialogue FollowUpDialogue { get; set; }
+    public List<DialogueResponse> Responses { get; set; }
 }

@@ -1,5 +1,4 @@
-﻿using SustainACityMAUI.Helpers;
-using SustainACityMAUI.Models;
+﻿using SustainACityMAUI.Models;
 
 namespace SustainACityMAUI.Commands;
 
@@ -18,85 +17,112 @@ public class TalkCommand : BaseCommand
 
     public override void Execute(object parameter)
     {
-        var response = (string)parameter;
+        var response = parameter as string;
+
         var npc = _player.CurrentRoom?.NPC;
 
         if (npc == null)
         {
-            _updateAction(null, "There is no-one to talk to.");
-            _responseOptions(new());
+            EndDialogue("There is no-one to talk to.");
             return;
         }
 
         if (string.IsNullOrEmpty(response))
         {
-            // First time talking to the NPC
-            StartDialogue(npc);
+            StartDialogue(npc, npc.Dialogues.First().Id);
         }
         else
         {
-            // Player has selected a response
             RespondToDialogue(npc, response);
         }
     }
 
-    private void StartDialogue(NPC npc)
+    private void StartDialogue(NPC npc, string dialogueId)
     {
-        var dialogue = npc.Dialogues.FirstOrDefault();
+        var dialogue = npc.Dialogues.FirstOrDefault(d => d.Id == dialogueId);
         if (dialogue != null)
         {
-            _updateAction(npc.Name, dialogue.Text);
-            _responseOptions(dialogue.Responses);
-        }
-    }
-
-    private void RespondToDialogue(NPC npc, string response)
-    {
-        // Find the dialogue that contains the chosen response
-        var dialogue = npc.Dialogues.Find(
-            d => d.Responses.Contains(response)
-            || d.FollowUpDialogue.Responses.Contains(response));
-        if (dialogue == null)
-        {
-            // No dialogue found for the response, end the conversation
-            _updateAction(npc.Name, "*Nods silently.*");
-            _responseOptions(new());
-            return;
-        }
-
-        // Check if the response is for starting a minigame
-        if (response == dialogue.FollowUpDialogue.Responses[0] && npc.Quest.Minigame != null)
-        {
-            // Handle minigame response
-            _ = HandleMinigameResponse(npc);
-        }
-        else if (dialogue.FollowUpDialogue != null && !dialogue.FollowUpDialogue.Responses.Contains(response))
-        {
-            // Continue with the follow-up dialogue based on the chosen response
-            var nextDialogue = dialogue.FollowUpDialogue;
-
-            _updateAction(npc.Name, nextDialogue.Text);
-            _responseOptions(nextDialogue.Responses);
+            DisplayDialogue(npc.Name, dialogue.Text, dialogue.Responses);
         }
         else
         {
-            // End the dialogue if there is no follow-up
-            _updateAction(npc.Name, "*Nods silently.*");
-            _responseOptions(new());
+            EndDialogue("The conversation has ended.");
         }
     }
 
-    private async Task HandleMinigameResponse(NPC npc)
+    private void RespondToDialogue(NPC npc, string responseText)
     {
-        bool canNavigate = await NavigationService.NavigateToPageAsync(npc.Quest.Minigame, _player);
-        if (canNavigate)
+        var response = npc.Dialogues
+                        .SelectMany(d => d.Responses)
+                        .FirstOrDefault(r => r.Text == responseText);
+
+        // Check if the response text is "Accept" and create a new response
+        if (responseText == "Accept")
         {
-            _updateAction(npc.Name, "*Is happily surprised you played their minigame*");
+            response = new()
+            {
+                Text = "Accept",
+                NextDialogueId = "acceptQuest"
+            };
+        }
+
+        if (response != null)
+        {
+            if (response.NextDialogueId == "offerQuest")
+            {
+                OfferQuest(npc);
+            }
+            else if (responseText == "Accept")
+            {
+                _ = AcceptQuest(npc);
+            }
+            else
+            {
+                StartDialogue(npc, response.NextDialogueId);
+            }
         }
         else
         {
-            _updateAction(npc.Name, "Oh, seems like we can't do that right now...");
+            EndDialogue("You seem to be at a loss for words.");
         }
+    }
+
+    private void OfferQuest(NPC npc)
+    {
+        if (npc.Quest != null && !npc.Quest.IsCompleted)
+        {
+            _updateAction(npc.Name, npc.Quest.Description);
+            _responseOptions(new(){ "Accept", "Decline" });
+        }
+        else
+        {
+            EndDialogue("No quest is available at this time.");
+        }
+    }
+
+    private async Task AcceptQuest(NPC npc)
+    {
+        if (npc.Quest != null)
+        {
+            await npc.Quest.Execute(_player);
+            npc.Quest.IsCompleted = true; // Or set this flag based on the quest completion status
+            EndDialogue("You have completed the quest.");
+        }
+        else
+        {
+            EndDialogue("There is no quest to accept.");
+        }
+    }
+
+    private void DisplayDialogue(string npcName, string text, List<DialogueResponse> responses)
+    {
+        _updateAction(npcName, text);
+        _responseOptions(responses.Select(r => r.Text).ToList());
+    }
+
+    private void EndDialogue(string message)
+    {
+        _updateAction(null, message);
         _responseOptions(new());
     }
 }
