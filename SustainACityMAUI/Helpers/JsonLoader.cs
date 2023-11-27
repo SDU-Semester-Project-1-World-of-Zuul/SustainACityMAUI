@@ -8,7 +8,7 @@ public class JsonLoader
     private readonly string _resourceName;
     private readonly Dictionary<string, Type> _questTypes;
 
-    public JsonLoader(string resourceName, Dictionary<string, Type>? questTypes = null)
+    public JsonLoader(string resourceName, Dictionary<string, Type> questTypes = null)
     {
         _resourceName = $"SustainACityMAUI.Resources.Data.{resourceName}";
         _questTypes = questTypes ?? new Dictionary<string, Type>();
