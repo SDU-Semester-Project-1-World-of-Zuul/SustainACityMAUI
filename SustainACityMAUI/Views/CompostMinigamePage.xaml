@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SustainACityMAUI.Views.CompostMinigamePage"
+             Title="Compost Management Game">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="10">
+
+            <!-- Introduction and Instructions -->
+            <Label Text="Welcome to the Compost Management Game! Make decisions to optimize your compost quality."
+                   FontSize="Medium"
+                   HorizontalOptions="Center"/>
+
+            <!-- Current Waste Option -->
+            <Frame CornerRadius="10"
+                   Padding="15"
+                   BackgroundColor="LightGreen"
+                   HasShadow="True">
+                <VerticalStackLayout>
+                    <Label Text="Current Waste Option:"
+                           FontAttributes="Bold"/>
+                    <Label Text="{Binding WasteOption}"
+                           FontAttributes="Italic"/>
+                    <Label FontAttributes="Italic">
+                        <Label.Text>
+                            <MultiBinding StringFormat="{}{0} units from {1}">
+                                <Binding Path="WasteQuantity" />
+                                <Binding Path="WasteSource" />
+                            </MultiBinding>
+                        </Label.Text>
+                    </Label>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Decision Making -->
+            <Label Text="Do you want to add this to your compost pile?"
+                   HorizontalOptions="Center"/>
+            <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
+                <Button Text="Yes"
+                        Command="{Binding AddWasteCommand}"/>
+                <Button Text="No"
+                        Command="{Binding SkipWasteCommand}"/>
+            </HorizontalStackLayout>
+
+            <!-- Game Progress and Score -->
+            <ProgressBar Progress="{Binding Progress}"
+                         HeightRequest="20"/>
+            <Label Text="Compost Quality"
+                   HorizontalOptions="Center"/>
+            <Label Text="{Binding Quality}"
+                   HorizontalOptions="Center"/>
+            <Label Text="Score:"
+                   HorizontalOptions="Center"/>
+            <Label Text="{Binding Score}"
+                   HorizontalOptions="Center"/>
+
+            <!-- End Game Notification -->
+            <Label Text="{Binding EndGameMessage}"
+                   HorizontalOptions="Center"
+                   IsVisible="{Binding IsGameEnded}"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -48,7 +48,7 @@
         "Title": "The Secret of Central Plaza",
         "Description": "Uncover the hidden secret of Central Plaza.",
         "IsCompleted": false,
-        "MinigamePage": "OrientationMinigame"
+        "MinigamePage": "CompostMinigame"
       }
     }
   },
