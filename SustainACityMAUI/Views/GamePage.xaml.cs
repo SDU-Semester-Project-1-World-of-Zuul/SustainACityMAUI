@@ -17,7 +17,7 @@ public partial class GamePage : ContentPage
 
     private async void ScrollToBottom()
     {
-        await Task.Delay(100); // Wait for the UI to update with the new content
+        await Task.Delay(50); // Wait for the UI to update with the new content
 
         if (dialogScrollView.Content is Label label)
         {
