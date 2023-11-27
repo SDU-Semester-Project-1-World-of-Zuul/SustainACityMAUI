@@ -117,8 +117,7 @@ class Compost
         }
     }
 
-class Game
-
+class CompostGame
 {
 
     private static Random random = new Random();
@@ -269,11 +268,6 @@ class Game
             Console.WriteLine("Press any key to exit.");
             Console.ReadKey();
     }
-    public static void Main(string[] args)
-    {
-        Start();
-    }
-
 }
 }
 
