@@ -52,7 +52,9 @@ public class Game : BaseViewModel
     public event Action ScrollToBottomRequested;
     public Player Player { get; }
     public string CurrentRoomImagePath => Player.CurrentRoom.ImgPath;
+    public string CurrentNPCImagePath => Player.CurrentRoom.NPC.ImgPath;
     public bool IsDialogVisible => !string.IsNullOrEmpty(DialogBox);
+    public bool IsNPCVisible => Speaker != _narrator && ResponseOptions.Count > 0;
     public bool IsOptionsVisible => !_isTyping && ResponseOptions.Count > 0;
     public bool AreActionButtonsEnabled => ResponseOptions.Count == 0;
 
@@ -77,6 +79,7 @@ public class Game : BaseViewModel
             ScrollToBottomRequested?.Invoke();              // Request to scroll
             OnPropertyChanged(nameof(IsDialogVisible));     // Notify property change for visibility
             OnPropertyChanged(nameof(IsOptionsVisible));    // Notify property change for visibility
+            OnPropertyChanged(nameof(IsNPCVisible));
         }
     }
 
@@ -197,6 +200,7 @@ public class Game : BaseViewModel
     public void OnPlayerMoved()
     {
         OnPropertyChanged(nameof(CurrentRoomImagePath));
+        OnPropertyChanged(nameof(CurrentNPCImagePath));
     }
 
     public static async Task PopupAsync(string popupName, string message, string cancel)

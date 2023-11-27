@@ -12,6 +12,24 @@
                Grid.Row="0" Grid.Column="0"
                Grid.RowSpan="4" Grid.ColumnSpan="3" />
 
+        <Frame x:Name="BackgroundBlur" CornerRadius="0" BackgroundColor="Black" Opacity="0.8"
+               HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+               Grid.Row="0" Grid.Column="0"
+               Grid.RowSpan="4" Grid.ColumnSpan="3" IsVisible="{Binding IsNPCVisible}"/>
+
+
+        <!-- NPC Image -->
+        <Image x:Name="NPC" Source="{Binding CurrentNPCImagePath}" IsVisible="{Binding IsNPCVisible}" Aspect="AspectFit" HorizontalOptions="Center" VerticalOptions="Center"
+               Grid.Row="0" Grid.Column="0"
+               Grid.RowSpan="4" Grid.ColumnSpan="3" >
+            <Image.Shadow>
+                <Shadow Brush="Black"
+                Offset="20,20"
+                Radius="40"
+                Opacity="0.8" />
+            </Image.Shadow>
+        </Image>
+
         <!-- Help icon in the top right corner -->
         <Button Grid.Row="0" Grid.Column="2" 
                 Text="❓" FontSize="Large"
