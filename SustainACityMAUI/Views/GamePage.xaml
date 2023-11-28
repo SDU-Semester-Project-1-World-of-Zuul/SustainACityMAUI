@@ -41,20 +41,26 @@
         <Frame Grid.Row="1" Grid.Column="3" CornerRadius="15" BorderColor="Black" Padding="2"
                HasShadow="True" BackgroundColor="White"
                HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand" IsVisible="{Binding IsOptionsVisible}">
-            <ScrollView Orientation="Vertical" Padding="0">
-                <StackLayout BindableLayout.ItemsSource="{Binding ResponseOptions}" Padding="0" HorizontalOptions="Start">
-                    <BindableLayout.ItemTemplate>
+            <Grid HorizontalOptions="EndAndExpand">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <ListView Grid.Column="0" ItemsSource="{Binding ResponseOptions}"
+              HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand">
+                    <ListView.ItemTemplate>
                         <DataTemplate>
-                            <Button Text="{Binding}" TextColor="Black"
+                            <ViewCell>
+                                <Button Text="{Binding}" TextColor="Black"
                             FontFamily="Cascadia Code" FontSize="Small"
-                            VerticalOptions="Start" HorizontalOptions="Start"
                             Margin="1"
                             Command="{Binding Path=BindingContext.TalkCommand, Source={x:Reference thisPage}}" 
                             CommandParameter="{Binding .}" />
+                            </ViewCell>
                         </DataTemplate>
-                    </BindableLayout.ItemTemplate>
-                </StackLayout>
-            </ScrollView>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+
         </Frame>
 
         <!-- Dialog Box -->

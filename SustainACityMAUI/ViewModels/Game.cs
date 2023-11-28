@@ -10,6 +10,7 @@ public class Game : BaseViewModel
 {
     private string _dialogBox;
     private string _speaker;
+    private string _currentNPCImagePath;
     private readonly Dictionary<(int, int), Room> _roomMap;
     private readonly Queue<DialogItem> _dialogQueue = new();
     private bool _isTyping = false;
@@ -27,7 +28,7 @@ public class Game : BaseViewModel
     public ICommand MoveWestCommand => new MoveCommand(Player, _roomMap, Direction.West, DialogWrite, OnPlayerMoved);
     public ICommand BackCommand => new BackCommand(Player, _roomMap, DialogWrite, OnPlayerMoved);
     public ICommand LookCommand => new LookCommand(Player, DialogWrite);
-    public ICommand TalkCommand => new TalkCommand(Player, options => ResponseOptions = options, DialogWrite);
+    public ICommand TalkCommand => new TalkCommand(Player, options => ResponseOptions = options, DialogWrite, imgPath => CurrentNPCImagePath = imgPath);
     public ICommand HelpCommand => new HelpCommand(async (message) => await PopupAsync("Help", message, "Ok"));
     public ICommand SkipDialogCommand => new Command(SkipDialog);
 
@@ -47,16 +48,28 @@ public class Game : BaseViewModel
         _roomMap = rooms.ToDictionary(room => (room.X, room.Y));
 
         Player = new() { CurrentRoom = _roomMap.GetValueOrDefault((0, 0))! };
+
+        DialogWrite(_narrator, $"You are in {Player.CurrentRoom.Name}.");
     }
 
     public event Action ScrollToBottomRequested;
     public Player Player { get; }
     public string CurrentRoomImagePath => Player.CurrentRoom.ImgPath;
-    public string CurrentNPCImagePath => Player.CurrentRoom.NPC.ImgPath;
     public bool IsDialogVisible => !string.IsNullOrEmpty(DialogBox);
     public bool IsNPCVisible => Speaker != _narrator && ResponseOptions.Count > 0;
     public bool IsOptionsVisible => !_isTyping && ResponseOptions.Count > 0;
     public bool AreActionButtonsEnabled => ResponseOptions.Count == 0;
+
+    public string CurrentNPCImagePath
+    {
+        get => _currentNPCImagePath;
+        set
+        {
+            _currentNPCImagePath = value;
+            OnPropertyChanged();
+            OnPropertyChanged(nameof(IsNPCVisible));
+        }
+    }
 
     public List<string> ResponseOptions
     {
