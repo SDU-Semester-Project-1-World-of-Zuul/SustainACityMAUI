@@ -167,7 +167,7 @@
             "Title": "Mystery of the Cathedra Oculi Sanguinei",
             "Description": "Unravel the hidden truths behind the haunting melodies of the Cathedra Oculi Sanguinei.",
             "IsCompleted": false,
-            "MinigamePage": "MysteryMinigame"
+            "MinigamePage": "PasswordMinigame"
           }
         ]
       }

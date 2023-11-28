@@ -62,6 +62,9 @@
         <MauiXaml Update="Views\CrisisManagementMinigamePage.xaml">
             <Generator>MSBuild:Compile</Generator>
         </MauiXaml>
+        <MauiXaml Update="Views\PasswordMinigamePage.xaml">
+          <Generator>MSBuild:Compile</Generator>
+        </MauiXaml>
         <MauiXaml Update="Views\QuizMinigamePage.xaml">
             <Generator>MSBuild:Compile</Generator>
         </MauiXaml>
