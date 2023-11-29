@@ -38,9 +38,9 @@
                    HorizontalOptions="Center"/>
             <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
                 <Button Text="Yes"
-                        Command="{Binding AddWasteCommand}"/>
+                        Command="{Binding AddWasteCommand}" IsEnabled="{Binding IsButtonsEnabled}"/>
                 <Button Text="No"
-                        Command="{Binding SkipWasteCommand}"/>
+                        Command="{Binding SkipWasteCommand}" IsEnabled="{Binding IsButtonsEnabled}"/>
             </HorizontalStackLayout>
 
             <!-- Game Progress and Score -->

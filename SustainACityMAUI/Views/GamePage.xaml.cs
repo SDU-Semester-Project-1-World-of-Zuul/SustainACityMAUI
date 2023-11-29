@@ -12,20 +12,34 @@ public partial class GamePage : ContentPage
         viewModel = new Game();
         BindingContext = viewModel;
 
-        viewModel.ScrollToBottomRequested += ScrollToBottom;
+        dialogScrollView.Content.SizeChanged += Content_SizeChanged;
     }
 
-    private async void ScrollToBottom()
+    private async void Content_SizeChanged(object sender, EventArgs e)
     {
-        await Task.Delay(50); // Wait for the UI to update with the new content
+        var scrollPosition = dialogScrollView.ContentSize.Height - dialogScrollView.Height;
 
-        if (dialogScrollView.Content is Label label)
+        if (scrollPosition > 0)
         {
-            var scrollPosition = label.Height - dialogScrollView.Height;
-            if (scrollPosition > 0)
-            {
-                await dialogScrollView.ScrollToAsync(0, scrollPosition, true);
-            }
+            await dialogScrollView.ScrollToAsync(0, scrollPosition, true);
+        }
+    }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        if (dialogScrollView.Content != null)
+        {
+            dialogScrollView.Content.SizeChanged += Content_SizeChanged;
+        }
+    }
+
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+        if (dialogScrollView?.Content != null)
+        {
+            dialogScrollView.Content.SizeChanged -= Content_SizeChanged;
         }
     }
 }

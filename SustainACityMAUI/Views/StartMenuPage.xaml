@@ -12,7 +12,7 @@
         <Image Source="start.png" Aspect="AspectFill" Grid.Column="1" />
 
         <!-- Frame that occupies one-fourth of the left side with square edges -->
-        <Frame Grid.Column="0" BackgroundColor="DarkRed" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" CornerRadius="0">
+        <ContentView Grid.Column="0" BackgroundColor="DarkRed" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
             <StackLayout>
                 <StackLayout VerticalOptions="Start" HorizontalOptions="Center">
                     <Label Text="Sustain A City" FontSize="Title" FontFamily="Courier New" TextColor="WhiteSmoke" HorizontalOptions="Center" Margin="0,20,0,0"/>
@@ -23,7 +23,7 @@
                     <Button Text="Exit" Command="{Binding ExitGameCommand}" HorizontalOptions="Center"/>
                 </StackLayout>
             </StackLayout>
-        </Frame>
+        </ContentView>
     </Grid>
 
 </ContentPage>

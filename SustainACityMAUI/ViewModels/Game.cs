@@ -52,7 +52,6 @@ public class Game : BaseViewModel
         DialogWrite(_narrator, $"You are in {Player.CurrentRoom.Name}.");
     }
 
-    public event Action ScrollToBottomRequested;
     public Player Player { get; }
     public string CurrentRoomImagePath => Player.CurrentRoom.ImgPath;
     public bool IsDialogVisible => !string.IsNullOrEmpty(DialogBox);
@@ -89,7 +88,6 @@ public class Game : BaseViewModel
         {
             _dialogBox = value; // Set the dialog text
             OnPropertyChanged(); // Notify the change
-            ScrollToBottomRequested?.Invoke();              // Request to scroll
             OnPropertyChanged(nameof(IsDialogVisible));     // Notify property change for visibility
             OnPropertyChanged(nameof(IsOptionsVisible));    // Notify property change for visibility
             OnPropertyChanged(nameof(IsNPCVisible));
@@ -218,6 +216,6 @@ public class Game : BaseViewModel
 
     public static async Task PopupAsync(string popupName, string message, string cancel)
     {
-        await App.Current.MainPage.DisplayAlert(popupName, message, cancel);
+        await Application.Current.MainPage.DisplayAlert(popupName, message, cancel);
     }
 }

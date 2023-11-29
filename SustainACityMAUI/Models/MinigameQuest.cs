@@ -13,17 +13,6 @@ public class MinigameQuest : Quest
 
     public override async Task Execute(Player player)
     {
-        bool pageLaunched = await NavigationService.NavigateToPageAsync(MinigamePage, player);
-
-        if (!pageLaunched)
-        {
-            // Handle the failed navigation
-            HandleFailedNavigation();
-        }
-    }
-
-    private void HandleFailedNavigation()
-    {
-        Application.Current.MainPage.DisplayAlert("Error", "Failed to launch the minigame.", "OK");
+        await NavigationService.NavigateToPageAsync(MinigamePage, player);
     }
 }

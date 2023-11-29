@@ -157,6 +157,7 @@ public class CompostMinigame : BaseViewModel
     public double Progress { get; private set; }
     public string EndGameMessage { get; private set; }
     public bool IsGameEnded { get; private set; }
+    public bool IsButtonsEnabled => !IsGameEnded;
 
     private void AddWaste()
     {
@@ -248,11 +249,14 @@ public class CompostMinigame : BaseViewModel
 
     private async void OnGameEnded()
     {
-        _player.Score += Score; // Update game score
+        if (IsGameEnded) return;
+
         IsGameEnded = true;
+        _player.Score += Score; // Update game score
         EndGameMessage = $"Game Over! Your final score is {Score}.";
         OnPropertyChanged(nameof(EndGameMessage));
         OnPropertyChanged(nameof(IsGameEnded));
+        OnPropertyChanged(nameof(IsButtonsEnabled));
 
         await Task.Delay(3000);
 
