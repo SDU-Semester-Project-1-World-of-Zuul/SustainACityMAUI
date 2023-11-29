@@ -17,12 +17,6 @@ namespace SustainACityMAUI.Views
             _stopwatch = new Stopwatch();
             StartGameButton.Clicked += OnStartGameButtonClicked;
 
-            // UI Styling
-            // Set the width of elements to be % of the screen width
-            ActionListView.WidthRequest = Application.Current.MainPage.Width * 0.90;
-            StartGameButton.WidthRequest = Application.Current.MainPage.Width * 0.90;
-            SubmitButton.WidthRequest = Application.Current.MainPage.Width * 0.90;
-
             // Navigation
             MessagingCenter.Subscribe<CrisisManagementMinigame>(this, "GoBack", (sender) =>
    {
