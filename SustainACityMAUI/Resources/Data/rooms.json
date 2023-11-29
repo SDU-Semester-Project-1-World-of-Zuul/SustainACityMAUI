@@ -295,7 +295,7 @@
             "Title": "The Conductor's Challenge",
             "Description": "Navigate the complexities of the Transit Hub and prove your mettle in the Conductor's Challenge.",
             "IsCompleted": false,
-            "MinigamePage": "BalancingActMinigame"
+            "MinigamePage": "TransportMinigame"
           }
         ]
       }
