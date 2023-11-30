@@ -45,18 +45,21 @@
             <Frame Grid.Column="0" CornerRadius="15" BorderColor="Black" Padding="2"
                    HasShadow="True" BackgroundColor="White"
                    HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
-            
-            <CollectionView Grid.Column="0" ItemsSource="{Binding ResponseOptions}"
-                        HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Button Text="{Binding}" TextColor="Black"
-                            FontFamily="Cascadia Code" FontSize="Small" Margin="1"
+
+            <ScrollView Orientation="Vertical" Padding="0">
+                <StackLayout BindableLayout.ItemsSource="{Binding ResponseOptions}" Padding="0" HorizontalOptions="Start">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Button Text="{Binding}" TextColor="Black"
+                            FontFamily="Cascadia Code" FontSize="Small"
+                            VerticalOptions="Start" HorizontalOptions="Start"
+                            Margin="1" LineBreakMode="WordWrap"
                             Command="{Binding Path=BindingContext.TalkCommand, Source={x:Reference thisPage}}" 
-                            CommandParameter="{Binding}" />
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                            CommandParameter="{Binding .}" />
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+            </ScrollView>
         </Grid>
 
 

@@ -78,6 +78,7 @@ public class Game : BaseViewModel
             _responseOptions = value;
             OnPropertyChanged();
             OnPropertyChanged(nameof(AreActionButtonsEnabled)); // Notify change for button enabled state
+            OnPropertyChanged(nameof(IsOptionsVisible));
         }
     }
 
@@ -101,6 +102,7 @@ public class Game : BaseViewModel
         {
             _speaker = value;
             OnPropertyChanged();
+            OnPropertyChanged(nameof(IsNPCVisible));
         }
     }
 
@@ -124,6 +126,7 @@ public class Game : BaseViewModel
 
         _dialogQueue.Enqueue(dialogItem);
         _ = ProcessDialogQueueAsync();
+        OnPropertyChanged(nameof(IsOptionsVisible));
     }
 
     private async Task ProcessDialogQueueAsync()
@@ -144,6 +147,7 @@ public class Game : BaseViewModel
             _skipDialog = false;
 
             await DisplayTextAsync(dialogItem.Text, _cancellationTokenSource.Token);
+            OnPropertyChanged(nameof(IsOptionsVisible));
         }
     }
 
