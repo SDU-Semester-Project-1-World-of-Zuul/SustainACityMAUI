@@ -16,6 +16,7 @@ public class QuizMinigame : BaseViewModel
     private int _timeRemaining;
     private TriviaQuestion _currentQuestion;
     private string _currentAnswer;
+    private bool _isGameEnded = false;
 
     public struct TriviaQuestion
     {
@@ -160,6 +161,10 @@ public class QuizMinigame : BaseViewModel
 
     private void OnGameEnded()
     {
+        if (_isGameEnded) return;
+
+        _isGameEnded = true;
+
         _player.Score += TriviaScore; // Update game score
         _ = NavigationService.NavigateBackAsync();
     }

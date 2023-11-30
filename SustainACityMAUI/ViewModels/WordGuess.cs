@@ -8,6 +8,7 @@ namespace SustainACityMAUI.ViewModels;
 public class WordGuess : BaseViewModel
 {
     private readonly Player _player;
+    private bool _isGameEnded = false;
     public ICommand SubmitAnswerCommand => new Command<string>(SubmitAnswer);
     public List<ShuffledWord> Words { get; }
     private readonly IDispatcher _dispatcher;
@@ -170,6 +171,10 @@ public class WordGuess : BaseViewModel
     
     private void OnGameEnded()
     {
+        if (_isGameEnded) return;
+
+        _isGameEnded = true;
+
         _player.Score += Score;
         _ = NavigationService.NavigateBackAsync();
     }
