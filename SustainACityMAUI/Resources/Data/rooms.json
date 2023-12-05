@@ -113,64 +113,64 @@
     "Y": 1,
     "ImgPath": "churchdistrict.png",
     "NPCs": [
-      {
-        "Name": "The Pianist",
-        "ImgPath": "pianist.png",
-        "Dialogues": [
-          {
-            "Id": "cathedralStart",
-            "Text": "You step into the Cathedra Oculi Sanguinei, where every note tells a story. What shadow of curiosity guides your steps?",
-            "Responses": [
-              {
-                "Text": "I'm drawn to the beauty of this place.",
-                "NextDialogueId": "cathedralBeauty"
-              },
-              {
-                "Text": "I sense there's something more here.",
-                "NextDialogueId": "offerQuest"
-              }
+        {
+            "Name": "Marcus Aurelius Clementius",
+            "ImgPath": "priest.png",
+            "Dialogues": [
+                {
+                    "Id": "cathedralStart",
+                    "Text": "You step into the Cathedra Oculi Sanguinei, where every note tells a story. What shadow of curiosity guides your steps?",
+                    "Responses": [
+                        {
+                            "Text": "I'm drawn to the beauty of this place.",
+                            "NextDialogueId": "cathedralBeauty"
+                        },
+                        {
+                            "Text": "I sense there's something more here.",
+                            "NextDialogueId": "offerQuest"
+                        }
+                    ]
+                },
+                {
+                    "Id": "cathedralBeauty",
+                    "Text": "The cathedral holds many secrets, some draped in beauty, others shrouded in whispers. The melodies here are said to echo from the depths of time itself. Dare you uncover what lies beneath?",
+                    "Responses": [
+                        {
+                            "Text": "Can you tell me more?",
+                            "NextDialogueId": "cathedralSecrets"
+                        },
+                        {
+                            "Text": "I must explore this on my own.",
+                            "NextDialogueId": "cathedralEnd"
+                        }
+                    ]
+                },
+                {
+                    "Id": "cathedralSecrets",
+                    "Text": "Each melody, each note played in this cathedral carries a piece of history, an untold story waiting to be revealed. Perhaps you could be the one to uncover these lost tales.",
+                    "Responses": [
+                        {
+                            "Text": "I'm interested in the task.",
+                            "NextDialogueId": "offerQuest"
+                        }
+                    ]
+                },
+                {
+                    "Id": "cathedralEnd",
+                    "Text": "May your journey through the cathedral reveal the answers you seek.",
+                    "Responses": []
+                }
+            ],
+            "Quests": [
+                {
+                    "Type": "MinigameQuest",
+                    "Title": "Mystery of the Cathedra Oculi Sanguinei",
+                    "Description": "Unravel the hidden truths behind the haunting melodies of the Cathedra Oculi Sanguinei.",
+                    "IsCompleted": false,
+                    "MinigamePage": "PasswordMinigame"
+                }
             ]
-          },
-          {
-            "Id": "cathedralBeauty",
-            "Text": "The cathedral holds many secrets, some draped in beauty, others shrouded in whispers. The melodies here are said to echo from the depths of time itself. Dare you uncover what lies beneath?",
-            "Responses": [
-              {
-                "Text": "Can you tell me more?",
-                "NextDialogueId": "cathedralSecrets"
-              },
-              {
-                "Text": "I must explore this on my own.",
-                "NextDialogueId": "cathedralEnd"
-              }
-            ]
-          },
-          {
-            "Id": "cathedralSecrets",
-            "Text": "Each melody, each note played in this cathedral carries a piece of history, an untold story waiting to be revealed. Perhaps you could be the one to uncover these lost tales.",
-            "Responses": [
-              {
-                "Text": "I'm interested in the task.",
-                "NextDialogueId": "offerQuest"
-              }
-            ]
-          },
-          {
-            "Id": "cathedralEnd",
-            "Text": "May your journey through the cathedral reveal the answers you seek.",
-            "Responses": []
-          }
-        ],
-        "Quests": [
-          {
-            "Type": "MinigameQuest",
-            "Title": "Mystery of the Cathedra Oculi Sanguinei",
-            "Description": "Unravel the hidden truths behind the haunting melodies of the Cathedra Oculi Sanguinei.",
-            "IsCompleted": false,
-            "MinigamePage": "PasswordMinigame"
-          }
-        ]
-      }
+        }
     ]
   },
   {
