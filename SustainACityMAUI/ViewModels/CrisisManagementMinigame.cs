@@ -171,31 +171,19 @@ public class CrisisManagementMinigame : BaseViewModel
         Days = 7; // for a week-long game
         Actions = new ObservableCollection<Action>
     {
-        new Action { Id = 1, Name = "Plant Trees 🌳",Score= 8, Description = "Planting trees helps to reduce the water level by absorbing water. Trees take up water from the soil and release it into the atmosphere, a process known as transpiration. This not only helps to lower the water level but also contributes to the local climate and biodiversity." },
-
-        new Action { Id = 2, Name = "Build Dams 🏗️", Score = 10, Description = "Building dams can control the flow of water and prevent flooding. Dams store water and release it in a controlled manner, preventing sudden increases in water level downstream. They also provide a source of hydroelectric power, which is a clean and renewable source of energy." },
-
-        new Action { Id = 3, Name = "Improve Drainage 🚧", Score = 9, Description = "Improving the drainage system can effectively reduce the water level. A well-designed drainage system can quickly remove excess water from the surface, preventing waterlogging and flooding. It also helps to manage water resources more effectively and can improve the quality of local water bodies by preventing pollution." },
-
-        new Action { Id = 4, Name = "Promote Water Conservation 💧", Score = 7 , Description = "Promoting water conservation can reduce the demand for water and lower the water level. By encouraging people to use water more efficiently, we can reduce the amount of water that needs to be extracted from natural sources. This not only helps to lower the water level but also ensures a sustainable supply of water for future generations." },
-
-        new Action { Id = 5, Name = "Implement Rainwater Harvesting ☔", Score = 6 , Description = "Implementing rainwater harvesting can reduce the water level and provide a source of water. Rainwater harvesting systems collect and store rainwater for later use, reducing the demand for water from other sources. This not only helps to lower the water level but also provides a reliable and sustainable source of water, especially in areas with limited water resources." },
-
-        new Action { Id = 6, Name = "Restore Wetlands 🌾", Score = 8 ,Description = "Restoring wetlands can help to absorb excess water and reduce the water level. Wetlands act as natural sponges, absorbing and storing excess water and slowly releasing it over time. This not only helps to lower the water level but also improves local biodiversity and provides a habitat for many species." },
-
-        new Action { Id = 7, Name = "Upgrade Infrastructure 🏢", Score = 7 ,Description = "Upgrading infrastructure can improve water management and reduce the water level. This includes improving the design and construction of buildings and roads to make them more water-efficient, and upgrading water supply and sewage systems to reduce water loss and pollution." },
-
-        new Action { Id = 8, Name = "Ignore the Problem 😴",Score = -5, Description = "Ignoring the problem will lead to an increase in the water level. Without taking any action to manage the water level, it will continue to rise due to natural processes and human activities. This can lead to flooding and other water-related problems." },
-
-        new Action { Id = 9, Name = "Increase Water Usage 🚿", Score = -4, Description = "Increasing water usage will lead to an increase in the water level. More water usage means more water is extracted from natural sources, which can lead to a rise in the water level. It also puts more pressure on water resources, leading to potential water shortages in the future." },
-
-        new Action { Id = 10, Name = "Pollute the Water 💀", Score = -10, Description = "Polluting the water can make it unusable and increase the water level. Water pollution can come from various sources, including industrial waste, agricultural runoff, and domestic sewage. Polluted water is not only harmful to human health and the environment, but it also increases the water level as it cannot be used effectively." },
-
-        new Action { Id = 11, Name = "Monitor Situation 👀", Score = 2, Description = "Monitoring the situation doesn't directly affect the water level but keeps you informed. By keeping a close eye on the water level and other related factors, you can make informed decisions about what actions to take. This can help to prevent sudden increases in the water level and mitigate the impact of any potential problems." },
-
-        new Action { Id = 12, Name = "Research Solutions 📚", Score = 3, Description = "Researching solutions doesn't directly affect the water level but can lead to future actions. By studying the problem and exploring potential solutions, you can develop effective strategies for managing the water level. This can lead to more effective actions in the future, helping to keep the water level under control." }
-        // Add more actions as needed for now just 12 in total. Maybe I could add more later
-    };
+        new Action { Id = 1, Name = "Build Dams 🏗️", Score = 10, Description = "Building dams can control the flow of water and prevent flooding. Dams store water and release it in a controlled manner, preventing sudden increases in water level downstream. They also provide a source of hydroelectric power, which is a clean and renewable source of energy." },
+        new Action { Id = 2, Name = "Improve Drainage 🚧", Score = 9, Description = "Improving the drainage system can effectively reduce the water level. A well-designed drainage system can quickly remove excess water from the surface, preventing waterlogging and flooding. It also helps to manage water resources more effectively and can improve the quality of local water bodies by preventing pollution." },
+        new Action { Id = 3, Name = "Plant Trees 🌳",Score= 8, Description = "Planting trees helps to reduce the water level by absorbing water. Trees take up water from the soil and release it into the atmosphere, a process known as transpiration. This not only helps to lower the water level but also contributes to the local climate and biodiversity." },
+        new Action { Id = 4, Name = "Restore Wetlands 🌾", Score = 8 ,Description = "Restoring wetlands can help to absorb excess water and reduce the water level. Wetlands act as natural sponges, absorbing and storing excess water and slowly releasing it over time. This not only helps to lower the water level but also improves local biodiversity and provides a habitat for many species." },
+        new Action { Id = 5, Name = "Upgrade Infrastructure 🏢", Score = 7 ,Description = "Upgrading infrastructure can improve water management and reduce the water level. This includes improving the design and construction of buildings and roads to make them more water-efficient, and upgrading water supply and sewage systems to reduce water loss and pollution." },
+        new Action { Id = 6, Name = "Promote Water Conservation 💧", Score = 7 , Description = "Promoting water conservation can reduce the demand for water and lower the water level. By encouraging people to use water more efficiently, we can reduce the amount of water that needs to be extracted from natural sources. This not only helps to lower the water level but also ensures a sustainable supply of water for future generations." },
+        new Action { Id = 7, Name = "Implement Rainwater Harvesting ☔", Score = 6 , Description = "Implementing rainwater harvesting can reduce the water level and provide a source of water. Rainwater harvesting systems collect and store rainwater for later use, reducing the demand for water from other sources. This not only helps to lower the water level but also provides a reliable and sustainable source of water, especially in areas with limited water resources." },
+        new Action { Id = 8, Name = "Research Solutions 📚", Score = 3, Description = "Researching solutions doesn't directly affect the water level but can lead to future actions. By studying the problem and exploring potential solutions, you can develop effective strategies for managing the water level. This can lead to more effective actions in the future, helping to keep the water level under control." },
+        new Action { Id = 9, Name = "Monitor Situation 👀", Score = 2, Description = "Monitoring the situation doesn't directly affect the water level but keeps you informed. By keeping a close eye on the water level and other related factors, you can make informed decisions about what actions to take. This can help to prevent sudden increases in the water level and mitigate the impact of any potential problems." },
+        new Action { Id = 10, Name = "Increase Water Usage 🚿", Score = -4, Description = "Increasing water usage will lead to an increase in the water level. More water usage means more water is extracted from natural sources, which can lead to a rise in the water level. It also puts more pressure on water resources, leading to potential water shortages in the future." },
+        new Action { Id = 11, Name = "Ignore the Problem 😴",Score = -5, Description = "Ignoring the problem will lead to an increase in the water level. Without taking any action to manage the water level, it will continue to rise due to natural processes and human activities. This can lead to flooding and other water-related problems." },
+        new Action { Id = 12, Name = "Pollute the Water 💀", Score = -10, Description = "Polluting the water can make it unusable and increase the water level. Water pollution can come from various sources, including industrial waste, agricultural runoff, and domestic sewage. Polluted water is not only harmful to human health and the environment, but it also increases the water level as it cannot be used effectively." },
+};
         // Initialize the timer with a 12-second interval
         timer = new System.Timers.Timer(12000);
 
@@ -255,7 +243,7 @@ public class CrisisManagementMinigame : BaseViewModel
         // Start the timer
         timer.Start();
         IsSubmitButtonVisible = true;
-
+        Actions = new ObservableCollection<Action>(Actions.OrderBy(a => random.Next()));
         // Generate initial data
         GenerateData();
     }
@@ -308,42 +296,40 @@ public class CrisisManagementMinigame : BaseViewModel
         GoBackCommand.Execute(null);
     }
 
-    // Calculate the score based on the current water level, time taken, and selected actions
+    // Calculate the score based on the current water level, time taken, and ranking of actions
     public void CalculateScore()
     {
-        int waterLevelFactor = 100 - _waterLevel; // Higher score for lower water level
-        int timeFactor = (int)timer.Interval; // Higher score for quicker times
+        int maxTime = 10 * 60; // 10 minutes
+        int maxWaterLevel = 1000;
+        int maxScore = 100;
+        double timeWeight = 0.1;
+        double waterLevelWeight = 0.1;
+        double actionsWeight = 0.8;
+        int timeTaken = (int)timer.Interval;
+        int waterLevel = WaterLevel;
+        int score = 0;
+        int timeScore = (int)(maxScore * (1 - timeWeight * timeTaken / maxTime));
+        int waterLevelScore = (int)(maxScore * (1 - waterLevelWeight * waterLevel / maxWaterLevel));
 
-        int actionScore = 0;
+        int totalRankDifference = 0;
         for (int i = 0; i < _actions.Count; i++)
         {
-            // Assume that the actions are sorted by rank, with the highest-ranked action first
-            // Give more points for higher-ranked actions
-            actionScore += (12 - i) * _actions[i].Score;
+            int originalRank = i + 1; // the original rank is just the index in the list plus one
+            int currentRank = _actions.IndexOf(_actions.First(a => a.Id == originalRank)) + 1;
+            int rankDifference = Math.Abs(originalRank - currentRank);
+            totalRankDifference += rankDifference;
         }
+        double actionsScore = maxScore - totalRankDifference * actionsWeight;
 
-        // Calculate the initial score
-        int initialScore = waterLevelFactor + timeFactor + actionScore;
+        score = timeScore + waterLevelScore + (int)actionsScore;
 
-        // Calculate the percentage of the initial score
-        int minScore = 10800;
-        int maxScore = 13200;
-        double percentage = ((initialScore - minScore) * 100.0) / (maxScore - minScore);
-
-        // Ensure the percentage is within 0 to 100
-        percentage = Math.Max(0, Math.Min(100, percentage));
-
-        // Add the percentage to the existing score
-        _player.Score += (int)percentage;
-
-
-        // Score cap at 100
-        if (_player.Score > 100)
+        if (score > 100)
         {
-            _player.Score = 100;
+            score = 100;
         }
+        _player.Score += score;
     }
 
-
 }
+
 
