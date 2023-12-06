@@ -10,13 +10,14 @@ public class BalancingActMinigame : BaseViewModel
     private List<int> _values;
     private int _difficultyLevel = 1;
     private int _attemptsLeft = 3;
-    private const int _initialNumbersCount = 3;
+    private const int _initialNumbersCount = 2;
     private const int _maxAttempts = 5;
     private readonly Player _player;
     private bool _isGameEnded = false;
 
     private int _firstPosition;
     private int _secondPosition;
+    private List<int> _positions;
 
     public BalancingActMinigame(Player player)
     {
@@ -28,7 +29,16 @@ public class BalancingActMinigame : BaseViewModel
     }
 
     public string NumbersDisplay => string.Join(", ", _values);
-
+    
+    public List<int> Positions
+    {
+        get => _positions;
+        set
+        {
+            _positions = value;
+            OnPropertyChanged();
+        }
+    }
     public int FirstPosition
     {
         get => _firstPosition;
@@ -76,10 +86,11 @@ public class BalancingActMinigame : BaseViewModel
 
     private void StartNewRound()
     {
-        _values = GenerateValues(_initialNumbersCount + DifficultyLevel - 1).ToList();
+        _values = GenerateValues(_initialNumbersCount + ((DifficultyLevel - 1) * 2)).ToList();
+        Positions = Enumerable.Range(1, _values.Count).ToList();
         OnPropertyChanged(nameof(Score));
         OnPropertyChanged(nameof(NumbersDisplay));
-        AttemptsLeft = _maxAttempts;
+        AttemptsLeft = CalculateMaxAttempts(DifficultyLevel);
     }
 
     private async void AdjustNumbers()
@@ -116,24 +127,8 @@ public class BalancingActMinigame : BaseViewModel
 
     private IEnumerable<int> GenerateValues(int count)
     {
-        int baseNumber = random.Next(1, 51) * 2; // Ensures baseNumber is even
-
-        var values = Enumerable.Repeat(baseNumber, count).ToList();
-
-        if (count % 2 != 0 && values.Sum() % 2 != 0)
-        {
-            // If count is odd, make one of the numbers odd to keep the total sum even
-            values[count - 1]++;
-        }
-
-        for (int i = 0; i < count - 1; i += 2)
-        {
-            int adjustment = random.Next(-10, 11); // Random adjustment value
-            values[i] += adjustment;
-            values[i + 1] -= adjustment; // Adjust the pair by the opposite amount
-        }
-
-        return values;
+        // Generate only even numbers to avoid decimals
+        return Enumerable.Range(1, count).Select(_ => random.Next(1, 51) * 2);
     }
 
     private bool CheckIfBalanced()
@@ -149,6 +144,12 @@ public class BalancingActMinigame : BaseViewModel
     private int CalculatePenalty(int level)
     {
         return 5 * level;
+    }
+
+    private int CalculateMaxAttempts(int difficultyLevel)
+    {
+        // Example logic: Base max attempts plus an additional attempt every 2 levels
+        return _maxAttempts + (difficultyLevel / 2);
     }
 
     private async Task OnGameEnded()

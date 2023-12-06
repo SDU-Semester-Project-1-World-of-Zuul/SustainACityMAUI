@@ -3,37 +3,39 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SustainACityMAUI.Views.QuizMinigamePage">
 
-    <VerticalStackLayout Spacing="25" Padding="30">
+    <ScrollView>
+        <VerticalStackLayout Spacing="25" Padding="30">
 
-        <!-- Timer and Score Display -->
-        <HorizontalStackLayout Spacing="15">
-            <Label Text="Time Remaining:" FontSize="Medium" />
-            <Label Text="{Binding TimeRemaining}" FontSize="Medium" FontAttributes="Bold" />
-            <Label Text="Score:" FontSize="Medium" />
-            <Label Text="{Binding TriviaScore}" FontSize="Medium" FontAttributes="Bold" />
-        </HorizontalStackLayout>
+            <!-- Timer and Score Display -->
+            <HorizontalStackLayout Spacing="15">
+                <Label Text="Time Remaining:" FontSize="Medium" />
+                <Label Text="{Binding TimeRemaining}" FontSize="Medium" FontAttributes="Bold" />
+                <Label Text="Score:" FontSize="Medium" />
+                <Label Text="{Binding TriviaScore}" FontSize="Medium" FontAttributes="Bold" />
+            </HorizontalStackLayout>
 
-        <!-- Question Display -->
-        <Frame Padding="15" CornerRadius="10">
-            <Label Text="{Binding CurrentQuestion.Query}" FontSize="Large" />
-        </Frame>
+            <!-- Question Display -->
+            <Frame Padding="15" CornerRadius="10">
+                <Label Text="{Binding CurrentQuestion.Query}" FontSize="Large" />
+            </Frame>
 
-        <!-- Answer Options -->
-        <CollectionView x:Name="optionsCollectionView" SelectionMode="Single" 
+            <!-- Answer Options -->
+            <CollectionView x:Name="optionsCollectionView" SelectionMode="Single" 
                 ItemsSource="{Binding CurrentQuestion.Options}"
                 SelectedItem="{Binding CurrentAnswer, Mode=TwoWay}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Frame Padding="10" Margin="5" CornerRadius="10">
-                        <Label Text="{Binding .}" VerticalOptions="Center" HorizontalOptions="Center"/>
-                    </Frame>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="10" Margin="5" CornerRadius="10">
+                            <Label Text="{Binding .}" VerticalOptions="Center" HorizontalOptions="Center"/>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
-        <!-- Submit Answer Button -->
-        <Button Text="Submit Answer" CornerRadius="10" Command="{Binding SubmitAnswerCommand}" CommandParameter="{Binding CurrentAnswer}" Style="{StaticResource AccentButtonStyle}" />
+            <!-- Submit Answer Button -->
+            <Button Text="Submit Answer" CornerRadius="10" Command="{Binding SubmitAnswerCommand}" CommandParameter="{Binding CurrentAnswer}" Style="{StaticResource AccentButtonStyle}" />
 
 
-    </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
