@@ -67,6 +67,54 @@
             ]
           },
           {
+            "Id": "guideToAdventure",
+            "Text": "Your quest for adventure is admirable. This city is a labyrinth of mysteries and wonders, each district holding its own secrets. Where would your heart lead you?",
+            "Responses": [
+              {
+                "Text": "Take me to where the past and present intertwine.",
+                "NextDialogueId": "guideToHistory"
+              },
+              {
+                "Text": "Guide me to a place of learning and enlightenment.",
+                "NextDialogueId": "guideToKnowledge"
+              },
+              {
+                "Text": "I seek the thrills of the unknown.",
+                "NextDialogueId": "guideToMystery"
+              }
+            ]
+          },
+          {
+            "Id": "guideToHistory",
+            "Text": "Then you must visit the Cathedra Oculi Sanguinei. It is a place where history breathes through ancient walls, and every stone tells a story.",
+            "Responses": [
+              {
+                "Text": "I shall head there. Thank you.",
+                "NextDialogueId": "centralPlazaEnd"
+              }
+            ]
+          },
+          {
+            "Id": "guideToKnowledge",
+            "Text": "The halls of Springfield Elementary await you. It's a place where knowledge transcends beyond textbooks, shaping the minds of tomorrow.",
+            "Responses": [
+              {
+                "Text": "I am eager to learn. Thank you.",
+                "NextDialogueId": "centralPlazaEnd"
+              }
+            ]
+          },
+          {
+            "Id": "guideToMystery",
+            "Text": "For mysteries that challenge both mind and spirit, The Reclamation Ward is your destination. It's a place where the forgotten is reborn into wonder.",
+            "Responses": [
+              {
+                "Text": "I am ready to uncover these mysteries.",
+                "NextDialogueId": "centralPlazaEnd"
+              }
+            ]
+          },
+          {
             "Id": "centralPlazaEnd",
             "Text": "The Plaza will always be here, a nexus of paths and ponderings. Return when you seek further enlightenment.",
             "Responses": []
