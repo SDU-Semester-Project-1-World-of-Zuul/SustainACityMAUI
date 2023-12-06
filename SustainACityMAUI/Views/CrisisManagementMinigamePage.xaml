@@ -6,14 +6,15 @@
         <StackLayout>
             <Label Text="Your City Needs You!"
                    HorizontalOptions="CenterAndExpand"
-                   FontSize="Large"
+                   FontSize="Title"
                    Margin="0,0,0,10" />
             <Label Text="🚨 Disaster Warning! 🚨"
                    HorizontalOptions="CenterAndExpand"
-                   FontSize="Medium"
+                   FontSize="Subtitle"
                    Margin="0,0,0,10" />
             <Label Text="You've received a weather alert! Once the game starts, every second counts, 1 day passes every 12 seconds (every second represent 2 hours). 🕰️ Water levels change daily due to uncontrollable factors. Prioritize the actions below, and submit when ready. Act quickly, but be smart. Good luck! 🌪️💦&#xA;&#xA;Your decisions, even in the absence of a disaster, can be beneficial in the future. 🌐"
-                   FontSize="Medium"
+                   HorizontalOptions="CenterAndExpand"
+                   FontSize="Large"
                    Margin="0,0,0,10" />
             <Grid>
                 <Grid.RowDefinitions>
