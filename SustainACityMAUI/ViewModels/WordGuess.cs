@@ -9,13 +9,14 @@ public class WordGuess : BaseViewModel
 {
     private readonly Player _player;
     private bool _isGameEnded = false;
-    public ICommand SubmitAnswerCommand => new Command<string>(SubmitAnswer);
+    public ICommand SubmitAnswerCommand => new Command(SubmitAnswer);
     public List<ShuffledWord> Words { get; }
+    private string _currentAnswer;
     private readonly IDispatcher _dispatcher;
     public int _score;
     public int _timeRemaining;
     public ShuffledWord _currentWord;
-    
+
     public int Score
     {
         get => _score;
@@ -36,6 +37,16 @@ public class WordGuess : BaseViewModel
         }
     }
     
+    public string CurrentAnswer
+    {
+        get => _currentAnswer;
+        set
+        {
+            _currentAnswer = value;
+            OnPropertyChanged();
+        }
+    }
+
     public ShuffledWord CurrentWord
     {
         get => _currentWord;
@@ -152,23 +163,24 @@ public class WordGuess : BaseViewModel
         TimeRemaining = 100;
         StartTimer();
     }
-    
-    private void SubmitAnswer(string currentAnswer)
+
+    private void SubmitAnswer()
     {
         if (Words.Count > 0)
         {
-            if (currentAnswer == CurrentWord.Word)
+            if (_currentAnswer == CurrentWord.Word)
                 Score += CurrentWord.Points;
-            
+
             Words.Remove(CurrentWord);
             CurrentWord = Words.FirstOrDefault();
             OnPropertyChanged(nameof(Words));
+            CurrentAnswer = string.Empty;
         }
-        
+
         if (Words.Count == 0)
             OnGameEnded();
     }
-    
+
     private void OnGameEnded()
     {
         if (_isGameEnded) return;

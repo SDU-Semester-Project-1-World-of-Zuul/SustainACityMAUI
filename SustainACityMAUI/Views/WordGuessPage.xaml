@@ -25,13 +25,14 @@
         <!-- Answer Options -->
         <Entry x:Name="inputTextBox"
                Placeholder="Enter your guess here"
+               Text="{Binding CurrentAnswer, Mode=TwoWay}"
                ReturnCommand="{Binding SubmitAnswerCommand}" 
-               ReturnCommandParameter="{Binding CurrentAnswer}"
+               ReturnCommandParameter="{Binding Text, Source={RelativeSource Self}}"
                ClearButtonVisibility="WhileEditing"
                />
         
         <!-- Submit Answer Button -->
-        <Button Text="Submit Answer" CornerRadius="10" Command="{Binding SubmitAnswerCommand}" CommandParameter="{Binding CurrentAnswer}" Style="{StaticResource AccentButtonStyle}" />
+        <Button Text="Submit Answer" CornerRadius="10" Command="{Binding SubmitAnswerCommand}" Style="{StaticResource AccentButtonStyle}" />
 
 
     </VerticalStackLayout>
