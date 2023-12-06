@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SustainACityMAUI.Views.EndGamePage"
+             Title="Game Over">
+    <!-- Dark background for dark mode -->
+
+    <Grid Padding="20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Game Over and Player Information Section -->
+        <ContentView Grid.Column="0" BackgroundColor="DarkRed" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <StackLayout VerticalOptions="Center" Padding="10">
+                <Label Text="Game Over!" FontSize="Large" FontAttributes="Bold" TextColor="White" HorizontalOptions="Center" />
+                <Label Text="{Binding PlayerScore}" FontSize="Medium" TextColor="White" HorizontalOptions="Center" />
+                <Label Text="{Binding CongratulatoryMessage}" FontSize="Small" TextColor="White" HorizontalOptions="Center" Margin="0,5,0,0" />
+                <Button Text="Restart Game" Command="{Binding RestartGameCommand}" Margin="0,20,0,0" />
+                <Button Text="Exit Game" Command="{Binding ExitGameCommand}" />
+            </StackLayout>
+        </ContentView>
+
+        <!-- Image Section -->
+        <Image Source="gameover.png" Aspect="AspectFit" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+
+        <!-- Credits Section -->
+        <ContentView Grid.Column="2" BackgroundColor="DarkRed" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <ScrollView Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                <Label Text="{Binding CreditsText}" 
+                       TextColor="White"
+                       FontSize="Small"
+                       Margin="10"/>
+            </ScrollView>
+        </ContentView>
+    </Grid>
+</ContentPage>

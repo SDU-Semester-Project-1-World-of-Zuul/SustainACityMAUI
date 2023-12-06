@@ -216,6 +216,29 @@ public class Game : BaseViewModel
     {
         OnPropertyChanged(nameof(CurrentRoomImagePath));
         OnPropertyChanged(nameof(CurrentNPCImagePath));
+
+        if (AreAllQuestsCompleted())
+        {
+            _ = NavigationService.NavigateToPageAsync("EndGame", Player);
+        }
+    }
+
+    private bool AreAllQuestsCompleted()
+    {
+        foreach (var room in _roomMap.Values)
+        {
+            foreach (var npc in room.NPCs)
+            {
+                foreach (var quest in npc.Quests)
+                {
+                    if (!quest.IsCompleted)
+                    {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
     }
 
     public static async Task PopupAsync(string popupName, string message, string cancel)
