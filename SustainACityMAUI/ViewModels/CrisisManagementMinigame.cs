@@ -296,11 +296,40 @@ public class CrisisManagementMinigame : BaseViewModel
         GoBackCommand.Execute(null);
     }
 
-    // Calculate the score based on the current water level, time taken, and selected actions
+    // Calculate the score based on the current water level, time taken, and ranking of actions
     public void CalculateScore()
     {
+        int maxTime = 10 * 60; // 10 minutes
+        int maxWaterLevel = 1000;
+        int maxScore = 100;
+        double timeWeight = 0.1;
+        double waterLevelWeight = 0.1;
+        double actionsWeight = 0.8;
+        int timeTaken = (int)timer.Interval;
+        int waterLevel = WaterLevel;
+        int score = 0;
+        int timeScore = (int)(maxScore * (1 - timeWeight * timeTaken / maxTime));
+        int waterLevelScore = (int)(maxScore * (1 - waterLevelWeight * waterLevel / maxWaterLevel));
+
+        int totalRankDifference = 0;
+        for (int i = 0; i < _actions.Count; i++)
+        {
+            int originalRank = i + 1; // the original rank is just the index in the list plus one
+            int currentRank = _actions.IndexOf(_actions.First(a => a.Id == originalRank)) + 1;
+            int rankDifference = Math.Abs(originalRank - currentRank);
+            totalRankDifference += rankDifference;
+        }
+        int actionsScore = maxScore - totalRankDifference;
+
+        score = +timeScore + waterLevelScore + actionsScore;
+
+        if (score > 100)
+        {
+            score = 100;
+        }
+        _player.Score += score;
     }
 
-
 }
+
 
