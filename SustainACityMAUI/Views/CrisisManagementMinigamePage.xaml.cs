@@ -16,7 +16,6 @@ namespace SustainACityMAUI.Views
             BindingContext = new CrisisManagementMinigame(player);
             _stopwatch = new Stopwatch();
             StartGameButton.Clicked += OnStartGameButtonClicked;
-
             // Navigation
             MessagingCenter.Subscribe<CrisisManagementMinigame>(this, "GoBack", (sender) =>
    {

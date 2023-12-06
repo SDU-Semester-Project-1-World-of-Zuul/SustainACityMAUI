@@ -4,15 +4,17 @@
              x:Name="Page">
     <ScrollView>
         <StackLayout>
-            <Label Text="Emergency Response District"
+            <Label Text="Your City Needs You!"
                    HorizontalOptions="CenterAndExpand"
                    FontSize="Large"
-                   FontAttributes="Bold"
-                   Margin="0,20,0,20" />
-            <Label Text="As the crisis manager of the Emergency Response District, you are tasked with managing an impending flood disaster. Your mission is to keep the water level as low as possible by making strategic and quick decisions. &#xA;&#xA;In this game, every second represents 2 hours, and every 12 seconds represents a day. With each passing day, the water level will increase, threatening to flood our district. Your task is to rank and submit your actions as quickly as possible. The faster you act, the more points you will earn. &#xA;&#xA;Scoring the best in this game requires both speed and strategy. Quick decisions will earn you time points, but remember that not all actions are equal. Actions are ranked based on their effectiveness in reducing the water level. Higher-ranked actions will earn you more points, so choose wisely. &#xA;&#xA;Every 24 hours, the environmental factors change, affecting the water level. Keep an eye on the temperature, rainfall, and drainage system, as these will influence the effectiveness of your actions. &#xA;&#xA;Remember, if the water level gets too high, it won't be game over, but it will significantly affect your score. Time is of the essence, and every decision you make could mean the difference between a high score and a low one. &#xA;&#xA;Are you ready to take on the challenge and save the district? Can you make the right choices under pressure and lead our district to safety? The future of our district is in your hands. Let's see how fast you can act when every second counts!"
+                   Margin="0,0,0,10" />
+            <Label Text="🚨 Disaster Warning! 🚨"
                    HorizontalOptions="CenterAndExpand"
                    FontSize="Medium"
-                   Margin="0,10,0,10" />
+                   Margin="0,0,0,10" />
+            <Label Text="You've received a weather alert! Once the game starts, every second counts, 1 day passes every 12 seconds (every second represent 2 hours). 🕰️ Water levels change daily due to uncontrollable factors. Prioritize the actions below, and submit when ready. Act quickly, but be smart. Good luck! 🌪️💦&#xA;&#xA;Your decisions, even in the absence of a disaster, can be beneficial in the future. 🌐"
+                   FontSize="Medium"
+                   Margin="0,0,0,10" />
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />

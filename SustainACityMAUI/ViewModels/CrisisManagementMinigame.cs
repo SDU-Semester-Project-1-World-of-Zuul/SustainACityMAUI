@@ -319,9 +319,9 @@ public class CrisisManagementMinigame : BaseViewModel
             int rankDifference = Math.Abs(originalRank - currentRank);
             totalRankDifference += rankDifference;
         }
-        int actionsScore = maxScore - totalRankDifference;
+        double actionsScore = maxScore - totalRankDifference * actionsWeight;
 
-        score = +timeScore + waterLevelScore + actionsScore;
+        score = timeScore + waterLevelScore + (int)actionsScore;
 
         if (score > 100)
         {
