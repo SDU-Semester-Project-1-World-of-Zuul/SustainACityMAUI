@@ -67,7 +67,7 @@ public class PasswordMinigame : BaseViewModel
             GoBackCommand.Execute(null);
         } else 
         {
-            Application.Current.MainPage.DisplayAlert("Input", "yo" ,"Ok Im stupid");
+            Application.Current.MainPage.DisplayAlert("Incorrect Pincode", "Try again" ,"OK");
         }
     }
 
