@@ -113,224 +113,224 @@
     "Y": 1,
     "ImgPath": "churchdistrict.png",
     "NPCs": [
-        {
-            "Name": "Marcus Aurelius Clementius",
-            "ImgPath": "priest.png",
-            "Dialogues": [
-                {
-                    "Id": "cathedralStart",
-                    "Text": "*A preist kneels before the altar, his face wet with tears. He begs for forgiveness, his voice hoarse with remorse. He had failed his flock, his vows and his God*",
-                    "Responses": [
-                        {
-                            "Text": "Reverend?",
-                            "NextDialogueId": "r1"
-                        },
-                        {
-                            "Text": "*Ignore him*",
-                            "NextDialogueId": "cathedralEnd"
-                        },
-                        {
-                            "Text": "Cut the act, I'm here for the quest",
-                            "NextDialogueId": "offerQuest"
-                        }
-                    ]
-                },
-                {
-                    "Id": "r1",
-                    "Text": "Greetings, Mayor. I’m sorry to bother you, but I have a serious problem that I need your help with",
-                    "Responses": [
-                        {
-                            "Text": "What is it, Priest? You look troubled",
-                            "NextDialogueId": "r3"
-                        },
-                        {
-                            "Text": "Sorry, I dont have any spare change",
-                            "NextDialogueId": "r2"
-                        }
-                    ]
-                },
-                {
-                    "Id": "r2",
-                    "Text": "Jiminy Cricket, what was Father thinking putting an insufferable person like you in charge of our city?",
-                    "Responses": [
-                        {
-                            "Text": "I was just messing with you reverend, what's the problem?",
-                            "NextDialogueId": "r3"
-                        },
-                        {
-                            "Text": "Do you question God's intentions?",
-                            "NextDialogueId": "r4"
-                        }
-                    ]
-                },
-                {
-                    "Id": "r3",
-                    "Text": "It’s about our cathedral, Mayor. It’s falling apart. The roof is leaking, the walls are cracking, the windows are broken. I can barely afford to keep the candles lit, let alone pay for any repairs",
-                    "Responses": [
-                        {
-                            "Text": "That’s terrible, Priest. How did this happen?",
-                            "NextDialogueId": "r5"
-                        },
-                        {
-                            "Text": "First you ask me for pocket change... and now you're asking for taxpayers money? We are done here",
-                            "NextDialogueId": "cathedralEnd"
-                        }
-                    ]
-                },
-                {
-                    "Id": "r4",
-                    "Text": "Your right Mayor, I shouldnt have. Can we start over, hear me out?",
-                    "Responses": [
-                        {
-                            "Text": "Alright reverend, whats bothering you?",
-                            "NextDialogueId": "r3"
-                        },
-                        {
-                            "Text": "I've heard enough",
-                            "NextDialogueId": "cathedralEnd"
-                        }
-                    ]
-                },
-                {
-                    "Id": "r5",
-                    "Text": "Well, you see, Mayor, ever since the city council decided to cut the funding for religious institutions, my church has been struggling to survive. We used to receive a generous donation every month from the city treasury, but now we get nothing. And without any money, we can’t attract any visitors or worshippers. People have lost interest in our faith and our heritage",
-                    "Responses": [
-                        {
-                            "Text": "I see. That’s a shame, reverend. Your church is a valuable part of our city’s culture and history. It deserves to be protected and preserved",
-                            "NextDialogueId": "r6"
-                        },
-                        {
-                            "Text": "I'm familiar with the situation, I may have or may not have tampered with some of those pathetic city council election results. That sweet christmas bonus I got didn't come out of nowhere...",
-                            "NextDialogueId": "cathedralEnd"
-                        }
-                    ]
-                },
-                {
-                    "Id": "r6",
-                    "Text": "Thank you for saying that, Mayor. It means a lot to me. But words are not enough. We need action. We need a solution",
-                    "Responses": [
-                        {
-                            "Text": "Why don’t you apply for a grant from the UNESCO World Heritage Fund? They support projects that safeguard the world’s cultural and natural heritage. Your church might qualify for their assistance",
-                            "NextDialogueId": "r7"
-                        },
-                        {
-                            "Text": "Why don’t you start a crowdfunding campaign on the Internet? You can use social media to spread the word about your church and ask people to donate money online. You might be surprised by how many people are willing to support your cause",
-                            "NextDialogueId": "r9"
-                        },
-                        {
-                            "Text": "Why don’t you partner with a local business or organization that shares your values and vision? You can offer them some benefits in exchange for their sponsorship, such as advertising space, tax deductions, or special events",
-                            "NextDialogueId": "r8"
-                        },
-                        {
-                            "Text": "I've got my own problems right now",
-                            "NextDialogueId": "cathedralEnd"
-                        }
-                    ]
-                },
-                {
-                    "Id": "r7",
-                    "Text": "Gee whiz, all that paperwork is making my head spin...",
-                    "Responses": [
-                        {
-                            "Text": "Then why don’t you start a crowdfunding campaign on the Internet? You can use social media to spread the word about your church and ask people to donate money online. You might be surprised by how many people are willing to support your cause",
-                            "NextDialogueId": "r9"
-                        },
-                        {
-                            "Text": "Why don’t you partner with a local business or organization that shares your values and vision? You can offer them some benefits in exchange for their sponsorship, such as advertising space, tax deductions, or special events",
-                            "NextDialogueId": "r8"
-                        },
-                        {
-                            "Text": "My bad, I didn't realise I was talking to a 12 year old...",
-                            "NextDialogueId": "cathedralEnd"
-                        }
-                    ]
-                },
-                {
-                    "Id": "r8",
-                    "Text": "I'm not exactly popular with the local businesses anymore. Ever since I refused to influence the young ones, at Sunday school, to invest in V-Bucks, I've had zero call back from them",
-                    "Responses": [
-                        {
-                            "Text": "Then suggest you start a crowdfunding campaign on the Internet? You can use social media to spread the word about your church and ask people to donate money online. You might be surprised by how many people are willing to support your cause",
-                            "NextDialogueId": "r9"
-                        },
-                        {
-                            "Text": "Are you serious!? V-Bucks have quadruped in value just in the last 3 days alone... This cathedral is beyond saving... get help",
-                            "NextDialogueId": "cathedralEnd"
-                        }
-                    ]
-                },
-                {
-                    "Id": "r9",
-                    "Text": "A crowdfunding campaign on the Internet? That's a great idea! The only problem is...",
-                    "Responses": [
-                        {
-                            "Text": "What?",
-                            "NextDialogueId": "r10"
-                        },
-                        {
-                            "Text": "Yeah, I've done you enough favours. I'm done here",
-                            "NextDialogueId": "cathedralEnd"
-                        }
-                    ]
-                },
-                {
-                    "Id": "r10",
-                    "Text": "So, the church's official Instagram account has over 10,000 followers, which would be perfect to spread the word, but...",
-                    "Responses": [
-                        {
-                            "Text": "Yes?",
-                            "NextDialogueId": "r11"
-                        },
-                        {
-                            "Text": "Jesus, get one with it",
-                            "NextDialogueId": "r11"
-                        }
-                    ]
-                },
-                {
-                    "Id": "r11",
-                    "Text": "My Alzheimer's is getting worse and I've forgotten the login to my computer...",
-                    "Responses": [
-                        {
-                            "Text": "I'm so sorry",
-                            "NextDialogueId": "r12"
-                        },
-                        {
-                            "Text": "Is there anything we can do?",
-                            "NextDialogueId": "r12"
-                        }
-                    ]
-                },
-                {
-                    "Id": "r12",
-                    "Text": "Well, the Great Ones guided me through spiritual psychosis the other night. They left me with this note. I have a feeling its my pin code, but I cant decipher it",
-                    "Responses": [
-                        {
-                            "Text": "Remarkable, let me take a look",
-                            "NextDialogueId": "offerQuest"
-                        },
-                        {
-                            "Text": "Holy mackerel, I'm not in the right headspace for that right now",
-                            "NextDialogueId": "cathedralEnd"
-                        }
-                    ]
-                },
-                {
-                    "Id": "cathedralEnd",
-                    "Text": "May your journey through the cathedral reveal the answers you seek.",
-                    "Responses": []
-                }
-            ],
-            "Quests": [
-                {
-                    "Type": "MinigameQuest",
-                    "Title": "Mystery of the Cathedra Oculi Sanguinei",
-                    "Description": "Unravel the hidden truths behind the haunting melodies of the Cathedra Oculi Sanguinei.",
-                    "IsCompleted": false,
-                    "MinigamePage": "PasswordMinigame"
-                }
+      {
+        "Name": "Marcus Aurelius Clementius",
+        "ImgPath": "priest.png",
+        "Dialogues": [
+          {
+            "Id": "cathedralStart",
+            "Text": "*A preist kneels before the altar, his face wet with tears. He begs for forgiveness, his voice hoarse with remorse. He had failed his flock, his vows and his God*",
+            "Responses": [
+              {
+                "Text": "Reverend?",
+                "NextDialogueId": "r1"
+              },
+              {
+                "Text": "*Ignore him*",
+                "NextDialogueId": "cathedralEnd"
+              },
+              {
+                "Text": "Cut the act, I'm here for the quest",
+                "NextDialogueId": "offerQuest"
+              }
             ]
-        }
+          },
+          {
+            "Id": "r1",
+            "Text": "Greetings, Mayor. I’m sorry to bother you, but I have a serious problem that I need your help with",
+            "Responses": [
+              {
+                "Text": "What is it, Priest? You look troubled",
+                "NextDialogueId": "r3"
+              },
+              {
+                "Text": "Sorry, I dont have any spare change",
+                "NextDialogueId": "r2"
+              }
+            ]
+          },
+          {
+            "Id": "r2",
+            "Text": "Jiminy Cricket, what was Father thinking putting an insufferable person like you in charge of our city?",
+            "Responses": [
+              {
+                "Text": "I was just messing with you reverend, what's the problem?",
+                "NextDialogueId": "r3"
+              },
+              {
+                "Text": "Do you question God's intentions?",
+                "NextDialogueId": "r4"
+              }
+            ]
+          },
+          {
+            "Id": "r3",
+            "Text": "It’s about our cathedral, Mayor. It’s falling apart. The roof is leaking, the walls are cracking, the windows are broken. I can barely afford to keep the candles lit, let alone pay for any repairs",
+            "Responses": [
+              {
+                "Text": "That’s terrible, Priest. How did this happen?",
+                "NextDialogueId": "r5"
+              },
+              {
+                "Text": "First you ask me for pocket change... and now you're asking for taxpayers money? We are done here",
+                "NextDialogueId": "cathedralEnd"
+              }
+            ]
+          },
+          {
+            "Id": "r4",
+            "Text": "Your right Mayor, I shouldnt have. Can we start over, hear me out?",
+            "Responses": [
+              {
+                "Text": "Alright reverend, whats bothering you?",
+                "NextDialogueId": "r3"
+              },
+              {
+                "Text": "I've heard enough",
+                "NextDialogueId": "cathedralEnd"
+              }
+            ]
+          },
+          {
+            "Id": "r5",
+            "Text": "Well, you see, Mayor, ever since the city council decided to cut the funding for religious institutions, my church has been struggling to survive. We used to receive a generous donation every month from the city treasury, but now we get nothing. And without any money, we can’t attract any visitors or worshippers. People have lost interest in our faith and our heritage",
+            "Responses": [
+              {
+                "Text": "I see. That’s a shame, reverend. Your church is a valuable part of our city’s culture and history. It deserves to be protected and preserved",
+                "NextDialogueId": "r6"
+              },
+              {
+                "Text": "I'm familiar with the situation, I may have or may not have tampered with some of those pathetic city council election results. That sweet christmas bonus I got didn't come out of nowhere...",
+                "NextDialogueId": "cathedralEnd"
+              }
+            ]
+          },
+          {
+            "Id": "r6",
+            "Text": "Thank you for saying that, Mayor. It means a lot to me. But words are not enough. We need action. We need a solution",
+            "Responses": [
+              {
+                "Text": "Why don’t you apply for a grant from the UNESCO World Heritage Fund? They support projects that safeguard the world’s cultural and natural heritage. Your church might qualify for their assistance",
+                "NextDialogueId": "r7"
+              },
+              {
+                "Text": "Why don’t you start a crowdfunding campaign on the Internet? You can use social media to spread the word about your church and ask people to donate money online. You might be surprised by how many people are willing to support your cause",
+                "NextDialogueId": "r9"
+              },
+              {
+                "Text": "Why don’t you partner with a local business or organization that shares your values and vision? You can offer them some benefits in exchange for their sponsorship, such as advertising space, tax deductions, or special events",
+                "NextDialogueId": "r8"
+              },
+              {
+                "Text": "I've got my own problems right now",
+                "NextDialogueId": "cathedralEnd"
+              }
+            ]
+          },
+          {
+            "Id": "r7",
+            "Text": "Gee whiz, all that paperwork is making my head spin...",
+            "Responses": [
+              {
+                "Text": "Then why don’t you start a crowdfunding campaign on the Internet? You can use social media to spread the word about your church and ask people to donate money online. You might be surprised by how many people are willing to support your cause",
+                "NextDialogueId": "r9"
+              },
+              {
+                "Text": "Why don’t you partner with a local business or organization that shares your values and vision? You can offer them some benefits in exchange for their sponsorship, such as advertising space, tax deductions, or special events",
+                "NextDialogueId": "r8"
+              },
+              {
+                "Text": "My bad, I didn't realise I was talking to a 12 year old...",
+                "NextDialogueId": "cathedralEnd"
+              }
+            ]
+          },
+          {
+            "Id": "r8",
+            "Text": "I'm not exactly popular with the local businesses anymore. Ever since I refused to influence the young ones, at Sunday school, to invest in V-Bucks, I've had zero call back from them",
+            "Responses": [
+              {
+                "Text": "Then suggest you start a crowdfunding campaign on the Internet? You can use social media to spread the word about your church and ask people to donate money online. You might be surprised by how many people are willing to support your cause",
+                "NextDialogueId": "r9"
+              },
+              {
+                "Text": "Are you serious!? V-Bucks have quadruped in value just in the last 3 days alone... This cathedral is beyond saving... get help",
+                "NextDialogueId": "cathedralEnd"
+              }
+            ]
+          },
+          {
+            "Id": "r9",
+            "Text": "A crowdfunding campaign on the Internet? That's a great idea! The only problem is...",
+            "Responses": [
+              {
+                "Text": "What?",
+                "NextDialogueId": "r10"
+              },
+              {
+                "Text": "Yeah, I've done you enough favours. I'm done here",
+                "NextDialogueId": "cathedralEnd"
+              }
+            ]
+          },
+          {
+            "Id": "r10",
+            "Text": "So, the church's official Instagram account has over 10,000 followers, which would be perfect to spread the word, but...",
+            "Responses": [
+              {
+                "Text": "Yes?",
+                "NextDialogueId": "r11"
+              },
+              {
+                "Text": "Jesus, get one with it",
+                "NextDialogueId": "r11"
+              }
+            ]
+          },
+          {
+            "Id": "r11",
+            "Text": "My Alzheimer's is getting worse and I've forgotten the login to my computer...",
+            "Responses": [
+              {
+                "Text": "I'm so sorry",
+                "NextDialogueId": "r12"
+              },
+              {
+                "Text": "Is there anything we can do?",
+                "NextDialogueId": "r12"
+              }
+            ]
+          },
+          {
+            "Id": "r12",
+            "Text": "Well, the Great Ones guided me through spiritual psychosis the other night. They left me with this note. I have a feeling its my pin code, but I cant decipher it",
+            "Responses": [
+              {
+                "Text": "Remarkable, let me take a look",
+                "NextDialogueId": "offerQuest"
+              },
+              {
+                "Text": "Holy mackerel, I'm not in the right headspace for that right now",
+                "NextDialogueId": "cathedralEnd"
+              }
+            ]
+          },
+          {
+            "Id": "cathedralEnd",
+            "Text": "May your journey through the cathedral reveal the answers you seek.",
+            "Responses": []
+          }
+        ],
+        "Quests": [
+          {
+            "Type": "MinigameQuest",
+            "Title": "Mystery of the Cathedra Oculi Sanguinei",
+            "Description": "Unravel the hidden truths behind the haunting melodies of the Cathedra Oculi Sanguinei.",
+            "IsCompleted": false,
+            "MinigamePage": "PasswordMinigame"
+          }
+        ]
+      }
     ]
   },
   {
@@ -406,7 +406,7 @@
   },
   {
     "Name": "The Grand Central Transit Hub",
-    "Description": "The Grand Central Transit Hub, a marvel of connectivity, hides a disconcerting symmetry in its design, with patterns that almost seem to shift when not observed directly. The constant movement of the crowd creates an uncanny harmony, as if each person is unknowingly part of a larger, unseen plan. The air sometimes carries a faint, almost imperceptible whisper, reminiscent of distant, otherworldly chants, and the architecture, with its overly grand scale, evokes a sense of insignificance in the cosmic scheme.",
+    "Description": "The Grand Central Transit Hub, a marvel of connectivity, hides a disconcerting symmetry in its design. The patterns almost seem to shift when not observed directly, and the constant movement of the crowd creates an uncanny harmony. The air carries a faint whisper, reminiscent of distant, otherworldly chants.",
     "X": -1,
     "Y": 0,
     "ImgPath": "transportdistrict.png",
@@ -417,45 +417,59 @@
         "Dialogues": [
           {
             "Id": "transitHubStart",
-            "Text": "Greetings at The Grand Central Transit Hub, where every journey has its price. What is it that you seek at the crossroads of the world?",
+            "Text": "Welcome to The Grand Central Transit Hub, where journeys intertwine with fate. What brings you to this crossroads of destinies?",
             "Responses": [
               {
-                "Text": "I'm exploring the wonders of the city.",
-                "NextDialogueId": "transitHubExplore"
+                "Text": "I'm drawn to the mysteries of this place.",
+                "NextDialogueId": "transitHubMystery"
               },
               {
-                "Text": "I'm in search of a challenge.",
+                "Text": "I seek a challenge to test my wits.",
                 "NextDialogueId": "offerQuest"
               }
             ]
           },
           {
-            "Id": "transitHubExplore",
-            "Text": "This place is more than a hub; it's where destinies intertwine. Our challenges are not merely for amusement; they are gateways to deeper understandings. Will you step through this portal?",
+            "Id": "transitHubMystery",
+            "Text": "Ah, the enigmas of the Hub are as numerous as the stars. Here, the very fabric of reality weaves a curious tapestry. Do you wish to unravel its threads?",
             "Responses": [
               {
-                "Text": "Yes, I'm up for the challenge.",
+                "Text": "Yes, show me the hidden truths.",
+                "NextDialogueId": "transitHubTruth"
+              },
+              {
+                "Text": "I'm just passing through.",
+                "NextDialogueId": "transitHubEnd"
+              }
+            ]
+          },
+          {
+            "Id": "transitHubTruth",
+            "Text": "Beneath the bustle lies a balance as delicate as it is complex. Will you dare to challenge the cosmic equilibrium?",
+            "Responses": [
+              {
+                "Text": "I'm ready for the challenge.",
                 "NextDialogueId": "offerQuest"
               },
               {
-                "Text": "Not right now, thank you.",
+                "Text": "I need more time to ponder.",
                 "NextDialogueId": "transitHubEnd"
               }
             ]
           },
           {
             "Id": "transitHubEnd",
-            "Text": "May your travels through the city bring you the answers you seek.",
+            "Text": "The paths of fate are ever open. Return when you're ready to delve deeper into the mysteries.",
             "Responses": []
           }
         ],
         "Quests": [
           {
             "Type": "MinigameQuest",
-            "Title": "The Conductor's Challenge",
-            "Description": "Navigate the complexities of the Transit Hub and prove your mettle in the Conductor's Challenge.",
+            "Title": "The Balance of the Cosmos",
+            "Description": "Engage in the Balancing Act Minigame to maintain the delicate cosmic balance that the Transit Hub embodies.",
             "IsCompleted": false,
-            "MinigamePage": "TransportMinigame"
+            "MinigamePage": "BalancingActMinigame"
           }
         ]
       }
@@ -598,6 +612,73 @@
             "Description": "Show how much you know about the ways society could eliminate the poor living conditions of slums.",
             "IsCompleted": false,
             "MinigamePage": "WordGuess"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Name": "Auditorium of Silent Notes",
+    "Description": "Shrouded in perpetual twilight, the auditorium stands as a testament to an otherworldly grandeur. Its architecture, a fusion of elegance and the unknown, seems to dance in the dim light. The air vibrates with piano melodies, each echoing a tale of sorrow and lost eras.",
+    "X": 0,
+    "Y": 2,
+    "ImgPath": "auditorium.png",
+    "NPCs": [
+      {
+        "Name": "The Enigmatic Pianist",
+        "ImgPath": "pianist.png",
+        "Dialogues": [
+          {
+            "Id": "auditoriumStart",
+            "Text": "You step into the Auditorium of Silent Notes, where every note carries the weight of untold stories. What compels you to explore these hallowed halls?",
+            "Responses": [
+              {
+                "Text": "I'm entranced by the haunting melodies.",
+                "NextDialogueId": "auditoriumEnigma"
+              },
+              {
+                "Text": "This place seems to hold more than just music.",
+                "NextDialogueId": "auditoriumSecret"
+              }
+            ]
+          },
+          {
+            "Id": "auditoriumEnigma",
+            "Text": "Indeed, each melody here whispers of lost times, forgotten dreams, and unspoken tragedies. Do you seek to understand the echoes of these ancient tunes?",
+            "Responses": [
+              {
+                "Text": "Yes, reveal their hidden tales.",
+                "NextDialogueId": "melodyMystery"
+              },
+              {
+                "Text": "I prefer to simply experience the music.",
+                "NextDialogueId": "melodyExperience"
+              }
+            ]
+          },
+          {
+            "Id": "melodyMystery",
+            "Text": "Within each harmony lies a labyrinth of stories, woven with the threads of time and fate. Will you wander these melodic pathways?",
+            "Responses": [
+              {
+                "Text": "Lead me through these harmonies.",
+                "NextDialogueId": "melodyPathways"
+              },
+              {
+                "Text": "Perhaps some other time.",
+                "NextDialogueId": "ponderDecision"
+              }
+            ]
+          },
+          {
+            "Id": "melodyPathways",
+            "Text": "Then let each note guide you on a journey through the veils of reality, to places both wondrous and foreboding.",
+            "Responses": []
+          },
+          {
+            "Id": "ponderDecision",
+            "Text": "The music will always be here, waiting to unveil its secrets when you're ready.",
+            "Responses": []
           }
         ]
       }

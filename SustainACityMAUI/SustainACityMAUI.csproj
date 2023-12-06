@@ -57,11 +57,11 @@
         <Compile Update="Views\StartMenuPage.xaml.cs">
             <DependentUpon>StartMenuPage.xaml</DependentUpon>
         </Compile>
-        <Compile Update="Views\TransportMinigamePage.xaml.cs">
-          <DependentUpon>TransportMinigamePage.xaml</DependentUpon>
-        </Compile>
     </ItemGroup>
     <ItemGroup>
+        <MauiXaml Update="Views\BalancingActMinigamePage.xaml">
+          <Generator>MSBuild:Compile</Generator>
+        </MauiXaml>
         <MauiXaml Update="Views\CompostMinigamePage.xaml">
           <Generator>MSBuild:Compile</Generator>
         </MauiXaml>
@@ -76,9 +76,6 @@
         </MauiXaml>
         <MauiXaml Update="Views\StartMenuPage.xaml">
             <Generator>MSBuild:Compile</Generator>
-        </MauiXaml>
-        <MauiXaml Update="Views\TransportMinigamePage.xaml">
-          <Generator>MSBuild:Compile</Generator>
         </MauiXaml>
     </ItemGroup>
 </Project>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SustainACityMAUI.Views.BalancingActMinigamePage"
+             Title="Balancing Act Game">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15" HorizontalOptions="Center" VerticalOptions="Center">
+
+            <!-- Header and Detailed Instructions -->
+            <Label Text="Balancing Act"
+                   FontSize="Large"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"/>
+            <Label Text="Your goal is to make all numbers in the array the same. Select two numbers; they will both change to their average value. Achieve balance before running out of attempts."
+                   HorizontalOptions="Center" Margin="0,0,0,10"/>
+
+            <!-- Dynamic Display of Numbers -->
+            <Frame CornerRadius="10" Padding="10" BackgroundColor="DarkRed" HorizontalOptions="FillAndExpand">
+                <Label Text="{Binding NumbersDisplay}"
+                       FontAttributes="Bold"
+                       HorizontalTextAlignment="Center"/>
+            </Frame>
+
+            <!-- Swap Controls -->
+            <Label Text="Choose two numbers to adjust to their average:" HorizontalOptions="Center"/>
+            <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
+                <Entry Text="{Binding FirstPosition}" Placeholder="Number 1 Position" Keyboard="Numeric" WidthRequest="100"/>
+                <Entry Text="{Binding SecondPosition}" Placeholder="Number 2 Position" Keyboard="Numeric" WidthRequest="100"/>
+                <Button Text="Adjust" Command="{Binding AdjustNumbersCommand}"/>
+            </HorizontalStackLayout>
+
+            <!-- Game Status -->
+            <Label Text="{Binding AttemptsLeft, StringFormat='Attempts Left: {0}'}" HorizontalOptions="Center"/>
+            <Label Text="{Binding DifficultyLevel, StringFormat='Level: {0}'}" HorizontalOptions="Center"/>
+            <Label Text="{Binding Score, StringFormat='Score: {0}'}" HorizontalOptions="Center"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

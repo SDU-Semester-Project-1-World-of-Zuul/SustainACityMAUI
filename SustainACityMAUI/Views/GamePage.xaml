@@ -38,7 +38,7 @@
                 Margin="10" WidthRequest="40" HeightRequest="40"/>
 
         <!-- Dialog Options -->
-        <Grid Grid.Row="1" Grid.Column="3"
+        <Grid Grid.Row="1" Grid.Column="3" RowDefinitions="*" ColumnDefinitions="*"
               HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand"
               IsVisible="{Binding IsOptionsVisible}">
             <!-- Dialog Bubble -->
@@ -46,20 +46,22 @@
                    HasShadow="True" BackgroundColor="White"
                    HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
 
-            <ScrollView Orientation="Vertical" Padding="0">
-                <StackLayout BindableLayout.ItemsSource="{Binding ResponseOptions}" Padding="0" HorizontalOptions="Start">
-                    <BindableLayout.ItemTemplate>
-                        <DataTemplate>
-                            <Button Text="{Binding}" TextColor="Black"
-                            FontFamily="Cascadia Code" FontSize="Small"
-                            VerticalOptions="Start" HorizontalOptions="Start"
-                            Margin="1" LineBreakMode="WordWrap"
-                            Command="{Binding Path=BindingContext.TalkCommand, Source={x:Reference thisPage}}" 
-                            CommandParameter="{Binding .}" />
-                        </DataTemplate>
-                    </BindableLayout.ItemTemplate>
-                </StackLayout>
-            </ScrollView>
+            <StackLayout BindableLayout.ItemsSource="{Binding ResponseOptions}" Padding="0" VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <Label Text="{Binding}" TextColor="Black" Margin="10"
+                   FontFamily="Cascadia Code" FontSize="Small"
+                   VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand"
+                   LineBreakMode="WordWrap">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer
+                        Command="{Binding Path=BindingContext.TalkCommand, Source={x:Reference thisPage}}"
+                        CommandParameter="{Binding .}" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
         </Grid>
 
 
