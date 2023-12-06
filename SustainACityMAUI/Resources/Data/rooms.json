@@ -12,45 +12,64 @@
         "Dialogues": [
           {
             "Id": "centralPlazaStart",
-            "Text": "Welcome to Central Plaza! A place where every path leads to a new destiny. What hidden desire brings you here today?",
+            "Text": "Greetings, traveler. You've entered Central Plaza, a crossroads of moral quandaries and ethereal wisdom. Are you prepared to ponder the unfathomable?",
             "Responses": [
               {
-                "Text": "Tell me more about this place.",
-                "NextDialogueId": "centralPlazaMore"
+                "Text": "I am ready to face these quandaries.",
+                "NextDialogueId": "trolleyProblemStart"
               },
               {
-                "Text": "Do you have any tasks for me?",
-                "NextDialogueId": "offerQuest"
+                "Text": "I seek guidance to a new adventure.",
+                "NextDialogueId": "guideToAdventure"
               }
             ]
           },
           {
-            "Id": "centralPlazaMore",
-            "Text": "Ah, the secrets of this plaza are as deep as they are ancient. Some say that the ground we walk on whispers tales from times forgotten. Would you like to delve deeper into these mysteries?",
+            "Id": "trolleyProblemStart",
+            "Text": "Let us begin with the trolley problem. A trolley speeds towards five people tied to the track. You can pull a lever to switch it to another track, but there's one person tied there. Do you pull the lever?",
             "Responses": [
               {
-                "Text": "I'm interested in the task.",
-                "NextDialogueId": "offerQuest"
+                "Text": "Yes, I pull the lever. Better to save more lives.",
+                "NextDialogueId": "trolleyProblemVariant"
               },
               {
-                "Text": "I'm just exploring for now.",
+                "Text": "No, I don't pull the lever. It's not my place to decide who lives.",
+                "NextDialogueId": "trolleyProblemVariant"
+              }
+            ]
+          },
+          {
+            "Id": "trolleyProblemVariant",
+            "Text": "A twist to the dilemma. Now, instead of pulling a lever, you must push a person onto the track to stop the trolley and save the five. Do you push the person?",
+            "Responses": [
+              {
+                "Text": "Yes, I would push to save more lives.",
+                "NextDialogueId": "trolleyProblemEnd"
+              },
+              {
+                "Text": "No, I cannot take such a direct action to end a life.",
+                "NextDialogueId": "trolleyProblemEnd"
+              }
+            ]
+          },
+          {
+            "Id": "trolleyProblemEnd",
+            "Text": "Intriguing choices. The moral landscape is ever complex and shifting. Perhaps your path leads you to a place where such decisions bear fruit.",
+            "Responses": [
+              {
+                "Text": "Lead me to this place.",
+                "NextDialogueId": "guideToAdventure"
+              },
+              {
+                "Text": "I need to reflect on this more.",
                 "NextDialogueId": "centralPlazaEnd"
               }
             ]
           },
           {
             "Id": "centralPlazaEnd",
-            "Text": "Feel free to explore and return if you change your mind.",
+            "Text": "The Plaza will always be here, a nexus of paths and ponderings. Return when you seek further enlightenment.",
             "Responses": []
-          }
-        ],
-        "Quests": [
-          {
-            "Type": "MinigameQuest",
-            "Title": "The Secret of Central Plaza",
-            "Description": "Uncover the hidden secret of Central Plaza.",
-            "IsCompleted": false,
-            "MinigamePage": "CompostMinigame"
           }
         ]
       },
@@ -549,8 +568,8 @@
   {
     "Name": "Slums",
     "Description": "The Slums, a place seemingly forgotten by time and progress, echo with a surreal sense of despair and resilience. The buildings, haphazard and decaying, seem to groan under an invisible weight. The air is thick with a mist that never quite lifts, and the faces of the people, while warm, carry a hint of something unspeakable behind their smiles. The very ground seems to pulse with a rhythm that is both enticing and unsettling, as if beckoning players to look closer at the hidden truths of this forsaken place.",
-    "X": 0,
-    "Y": -2,
+    "X": -1,
+    "Y": -1,
     "ImgPath": "slums.png",
     "NPCs": [
       {
@@ -620,8 +639,8 @@
   {
     "Name": "Auditorium of Silent Notes",
     "Description": "Shrouded in perpetual twilight, the auditorium stands as a testament to an otherworldly grandeur. Its architecture, a fusion of elegance and the unknown, seems to dance in the dim light. The air vibrates with piano melodies, each echoing a tale of sorrow and lost eras.",
-    "X": 0,
-    "Y": 2,
+    "X": -1,
+    "Y": 1,
     "ImgPath": "auditorium.png",
     "NPCs": [
       {
@@ -683,5 +702,62 @@
         ]
       }
     ]
-  }
+  },
+  {
+    "Name": "The Reclamation Ward",
+    "Description": "Nestled in the shadows of the city, The Reclamation Ward thrives in the twilight, a place where the discarded finds new purpose. Gothic spires loom over recycling forges, casting elongated shadows. The air hums with an uncanny energy, as workers, more akin to alchemists, transmute waste into wondrous creations. Here, the boundary between decay and renewal blurs, and each piece of refuse whispers tales of forgotten eras.",
+    "X": 1,
+    "Y": -1,
+    "ImgPath": "reclamationward.png",
+    "NPCs": [
+      {
+        "Name": "Morrow, the Waste Alchemist",
+        "ImgPath": "wastealchemist.png",
+        "Dialogues": [
+          {
+            "Id": "reclamationStart",
+            "Text": "Ah, a wanderer steps into the alchemical realm of The Reclamation Ward. What secrets do you seek in this place of transformation?",
+            "Responses": [
+              {
+                "Text": "I'm intrigued by the art of waste alchemy.",
+                "NextDialogueId": "reclamationAlchemy"
+              },
+              {
+                "Text": "I heard there's a challenge that tests one's wit and will.",
+                "NextDialogueId": "offerQuest"
+              }
+            ]
+          },
+          {
+            "Id": "reclamationAlchemy",
+            "Text": "Here, we dabble in the arcane art of giving life anew to the lifeless. The refuse of the world becomes our elixir, our philosopher's stone. Dare you learn more of this esoteric practice?",
+            "Responses": [
+              {
+                "Text": "Yes, teach me these mysteries.",
+                "NextDialogueId": "reclamationTeach"
+              },
+              {
+                "Text": "Perhaps another time. I seek a challenge now.",
+                "NextDialogueId": "offerQuest"
+              }
+            ]
+          },
+          {
+            "Id": "reclamationTeach",
+            "Text": "Then follow me into the heart of our Ward, where the mundane becomes the magical, and the discarded reveals hidden potential.",
+            "Responses": []
+          }
+        ],
+        "Quests": [
+          {
+            "Type": "MinigameQuest",
+            "Title": "The Alchemist's Challenge",
+            "Description": "Master the art of waste alchemy and transform the mundane into the extraordinary.",
+            "IsCompleted": false,
+            "MinigamePage": "CompostMinigame"
+          }
+        ]
+      }
+    ]
+  }  
 ]
