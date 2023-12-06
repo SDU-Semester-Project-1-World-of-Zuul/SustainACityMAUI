@@ -27,6 +27,7 @@
                Placeholder="Enter your guess here"
                ReturnCommand="{Binding SubmitAnswerCommand}" 
                ReturnCommandParameter="{Binding CurrentAnswer}"
+               ClearButtonVisibility="WhileEditing"
                />
         
         <!-- Submit Answer Button -->
