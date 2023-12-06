@@ -6,22 +6,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using SustainACityMAUI.Helpers;
 
 namespace SustainACityMAUI.ViewModels;
 
 public class PasswordMinigame : BaseViewModel
 {
-    public string backroundImg => "computer.jpeg";
 
     // Fields
     private readonly Player _player;
     private string _inputString = "";
     private string _displayText = "";
     private string _masterPassword = "6666";
+    public string backroundImg => "computer.jpeg";
 
     public ICommand AddCharCommand { get; private set; }
     public ICommand DeleteCharCommand { get; private set; }
     public ICommand EnterPasswordCommand { get; private set; }
+    public ICommand GoBackCommand => new Command(() =>
+    {
+        _ = NavigationService.NavigateBackAsync();
+    });
+
+
 
     public string InputString
     {
@@ -51,16 +58,16 @@ public class PasswordMinigame : BaseViewModel
             }
         }
     }
-
-    public string MasterPassword
+    public void checkUserInput(Player player)
     {
-        get => _masterPassword;
-        private set
+        if (_masterPassword == _displayText)
         {
-            if (_masterPassword == _displayText)
-            {
-                Application.Current.MainPage.DisplayAlert("Score", $"Congrats! 🎉. Your score is 666", "Go Back");
-            }
+            Application.Current.MainPage.DisplayAlert("Score", $"Congrats! 🎉. Your score is 100", "Go Back");
+            player.Score += 100;
+            GoBackCommand.Execute(null);
+        } else 
+        {
+            Application.Current.MainPage.DisplayAlert("Input", "yo" ,"Ok Im stupid");
         }
     }
 
@@ -81,7 +88,7 @@ public class PasswordMinigame : BaseViewModel
             );
         EnterPasswordCommand =
             new Command(
-                () => MasterPassword = MasterPassword
+                () => checkUserInput(_player)
             );
     }
 
