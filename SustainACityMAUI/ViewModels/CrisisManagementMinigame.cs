@@ -1,4 +1,3 @@
-
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using SustainACityMAUI.Helpers;
@@ -7,7 +6,6 @@ using SustainACityMAUI.Models;
 namespace SustainACityMAUI.ViewModels;
 public class CrisisManagementMinigame : BaseViewModel
 {
-
     // Fields
     private readonly Player _player;
     private int _currentDay;
@@ -163,7 +161,6 @@ public class CrisisManagementMinigame : BaseViewModel
         _ = NavigationService.NavigateBackAsync();
     });
 
-    [Obsolete]
     public CrisisManagementMinigame(Player player)
     {
         _player = player;
@@ -183,7 +180,7 @@ public class CrisisManagementMinigame : BaseViewModel
         new Action { Id = 10, Name = "Increase Water Usage 🚿", Score = -4, Description = "Increasing water usage will lead to an increase in the water level. More water usage means more water is extracted from natural sources, which can lead to a rise in the water level. It also puts more pressure on water resources, leading to potential water shortages in the future." },
         new Action { Id = 11, Name = "Ignore the Problem 😴",Score = -5, Description = "Ignoring the problem will lead to an increase in the water level. Without taking any action to manage the water level, it will continue to rise due to natural processes and human activities. This can lead to flooding and other water-related problems." },
         new Action { Id = 12, Name = "Pollute the Water 💀", Score = -10, Description = "Polluting the water can make it unusable and increase the water level. Water pollution can come from various sources, including industrial waste, agricultural runoff, and domestic sewage. Polluted water is not only harmful to human health and the environment, but it also increases the water level as it cannot be used effectively." },
-};
+        };
         // Initialize the timer with a 12-second interval
         timer = new System.Timers.Timer(12000);
 
@@ -194,7 +191,6 @@ public class CrisisManagementMinigame : BaseViewModel
         MoveDownCommand = new Command<Action>(MoveDown);
         ShowDetailsCommand = new Command<Action>(ShowDetails);
         SubmitCommand = new Command(Submit);
-
     }
 
     public void GenerateData()
@@ -282,7 +278,6 @@ public class CrisisManagementMinigame : BaseViewModel
 
 
     // Submit the selected actions and calculate the score
-    [Obsolete]
     private async void Submit()
     {
         CalculateScore();
@@ -329,7 +324,4 @@ public class CrisisManagementMinigame : BaseViewModel
         }
         _player.Score += score;
     }
-
 }
-
-
